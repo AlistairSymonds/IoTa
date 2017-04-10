@@ -2,7 +2,7 @@ package IoTaBase.definitions;
 
 import java.util.ArrayList;
 
-import IoTaBase.IoTaUtil;
+import IoTaBase.util.IoTaUtil;
 
 public class TemperatureDef implements IDatabaseDef {
 
