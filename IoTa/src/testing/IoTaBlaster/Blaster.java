@@ -1,4 +1,4 @@
-package IoTaBlaster;
+package testing.IoTaBlaster;
 
 import java.io.DataOutputStream;
 import java.net.Socket;
