@@ -1,14 +1,18 @@
 package IoTaBase;
 
 import java.sql.SQLException;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import IoTaBase.sql.SqlUpdateHandler;
+import IoTaBase.util.IoTaUtil;
 
-public class IoTaBase {
-  public static SqlUpdateHandler insert = null;
-  public static NetworkHandler net = null;
-  public static Thread insertThread = null;
-  public static Thread netThread = null;
+
+public class IoTaBaseMain {
+  public static SqlUpdateHandler insert;
+  public static NetworkHandler net;
+  public static Thread insertThread;
+  public static Thread netThread;
+  public static final Logger logger = Logger.getLogger(IoTaBase.util.Constants.ERROR_LOGGER, null);
 
   public static void main(String[] args) {
     IoTaUtil.initDataDefs();
@@ -23,16 +27,17 @@ public class IoTaBase {
       user = args[1];
       password = args[2];
       portNum = Integer.parseInt(args[3]);
+      
+      try{
+        insert = new SqlUpdateHandler(hostname, user, password);
+      }catch(SQLException e){
+        logger.log(Level.SEVERE, e.getMessage(), e);
+      }
     } else {
       System.out.println("java -jar IoTaBase.jar HOSTNAME SQLUSER SQLPASSWORD EXTERNAL_PORTNUMBER");
     }
 
-    try {
-      insert = new SqlUpdateHandler(hostname, user, password);
-    } catch (SQLException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
+    
 
     System.out.println("SQL Connection Established");
     insertThread = new Thread(insert);

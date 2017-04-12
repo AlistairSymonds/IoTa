@@ -31,7 +31,7 @@ public class NetworkHandler implements Runnable {
         // t.start();
         es.execute(new TcpDecoder(client));
       } catch (IOException e) {
-        e.printStackTrace();
+        System.err.println(e.getMessage());
       }
 
     }

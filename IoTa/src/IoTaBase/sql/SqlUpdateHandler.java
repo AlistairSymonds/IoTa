@@ -2,12 +2,11 @@ package IoTaBase.sql;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.logging.Level;
+
+import IoTaBase.IoTaBaseMain;
 
 public class SqlUpdateHandler implements Runnable {
 	private String sqlURL;
@@ -22,9 +21,10 @@ public class SqlUpdateHandler implements Runnable {
 		sqlURL = "jdbc:mysql://" + urlIn + ":3306/test";
 		sqlUser = userIn;
 		sqlPassword = passwordIn;
-		System.out.println(sqlURL);
+		IoTaBaseMain.logger.log(Level.INFO, "Connecting to SQL " + sqlURL);
 		updates = new ConcurrentLinkedQueue<String>();
 		conns = new ConcurrentLinkedQueue<Connection>();
+		
 		connectToDB();
 		
 	}
@@ -47,15 +47,15 @@ public class SqlUpdateHandler implements Runnable {
 					Thread t = new Thread(upObj);
 					t.start();
 				} catch (SQLException e) {
-					e.printStackTrace();
-				}
+		          IoTaBaseMain.logger.log(Level.SEVERE, e.getMessage(), e);
+		        }
 			}
 			
 			try {
 				this.wait();
 			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+	          IoTaBaseMain.logger.log(Level.SEVERE, e.getMessage(), e);
+	        }
 			
 			
 		}

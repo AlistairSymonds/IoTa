@@ -1,4 +1,4 @@
-package IoTaBase;
+package IoTaBase.util;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

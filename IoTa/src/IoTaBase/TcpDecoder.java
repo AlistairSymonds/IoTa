@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.Arrays;
 
+import IoTaBase.util.IoTaUtil;
+
 public class TcpDecoder implements Runnable {
 
   private Thread t;
@@ -38,7 +40,7 @@ public class TcpDecoder implements Runnable {
           int dataId = msg[i];
           int data = IoTaUtil.bytes2Int(Arrays.copyOfRange(msg, i + 1, i + 5));
           String query = IoTaUtil.getInsertQ(dataId, devId, data);
-          IoTaBase.insert.addUpdate(query);
+          IoTaBaseMain.insert.addUpdate(query);
         }
       }
       socket.close();

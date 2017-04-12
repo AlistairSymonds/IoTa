@@ -13,7 +13,7 @@ public class Blaster {
 		//8 bytes for device id
 		//1 byte to signify temperature data next
 		//4 bytes for temperature value
-		byte test[] = new byte[14];
+		byte[] test = new byte[14];
 		test[0] = 14;
 		for(int i = 0; i < 8; i++){
 			int shiftnum = (7-i)*8;
