@@ -1,4 +1,4 @@
-package shortbase.definitions;
+package definitions;
 
 
 import java.util.ArrayList;
