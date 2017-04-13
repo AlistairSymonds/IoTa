@@ -1,4 +1,4 @@
-package IoTaBase;
+package shortbase;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -6,7 +6,8 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.Arrays;
 
-import IoTaBase.util.IoTaUtil;
+import iota.util.IoTaUtil;
+import shortbase.IoTaBaseMain;
 
 public class TcpDecoder implements Runnable {
 

@@ -1,0 +1,13 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+dependencies {
+	classpath 'mysql:mysql-connector-java:6.0.6'
+} 
+
+jar {
+    manifest.attributes provider : 'gradle'
+}
+
+archivesBaseName = 'shortbase'
+version = '0.1' 

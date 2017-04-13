@@ -1,4 +1,5 @@
-package IoTaBase.definitions;
+package shortbase.definitions;
+
 
 import java.util.ArrayList;
 

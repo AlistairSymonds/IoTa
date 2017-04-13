@@ -1,4 +1,4 @@
-package IoTaBase.inserters;
+package shortbase.inserters;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;

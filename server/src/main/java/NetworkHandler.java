@@ -1,4 +1,4 @@
-package IoTaBase;
+package shortbase;
 
 import java.io.IOException;
 import java.net.ServerSocket;

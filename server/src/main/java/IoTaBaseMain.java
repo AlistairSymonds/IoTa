@@ -1,10 +1,10 @@
-package IoTaBase;
+package shortbase;
 
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import IoTaBase.sql.SqlUpdateHandler;
-import IoTaBase.util.IoTaUtil;
+import shortbase.sql.SqlUpdateHandler;
+
 
 
 public class IoTaBaseMain {
@@ -12,10 +12,10 @@ public class IoTaBaseMain {
   public static NetworkHandler net;
   public static Thread insertThread;
   public static Thread netThread;
-  public static final Logger logger = Logger.getLogger(IoTaBase.util.Constants.ERROR_LOGGER, null);
+  public static final Logger logger = Logger.getLogger(iota.util.Constants.ERROR_LOGGER, null);
 
   public static void main(String[] args) {
-    IoTaUtil.initDataDefs();
+    iota.util.IoTaUtil.initDataDefs();
 
     String hostname = "";
     String user = "";

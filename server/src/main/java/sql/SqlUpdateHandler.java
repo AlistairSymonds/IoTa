@@ -1,4 +1,4 @@
-package IoTaBase.sql;
+package shortbase.sql;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Level;
 
-import IoTaBase.IoTaBaseMain;
+import shortbase.IoTaBaseMain;
 
 public class SqlUpdateHandler implements Runnable {
 	private String sqlURL;

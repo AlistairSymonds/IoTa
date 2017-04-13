@@ -1,4 +1,4 @@
-package IoTaBase.util;
+package iota.util;
 
 public final class Constants {
   private Constants(){

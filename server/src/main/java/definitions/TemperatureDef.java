@@ -1,8 +1,9 @@
-package IoTaBase.definitions;
+package shortbase.definitions;
 
 import java.util.ArrayList;
 
-import IoTaBase.util.IoTaUtil;
+import iota.util.IoTaUtil;
+
 
 public class TemperatureDef implements IDatabaseDef {
 
