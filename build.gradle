@@ -1,10 +1,18 @@
-allprojects {
-    apply plugin: 'java'
-    group = 'com.alistairsymonds.iota'
-    version = '1.0'
-    repositories {
-        mavenCentral()
-    }
-    task hello << { task -> println "I'm $task.project.name" }
+apply plugin: 'java'
+apply plugin: 'eclipse'
+archivesBaseName = 'someJar'
+version = '0.1' 
+
+repositories {
+    mavenCentral()
 }
 
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.test.Run'
+    }
+}
+
+dependencies {
+
+} 
