@@ -1,4 +1,4 @@
-package shortbase.inserters;
+package iota.server.inserters;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;

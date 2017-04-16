@@ -9,5 +9,5 @@ jar {
     manifest.attributes provider : 'gradle'
 }
 
-archivesBaseName = 'shortbase'
+archivesBaseName = 'iotabase'
 version = '0.1' 

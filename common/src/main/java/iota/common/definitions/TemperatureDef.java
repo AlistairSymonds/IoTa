@@ -1,8 +1,6 @@
-package shortbase.definitions;
+package iota.common.definitions;
 
 import java.util.ArrayList;
-
-import iota.util.IoTaUtil;
 
 
 public class TemperatureDef implements IDatabaseDef {
@@ -29,7 +27,7 @@ public class TemperatureDef implements IDatabaseDef {
 		String q = "INSERT INTO "+ getTableName() + "(" +
 				( cnames.get(1) + ", " + cnames.get(2) + ", " + cnames.get(3)+ 
 				") VALUES (" 
-				+ IoTaUtil.time2DATETIME(System.currentTimeMillis()) +", "+ devId+", "+ data+")");
+				+ iota.common.IoTaUtil.time2DATETIME(System.currentTimeMillis()) +", "+ devId+", "+ data+")");
 		return q;
 	}
 

@@ -1,4 +1,4 @@
-package definitions;
+package iota.common.definitions;
 
 
 import java.util.ArrayList;

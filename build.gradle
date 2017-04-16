@@ -1,18 +1,19 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
-archivesBaseName = 'someJar'
-version = '0.1' 
 
-repositories {
-    mavenCentral()
+
+allprojects{
+	apply plugin: 'java'
+	apply plugin: 'eclipse'
+	task hello << { task -> println "I'm $task.project.name" }
+
+	repositories {
+    	mavenCentral()
+	}
 }
 
-jar {
-    manifest {
-        attributes 'Main-Class': 'com.test.Run'
+project(':server') {
+    dependencies {
+        compile project(':common')
     }
 }
-
-dependencies {
-
-} 

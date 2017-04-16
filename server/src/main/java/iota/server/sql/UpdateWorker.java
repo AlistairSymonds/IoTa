@@ -1,4 +1,4 @@
-package shortbase.sql;
+package iota.server.sql;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

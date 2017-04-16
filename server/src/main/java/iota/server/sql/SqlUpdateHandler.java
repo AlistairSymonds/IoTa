@@ -1,12 +1,12 @@
-package shortbase.sql;
+package iota.server.sql;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Level;
+import iota.server.*;
 
-import shortbase.IoTaBaseMain;
 
 public class SqlUpdateHandler implements Runnable {
 	private String sqlURL;

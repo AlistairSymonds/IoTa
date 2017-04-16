@@ -1,21 +1,24 @@
-package shortbase;
+package iota.server;
 
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import shortbase.sql.SqlUpdateHandler;
+
+import iota.common.Constants;
+import iota.common.IoTaUtil;
+import iota.server.sql.SqlUpdateHandler;
 
 
 
 public class IoTaBaseMain {
-  public static SqlUpdateHandler insert;
+  public static iota.server.sql.SqlUpdateHandler insert;
   public static NetworkHandler net;
   public static Thread insertThread;
   public static Thread netThread;
-  public static final Logger logger = Logger.getLogger(iota.util.Constants.ERROR_LOGGER, null);
+  public static final Logger logger = Logger.getLogger(Constants.ERROR_LOGGER, null);
 
   public static void main(String[] args) {
-    iota.util.IoTaUtil.initDataDefs();
+    IoTaUtil.initDataDefs();
 
     String hostname = "";
     String user = "";
