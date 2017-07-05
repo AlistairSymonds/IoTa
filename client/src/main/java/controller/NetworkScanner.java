@@ -1,4 +1,4 @@
-package interfaces.controller;
+package controller;
 
 import java.net.InetAddress;
 

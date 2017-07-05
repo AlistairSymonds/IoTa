@@ -1,4 +1,4 @@
-package interfaces.model;
+package model;
 
 import java.net.Socket;
 
