@@ -17,3 +17,10 @@ project(':server') {
         compile project(':common')
     }
 }
+
+project(':client') {
+    dependencies {
+        compile project(':common')
+    }
+}
+

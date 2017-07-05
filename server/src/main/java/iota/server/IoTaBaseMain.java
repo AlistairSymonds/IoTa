@@ -3,7 +3,6 @@ package iota.server;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import iota.common.Constants;
 import iota.common.IoTaUtil;
 import iota.server.sql.SqlUpdateHandler;
@@ -25,7 +24,7 @@ public class IoTaBaseMain {
     String password = "";
     int portNum = 0;
 
-    if (args.length == 4) {
+    if (args.length == 4 ) {
       hostname = args[0];
       user = args[1];
       password = args[2];
@@ -38,23 +37,17 @@ public class IoTaBaseMain {
       }
     } else {
       System.out.println("java -jar IoTaBase.jar HOSTNAME SQLUSER SQLPASSWORD EXTERNAL_PORTNUMBER");
+      System.exit(1);
     }
 
     
-
-    System.out.println("SQL Connection Established");
     insertThread = new Thread(insert);
     insertThread.start();
     insertThread.setName("SqlInsert Thread");
-    if (insertThread.isAlive()) {
-      System.out.println("Insert Thread Alive at ID " + insertThread.getId());
-    }
+
 
     net = new NetworkHandler(portNum);
-    System.out.println("NetworkHandler Constructed");
-    System.out.println("Creating Network Thread");
     netThread = new Thread(net);
-    System.out.println("Starting Network Thread");
     netThread.start();
     netThread.setName("Network Thread");
 
