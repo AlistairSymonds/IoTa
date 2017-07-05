@@ -24,3 +24,9 @@ project(':client') {
     }
 }
 
+project(':client') {
+    dependencies {
+        compile project(':common')
+    }
+}
+

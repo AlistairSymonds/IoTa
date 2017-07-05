@@ -1,1 +1,1 @@
-include "server","common","client"
+include "server","common","client","tester"
