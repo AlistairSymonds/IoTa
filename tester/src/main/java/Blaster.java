@@ -31,7 +31,7 @@ public class Blaster {
 	}
 	
 	
-	public static void main(String[] args) {
+	public static void testSpam() {
 		System.out.println(fakeTempData(20).toString());
 		long start = System.currentTimeMillis();
 		for(int i = 0; i < 10000; i++){
