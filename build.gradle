@@ -24,7 +24,7 @@ project(':client') {
     }
 }
 
-project(':client') {
+project(':tester') {
     dependencies {
         compile project(':common')
     }
