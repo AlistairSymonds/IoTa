@@ -1,52 +1,39 @@
 package iota.server;
 
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import iota.common.Constants;
 import iota.common.IoTaUtil;
-import iota.server.sql.SqlUpdateHandler;
+import iota.common.definitions.DefinitionStore;
+import iota.server.network.NetworkHandler;
+import iota.server.sql.SqlHandler;
+
+import java.util.logging.Logger;
 
 
 
 public class IoTaBaseMain {
-  public static iota.server.sql.SqlUpdateHandler insert;
+  public static SqlHandler sql;
   public static NetworkHandler net;
-  public static Thread insertThread;
+  public static Thread sqlThread;
   public static Thread netThread;
+  public static DefinitionStore defStore;
+  public static StartupParams startupParams;
   public static final Logger logger = Logger.getLogger(Constants.ERROR_LOGGER, null);
 
   public static void main(String[] args) {
-    IoTaUtil.initDataDefs();
+    System.out.println(args.toString());
+    startupParams = new StartupParams(IoTaUtil.createFlagMap(args));
 
-    String hostname = "";
-    String user = "";
-    String password = "";
-    int portNum = 0;
+    defStore = new DefinitionStore();
 
-    if (args.length == 4 ) {
-      hostname = args[0];
-      user = args[1];
-      password = args[2];
-      portNum = Integer.parseInt(args[3]);
-      
-      try{
-        insert = new SqlUpdateHandler(hostname, user, password);
-      }catch(SQLException e){
-        logger.log(Level.SEVERE, e.getMessage(), e);
-      }
-    } else {
-      System.out.println("java -jar IoTaBase.jar HOSTNAME SQLUSER SQLPASSWORD EXTERNAL_PORTNUMBER");
-      System.exit(1);
-    }
+    //defStore.;
 
-    
-    insertThread = new Thread(insert);
-    insertThread.start();
-    insertThread.setName("SqlInsert Thread");
+    sql = new SqlHandler(startupParams.getSqlUrl(), startupParams.getSqlUser(), startupParams.getSqlPass());
+    sqlThread = new Thread(sql);
+    sqlThread.start();
+    sqlThread.setName("SqlInsert Thread");
 
 
-    net = new NetworkHandler(portNum);
+    net = new NetworkHandler(startupParams.getAppPort());
     netThread = new Thread(net);
     netThread.start();
     netThread.setName("Network Thread");

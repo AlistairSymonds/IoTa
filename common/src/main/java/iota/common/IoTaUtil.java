@@ -2,27 +2,11 @@ package iota.common;
 
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
-import iota.common.definitions.IDatabaseDef;
-import iota.common.definitions.TemperatureDef;
-
 public class IoTaUtil {
 
-  private static HashMap<Integer, IDatabaseDef> dataDefs;
-
-  public static void initDataDefs() {
-    dataDefs = new HashMap<Integer, IDatabaseDef>();
-    TemperatureDef tdef = new TemperatureDef();
-    dataDefs.put(tdef.getFuncId(), tdef);
-
-  }
-
-  public static String getInsertQ(int dataId, long devId, int data) {
-    return dataDefs.get(dataId).getInsertUpdate(devId, data);
-  }
 
   public static String time2DATETIME(long time) {
     SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -64,6 +48,31 @@ public class IoTaUtil {
       b[i + 10] = (byte) (n >> shiftnum);
     }
     return b;
+  }
+
+  public static HashMap createFlagMap(String args[]){
+    HashMap<String, String> flags = new HashMap<String, String>();
+
+    int firstArg = 0;
+    while(!args[firstArg].startsWith("-")){
+        firstArg++;
+    }
+    String flagKey = args[firstArg].substring(1).toLowerCase();;
+    String flagVal ="";
+
+    for(int i = firstArg+1; i < args.length; i++){
+        if(args[i].startsWith("-")){
+            flags.put(flagKey, flagVal);
+            flagVal = "";
+            flagKey = args[i].substring(1).toLowerCase();
+
+        } else {
+            flagVal = flagVal + args[i];
+        }
+
+    }
+    flags.put(flagKey, flagVal);
+    return flags;
   }
 
 }

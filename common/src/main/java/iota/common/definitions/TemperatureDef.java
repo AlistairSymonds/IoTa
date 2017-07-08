@@ -3,17 +3,20 @@ package iota.common.definitions;
 import java.util.ArrayList;
 
 
-public class TemperatureDef implements IDatabaseDef {
+class TemperatureDef implements IDatabaseDef {
 
-	public ArrayList<String> getColNames() {
-		ArrayList<String> l = new ArrayList<String>();
-		l.add("datapoint");
-		l.add("time_in");
-		l.add("device_id");
-		l.add("value");
+
+
+	@Override
+	public ArrayList<DBCol> getCols() {
+		ArrayList<DBCol> l = new ArrayList<DBCol>();
+		l.add(new DBCol("INT","datapoint"));
+		l.add(new DBCol("datetime","time_in"));
+		l.add(new DBCol("INT","device_id"));
+		l.add(new DBCol("INT","value"));
 		return l;
 	}
-	
+
 	public String getTableName() {
 		return "temperature";
 	}
@@ -23,9 +26,9 @@ public class TemperatureDef implements IDatabaseDef {
 	}
 
 	public String getInsertUpdate(long devId, int data) {
-		ArrayList<String> cnames = getColNames();
+		ArrayList<DBCol> cols = getCols();
 		String q = "INSERT INTO "+ getTableName() + "(" +
-				( cnames.get(1) + ", " + cnames.get(2) + ", " + cnames.get(3)+ 
+				( cols.get(1).getColName() + ", " + cols.get(2).getColName() + ", " + cols.get(3).getColName()+
 				") VALUES (" 
 				+ iota.common.IoTaUtil.time2DATETIME(System.currentTimeMillis()) +", "+ devId+", "+ data+")");
 		return q;
