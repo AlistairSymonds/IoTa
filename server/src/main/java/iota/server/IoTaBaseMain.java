@@ -23,14 +23,15 @@ public class IoTaBaseMain {
     System.out.println(args.toString());
     startupParams = new StartupParams(IoTaUtil.createFlagMap(args));
 
-    defStore = new DefinitionStore();
+    System.out.println(startupParams.toString());
 
-    //defStore.;
+    defStore = new DefinitionStore();
+    defStore.populateStore(startupParams.getDefLocation());
 
     sql = new SqlHandler(startupParams.getSqlUrl(), startupParams.getSqlUser(), startupParams.getSqlPass());
     sqlThread = new Thread(sql);
     sqlThread.start();
-    sqlThread.setName("SqlInsert Thread");
+    sqlThread.setName("Sql Thread");
 
 
     net = new NetworkHandler(startupParams.getAppPort());

@@ -1,8 +1,5 @@
-
-
 import java.io.DataOutputStream;
 import java.net.Socket;
-import java.util.Scanner;
 
 public class Blaster {
 
@@ -32,11 +29,9 @@ public class Blaster {
 	
 	
 	public static void testSpam() {
-		System.out.println(fakeTempData(20).toString());
 		long start = System.currentTimeMillis();
 		for(int i = 0; i < 10000; i++){
-			try {
-				Socket sock = new Socket("localhost", 2812);
+			try (Socket sock = new Socket("localhost", 2812)) {
 				DataOutputStream os = new DataOutputStream(sock.getOutputStream());
 				os.write(fakeTempData(i));		
 				sock.close();

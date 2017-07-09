@@ -2,7 +2,7 @@ package iota.server.sql;
 
 import com.mysql.cj.api.jdbc.Statement;
 import com.mysql.cj.jdbc.MysqlDataSource;
-import iota.common.definitions.IDatabaseDef;
+import iota.common.definitions.IFuncDef;
 
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
@@ -38,8 +38,7 @@ class DbInitialiser {
     }
 
 
-
-    protected void createTable(IDatabaseDef def){
+    protected void createTable(IFuncDef def) {
         try{
             Statement stmt = (Statement) dataSource.getConnection().createStatement();
             stmt.executeQuery("");

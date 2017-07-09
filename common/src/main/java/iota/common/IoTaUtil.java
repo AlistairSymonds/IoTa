@@ -6,6 +6,9 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class IoTaUtil {
+  private IoTaUtil() {
+    throw new IllegalStateException("Util Class");
+  }
 
 
   public static String time2DATETIME(long time) {

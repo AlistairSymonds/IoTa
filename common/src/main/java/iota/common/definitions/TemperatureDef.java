@@ -3,7 +3,7 @@ package iota.common.definitions;
 import java.util.ArrayList;
 
 
-class TemperatureDef implements IDatabaseDef {
+class TemperatureDef implements IFuncDef {
 
 
 
@@ -27,11 +27,11 @@ class TemperatureDef implements IDatabaseDef {
 
 	public String getInsertUpdate(long devId, int data) {
 		ArrayList<DBCol> cols = getCols();
-		String q = "INSERT INTO "+ getTableName() + "(" +
+
+		return "INSERT INTO " + getTableName() + "(" +
 				( cols.get(1).getColName() + ", " + cols.get(2).getColName() + ", " + cols.get(3).getColName()+
-				") VALUES (" 
-				+ iota.common.IoTaUtil.time2DATETIME(System.currentTimeMillis()) +", "+ devId+", "+ data+")");
-		return q;
+						") VALUES ("
+						+ iota.common.IoTaUtil.time2DATETIME(System.currentTimeMillis()) + ", " + devId + ", " + data + ")");
 	}
 
 }
