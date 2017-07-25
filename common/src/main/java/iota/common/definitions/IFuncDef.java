@@ -1,11 +1,17 @@
 package iota.common.definitions;
 
 
-import java.util.ArrayList;
+import iota.common.definitions.db.DbCol;
+import iota.common.definitions.db.IDbQueryGenerator;
+
+import java.util.List;
 
 public interface IFuncDef {
-	public ArrayList<DBCol> getCols();
-	public String getTableName();
-	public int getFuncId();
-	public String getInsertUpdate(long devId, int data);
+    List<DbCol> getCols();
+
+    String getTableName();
+
+    int getFuncId();
+
+    IDbQueryGenerator getDbQueryGenerator();
 }

@@ -20,18 +20,18 @@ public class IoTaBaseMain {
   public static final Logger logger = Logger.getLogger(Constants.ERROR_LOGGER, null);
 
   public static void main(String[] args) {
-    System.out.println(args.toString());
-    startupParams = new StartupParams(IoTaUtil.createFlagMap(args));
+    startupParams = new StartupParams(args);
 
-    System.out.println(startupParams.toString());
 
-    defStore = new DefinitionStore();
-    defStore.populateStore(startupParams.getDefLocation());
 
     sql = new SqlHandler(startupParams.getSqlUrl(), startupParams.getSqlUser(), startupParams.getSqlPass());
     sqlThread = new Thread(sql);
     sqlThread.start();
     sqlThread.setName("Sql Thread");
+    if (sqlThread.isAlive() == true) {
+      System.out.println("Sql Thread Alive at ID " + sqlThread.getId());
+    }
+
 
 
     net = new NetworkHandler(startupParams.getAppPort());
@@ -45,4 +45,8 @@ public class IoTaBaseMain {
 
   }
 
+  private void cookArgs(String[] args) {
+
+
+  }
 }

@@ -48,7 +48,10 @@ class TxtParser implements IFuncDefFileParser {
         return lmap;
     }
 
+
     private IFuncDef createDef(HashMap<String, List<String>> lineMap) {
-        return null;
+        IFuncDef def;
+        def = new FileBasedFuncDef(lineMap);
+        return def;
     }
 }

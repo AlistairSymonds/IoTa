@@ -1,5 +1,8 @@
 package iota.server;
 
+
+import org.apache.commons.cli.*;
+
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -10,11 +13,38 @@ import java.util.HashMap;
  */
 public class StartupParams {
 
+    private CommandLine cmdLine;
 
-    private HashMap<String, String> p;
 
-    public StartupParams (HashMap<String, String> args) throws IllegalArgumentException{
-        this.p = args;
+    public StartupParams(String[] args) throws IllegalArgumentException {
+
+
+        CommandLineParser parser = new DefaultParser();
+        Options opts = new Options();
+
+        Option sqlUserOpt = Option.builder("sqluser").desc("SQL Username").required().build();
+        opts.addOption(sqlUserOpt);
+
+        Option sqlPassOpt = Option.builder("sqlpass").desc("SQL Password").required().build();
+        opts.addOption(sqlPassOpt);
+
+        Option sqlUrlOpt = Option.builder("sqlurl").desc("SQL URL").required().build();
+        opts.addOption(sqlUrlOpt);
+
+        Option defintionPathOpt = Option.builder("definitionpath").desc("File path to folder containing definition files").required().build();
+        opts.addOption(defintionPathOpt);
+
+
+        HelpFormatter formatter = new HelpFormatter();
+        try {
+            cmdLine = parser.parse(opts, args);
+        } catch (ParseException e) {
+            System.out.println(e.getMessage());
+            formatter.printHelp("IotaBase", opts);
+            System.exit(1);
+        }
+
+
     }
 
     @Override
@@ -39,33 +69,22 @@ public class StartupParams {
     }
 
     public int getAppPort() {
-        return Integer.parseInt(p.get("port"));
+        return Integer.parseInt(cmdLine.getOptionValue("appport"));
     }
 
     public String getSqlUser() {
-        return p.get("sqluser");
+        return cmdLine.getOptionValue("sqluser");
     }
 
     public String getSqlPass() {
-        return p.get("sqlpass");
+        return cmdLine.getOptionValue("sqlpass");
     }
 
     public String getSqlUrl() {
-        return p.get("sqlurl");
+        return cmdLine.getOptionValue("sqlurl");
     }
 
     public Path getDefLocation() {
-        if (p.get("defloc") != null) {
-            return Paths.get(p.get("defloc"));
-        } else {
-            try {
-                return Paths.get(IoTaBaseMain.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-            } catch (URISyntaxException e) {
-
-                e.printStackTrace();
-                return null;
-            }
-        }
-
+        return Paths.get(cmdLine.getOptionValue("definitionpath"));
     }
 }

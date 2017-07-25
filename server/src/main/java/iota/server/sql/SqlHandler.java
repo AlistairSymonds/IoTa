@@ -13,6 +13,7 @@ import java.util.logging.Level;
 public class SqlHandler implements Runnable {
 	private ConcurrentLinkedQueue<String> queries;
 	private MysqlDataSource dataSource;
+	private SqlQueries queryGen;
 
 	public boolean stop = false;
 

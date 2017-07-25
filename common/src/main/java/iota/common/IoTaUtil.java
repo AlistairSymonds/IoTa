@@ -55,7 +55,9 @@ public class IoTaUtil {
 
   public static HashMap createFlagMap(String args[]){
     HashMap<String, String> flags = new HashMap<String, String>();
+    if (args.length == 0) {
 
+    }
     int firstArg = 0;
     while(!args[firstArg].startsWith("-")){
         firstArg++;

@@ -5,11 +5,16 @@ apply plugin: 'eclipse'
 allprojects{
 	apply plugin: 'java'
 	apply plugin: 'eclipse'
-	task hello << { task -> println "I'm $task.project.name" }
+    task hello << { task -> println "I'm $task.project.name" }
 
 	repositories {
     	mavenCentral()
 	}
+
+    dependencies{
+        // https://mvnrepository.com/artifact/commons-cli/commons-cli
+        compile group: 'commons-cli', name: 'commons-cli', version: '1.4'
+    }
 }
 
 project(':server') {
