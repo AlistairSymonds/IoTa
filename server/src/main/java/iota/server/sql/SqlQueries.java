@@ -11,7 +11,7 @@ import iota.common.definitions.IFuncDef;
 class SqlQueries {
 
 
-    public String getCreateTableStatement(IFuncDef definition) {
+    public static String getCreateTableStatement(IFuncDef definition) {
         String pk = "";
         StringBuilder stmt = new StringBuilder("CREATE TABLE ");
         stmt.append("'" + definition.getTableName() + "'(");
@@ -32,14 +32,16 @@ class SqlQueries {
         return stmt.toString();
     }
 
-    public String getCheckTableExistsStatement() {
+    public static String getCheckTableExistsStatement() {
         StringBuilder stmt = new StringBuilder("");
 
         return stmt.toString();
     }
 
-    public String getCheckTableHasColumns() {
-        return null;
+    public static String getCheckTableHasColumns() {
+        StringBuilder stmt = new StringBuilder("");
+
+        return stmt.toString();
     }
 
 

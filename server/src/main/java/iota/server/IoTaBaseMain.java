@@ -6,6 +6,7 @@ import iota.common.definitions.DefinitionStore;
 import iota.server.network.NetworkHandler;
 import iota.server.sql.SqlHandler;
 
+import java.util.Scanner;
 import java.util.logging.Logger;
 
 
@@ -21,6 +22,9 @@ public class IoTaBaseMain {
 
   public static void main(String[] args) {
     startupParams = new StartupParams(args);
+    defStore = new DefinitionStore();
+
+    defStore.populateStore(startupParams.getDefLocation());
 
 
 
@@ -43,10 +47,17 @@ public class IoTaBaseMain {
       System.out.println("Network Thread Alive at ID " + netThread.getId());
     }
 
+    Scanner scan = new Scanner(System.in);
+    while (true) {
+      if (scan.hasNext()) {
+        if (scan.next().equalsIgnoreCase("stop")) {
+          System.out.println("Stopping...");
+          net.stop = true;
+          sql.stop = true;
+        }
+      }
+    }
+
   }
 
-  private void cookArgs(String[] args) {
-
-
-  }
 }

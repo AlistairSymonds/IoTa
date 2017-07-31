@@ -22,16 +22,19 @@ public class StartupParams {
         CommandLineParser parser = new DefaultParser();
         Options opts = new Options();
 
-        Option sqlUserOpt = Option.builder("sqluser").desc("SQL Username").required().build();
+        Option sqlUserOpt = Option.builder("sqluser").desc("SQL Username").required().hasArg().build();
         opts.addOption(sqlUserOpt);
 
-        Option sqlPassOpt = Option.builder("sqlpass").desc("SQL Password").required().build();
+        Option sqlPassOpt = Option.builder("sqlpass").desc("SQL Password").required().hasArg().build();
         opts.addOption(sqlPassOpt);
 
-        Option sqlUrlOpt = Option.builder("sqlurl").desc("SQL URL").required().build();
+        Option sqlUrlOpt = Option.builder("sqlurl").desc("SQL URL").required().hasArg().build();
         opts.addOption(sqlUrlOpt);
 
-        Option defintionPathOpt = Option.builder("definitionpath").desc("File path to folder containing definition files").required().build();
+        Option defintionPathOpt = Option.builder("definitionpath").desc("File path to folder containing definition files").hasArg().build();
+        opts.addOption(defintionPathOpt);
+
+        Option appPortOpt = Option.builder("appport").desc("TCP Port on which the application will run, default is 2812").hasArg().build();
         opts.addOption(defintionPathOpt);
 
 
@@ -69,7 +72,15 @@ public class StartupParams {
     }
 
     public int getAppPort() {
-        return Integer.parseInt(cmdLine.getOptionValue("appport"));
+        int port = 2812;
+        try {
+            if (cmdLine.hasOption("appport")) {
+                port = Integer.parseInt(cmdLine.getOptionValue("appport"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return port;
     }
 
     public String getSqlUser() {
@@ -81,10 +92,21 @@ public class StartupParams {
     }
 
     public String getSqlUrl() {
+        System.out.println(cmdLine.hasOption("sqlurl"));
+        System.out.println(cmdLine.getOptionValue("sqlurl"));
         return cmdLine.getOptionValue("sqlurl");
     }
 
     public Path getDefLocation() {
-        return Paths.get(cmdLine.getOptionValue("definitionpath"));
+        Path p;
+        p = Paths.get(".");
+        try {
+            if (cmdLine.hasOption("definitionpath")) {
+                p = Paths.get(cmdLine.getOptionValue("definitionpath"));
+            }
+        } catch (Exception e) {
+
+        }
+        return p;
     }
 }

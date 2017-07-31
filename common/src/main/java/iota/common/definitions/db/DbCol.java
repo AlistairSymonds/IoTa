@@ -18,8 +18,6 @@ public class DbCol {
             } else if (s.equalsIgnoreCase("pk")) {
                 this.isPrimaryKey = true;
             }
-
-            System.out.println("Unknown modifier found. Check your definition files!");
         }
     }
 

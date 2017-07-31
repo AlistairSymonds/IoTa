@@ -11,7 +11,5 @@ public interface IFuncDef {
 
     String getTableName();
 
-    int getFuncId();
-
-    IDbQueryGenerator getDbQueryGenerator();
+    short getFuncId();
 }

@@ -19,9 +19,7 @@ class TxtParser implements IFuncDefFileParser {
 
     @Override
     public IFuncDef parseFile() {
-        createDef(createLineMap());
-
-        return null;
+        return createDef(createLineMap());
     }
 
     private HashMap<String, List<String>> createLineMap() {
@@ -29,7 +27,6 @@ class TxtParser implements IFuncDefFileParser {
         try (BufferedReader br = Files.newBufferedReader(file)) {
             String line = null;
             while ((line = br.readLine()) != null) {
-                System.out.println(line);
                 if (line.startsWith("#")) {
                     String key = line.substring(0, line.indexOf(" "));
                     String val = line.substring(line.indexOf(" "));
@@ -37,9 +34,8 @@ class TxtParser implements IFuncDefFileParser {
                     if (vals == null) {
                         vals = new ArrayList<String>();
                     }
-                    vals.add(val);
+                    vals.add(val.trim());
                     lmap.put(key, vals);
-
                 }
             }
         } catch (Exception e) {

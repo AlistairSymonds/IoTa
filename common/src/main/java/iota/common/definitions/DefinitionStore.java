@@ -4,16 +4,16 @@ import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.HashMap;
+import java.util.*;
 
 /**
  * Created by alist on 8/07/2017.
  */
-public class DefinitionStore{
-    private HashMap<Byte, IFuncDef> defs;
+public class DefinitionStore implements Iterable<IFuncDef> {
+    private HashMap<Short, IFuncDef> defs;
 
     public  DefinitionStore(){
-        defs = new HashMap<Byte, IFuncDef>();
+        defs = new HashMap<Short, IFuncDef>();
     }
 
     public int populateStore(Path folder, String globFilter) {
@@ -24,8 +24,8 @@ public class DefinitionStore{
             for(Path file : dir){
                 if (file.toFile().isFile()) {
                     System.out.println("Found definition file: " + file.getFileName());
-                    createParser(file).parseFile();
-
+                    IFuncDef newDef = createParser(file).parseFile();
+                    defs.put(newDef.getFuncId(), newDef);
                 }
 
             }
@@ -51,4 +51,31 @@ public class DefinitionStore{
         return new TxtParser(file);
     }
 
+    @Override
+    public Iterator<IFuncDef> iterator() {
+        return new DefIterator();
+    }
+
+    class DefIterator implements Iterator<IFuncDef> {
+        private List<IFuncDef> data;
+        private int currentIndex;
+
+        DefIterator() {
+            currentIndex = 0;
+            data = new ArrayList<IFuncDef>();
+            data.addAll(defs.values());
+        }
+
+        @Override
+        public boolean hasNext() {
+            return currentIndex != data.size();
+        }
+
+        @Override
+        public IFuncDef next() {
+            IFuncDef retVal = data.get(currentIndex);
+            currentIndex++;
+            return retVal;
+        }
+    }
 }

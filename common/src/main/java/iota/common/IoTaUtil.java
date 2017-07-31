@@ -62,7 +62,7 @@ public class IoTaUtil {
     while(!args[firstArg].startsWith("-")){
         firstArg++;
     }
-    String flagKey = args[firstArg].substring(1).toLowerCase();;
+    String flagKey = args[firstArg].substring(1).toLowerCase();
     String flagVal ="";
 
     for(int i = firstArg+1; i < args.length; i++){

@@ -1,6 +1,7 @@
 package iota.server.sql;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
+import iota.common.definitions.IFuncDef;
 import iota.server.IoTaBaseMain;
 
 import java.sql.ResultSet;
@@ -19,15 +20,11 @@ public class SqlHandler implements Runnable {
 
 	public SqlHandler(String urlIn, String userIn, String passwordIn){
 		dataSource = new MysqlDataSource();
-		dataSource.setURL(urlIn);
+		dataSource.setURL("jdbc:mysql://" + urlIn + ":3306");
 		dataSource.setUser(userIn);
 		dataSource.setPassword(passwordIn);
 		dataSource.setDatabaseName("test");
-
-
 		queries = new ConcurrentLinkedQueue<String>();
-
-		
 	}
 	
 	public synchronized void addUpdate(String query){
@@ -37,14 +34,15 @@ public class SqlHandler implements Runnable {
 
 	private boolean initDb(){
 		DbInitialiser dbInit = new DbInitialiser(this.dataSource);
-		System.out.println("Has temperature: " + dbInit.hasTable("temperature"));
-		System.out.println("Has blahblah: " + dbInit.hasTable("blahblah"));
+		for (IFuncDef def : IoTaBaseMain.defStore) {
+			if (!dbInit.hasTable(def)) {
+				dbInit.createTable(def);
+			}
+		}
 		return true;
 	}
 
 	public synchronized void run() {
-
-
 		initDb();
 		while(!stop){
 			while(!queries.isEmpty()){

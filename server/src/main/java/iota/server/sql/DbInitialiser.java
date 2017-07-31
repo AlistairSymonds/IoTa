@@ -2,6 +2,7 @@ package iota.server.sql;
 
 import com.mysql.cj.api.jdbc.Statement;
 import com.mysql.cj.jdbc.MysqlDataSource;
+import iota.common.definitions.DefinitionStore;
 import iota.common.definitions.IFuncDef;
 
 import java.sql.DatabaseMetaData;
@@ -25,9 +26,10 @@ class DbInitialiser {
 
     }
 
-    protected boolean hasTable(String tableName){
+    protected boolean hasTable(IFuncDef def) {
         try{
-            ResultSet tableList = meta.getTables(null,null,tableName,null);
+            System.out.println("Checking for " + def.getTableName());
+            ResultSet tableList = meta.getTables(null, null, def.getTableName(), null);
             while(tableList.next()){
                 return true;
             }
@@ -41,7 +43,8 @@ class DbInitialiser {
     protected void createTable(IFuncDef def) {
         try{
             Statement stmt = (Statement) dataSource.getConnection().createStatement();
-            stmt.executeQuery("");
+            System.out.println("bleep bloop creating table: " + def.getTableName());
+            //stmt.executeQuery("");
         } catch (SQLException e){
             e.printStackTrace();
         }
