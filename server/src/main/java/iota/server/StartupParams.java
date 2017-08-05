@@ -3,10 +3,8 @@ package iota.server;
 
 import org.apache.commons.cli.*;
 
-import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
 
 /**
  * Created by alist on 8/07/2017.
@@ -30,6 +28,9 @@ public class StartupParams {
 
         Option sqlUrlOpt = Option.builder("sqlurl").desc("SQL URL").required().hasArg().build();
         opts.addOption(sqlUrlOpt);
+
+        Option schemaNameOpt = Option.builder("schema").desc("Schema name which will be used for storing data logged").hasArg().build();
+        opts.addOption(schemaNameOpt);
 
         Option defintionPathOpt = Option.builder("definitionpath").desc("File path to folder containing definition files").hasArg().build();
         opts.addOption(defintionPathOpt);
@@ -95,6 +96,15 @@ public class StartupParams {
         System.out.println(cmdLine.hasOption("sqlurl"));
         System.out.println(cmdLine.getOptionValue("sqlurl"));
         return cmdLine.getOptionValue("sqlurl");
+    }
+
+    public String getSchemaName() {
+        String schema = "iota";
+
+        if (cmdLine.hasOption("schema")) {
+            schema = cmdLine.getOptionValue("schema");
+        }
+        return schema;
     }
 
     public Path getDefLocation() {

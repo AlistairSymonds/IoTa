@@ -2,9 +2,9 @@ package iota.server.sql;
 
 import com.mysql.cj.api.jdbc.Statement;
 import com.mysql.cj.jdbc.MysqlDataSource;
-import iota.common.definitions.DefinitionStore;
 import iota.common.definitions.IFuncDef;
 
+import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,9 +16,9 @@ class DbInitialiser {
     private MysqlDataSource dataSource;
     private DatabaseMetaData meta;
 
-    public DbInitialiser (MysqlDataSource dataSource){
+    public DbInitialiser(MysqlDataSource dataSource) {
         this.dataSource = dataSource;
-        try{
+        try {
             meta = dataSource.getConnection().getMetaData();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -27,13 +27,13 @@ class DbInitialiser {
     }
 
     protected boolean hasTable(IFuncDef def) {
-        try{
+        try {
             System.out.println("Checking for " + def.getTableName());
             ResultSet tableList = meta.getTables(null, null, def.getTableName(), null);
-            while(tableList.next()){
+            while (tableList.next()) {
                 return true;
             }
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
@@ -41,11 +41,11 @@ class DbInitialiser {
 
 
     protected void createTable(IFuncDef def) {
-        try{
-            Statement stmt = (Statement) dataSource.getConnection().createStatement();
-            System.out.println("bleep bloop creating table: " + def.getTableName());
-            //stmt.executeQuery("");
-        } catch (SQLException e){
+        try {
+            Connection conn = dataSource.getConnection();
+            Statement stmt = (Statement) conn.createStatement();
+            stmt.executeUpdate(SqlQueries.getCreateTableStatement(def, dataSource.getDatabaseName()));
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }

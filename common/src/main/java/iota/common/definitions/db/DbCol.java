@@ -8,8 +8,9 @@ public class DbCol {
     private String colType;
     private boolean isPrimaryKey = false;
     private boolean isAutoIncrement = false;
+    private boolean isNotNull = false;
 
-    public DbCol(String colType, String colName, String[] modifiers) {
+    public DbCol(String colName, String colType, String[] modifiers) {
         this.colType = colType;
         this.colName = colName;
         for (String s : modifiers) {
@@ -17,6 +18,9 @@ public class DbCol {
                 this.isAutoIncrement = true;
             } else if (s.equalsIgnoreCase("pk")) {
                 this.isPrimaryKey = true;
+                this.isNotNull = true;
+            } else if (s.equalsIgnoreCase("nn")) {
+                this.isNotNull = true;
             }
         }
     }
@@ -37,4 +41,7 @@ public class DbCol {
         return isAutoIncrement;
     }
 
+    public boolean getIsNotNull() {
+        return isNotNull;
+    }
 }

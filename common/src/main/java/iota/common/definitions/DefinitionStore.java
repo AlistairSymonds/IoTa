@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by alist on 8/07/2017.
@@ -12,7 +15,7 @@ import java.util.*;
 public class DefinitionStore implements Iterable<IFuncDef> {
     private HashMap<Short, IFuncDef> defs;
 
-    public  DefinitionStore(){
+    public DefinitionStore() {
         defs = new HashMap<Short, IFuncDef>();
     }
 
@@ -21,7 +24,7 @@ public class DefinitionStore implements Iterable<IFuncDef> {
         System.out.println("Searching for definitions in: " + folder.toString());
 
         try (DirectoryStream<Path> dir = Files.newDirectoryStream(folder, globFilter)) {
-            for(Path file : dir){
+            for (Path file : dir) {
                 if (file.toFile().isFile()) {
                     System.out.println("Found definition file: " + file.getFileName());
                     IFuncDef newDef = createParser(file).parseFile();

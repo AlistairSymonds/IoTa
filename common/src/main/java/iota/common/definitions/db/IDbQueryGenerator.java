@@ -1,7 +1,5 @@
 package iota.common.definitions.db;
 
-import java.sql.Statement;
-
 /**
  * Created by alist on 10/07/2017.
  */

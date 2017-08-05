@@ -2,7 +2,6 @@ package iota.common.definitions;
 
 
 import iota.common.definitions.db.DbCol;
-import iota.common.definitions.db.IDbQueryGenerator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,7 +46,7 @@ class FileBasedFuncDef implements IFuncDef {
 
     @Override
     public List<DbCol> getCols() {
-        return null;
+        return this.cols;
     }
 
     @Override
