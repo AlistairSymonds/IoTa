@@ -7,7 +7,7 @@ import java.util.concurrent.*;
 public class NetworkScanner {
     String baseIp = "192.168.0.";
 
-    public List<ScanResult> scan(int port) throws InterruptedException, ExecutionException {
+    public List<ScanResult> scan(int port) {
         final ExecutorService es = Executors.newFixedThreadPool(255);
         final int timeout = 200;
         List<Future<ScanResult>> futures = new ArrayList<>();
@@ -29,7 +29,13 @@ public class NetworkScanner {
         System.out.println("all scanning done");
         System.out.println((futures.size()));
         for (int i = 0; i < futures.size(); i++) {
-            results.add(futures.get(i).get());
+            try {
+                results.add(futures.get(i).get());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
         }
         return results;
     }
