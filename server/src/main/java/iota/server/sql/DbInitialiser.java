@@ -45,9 +45,11 @@ class DbInitialiser {
             Connection conn = dataSource.getConnection();
             Statement stmt = (Statement) conn.createStatement();
             stmt.executeUpdate(SqlQueries.getCreateTableStatement(def, dataSource.getDatabaseName()));
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
 
 }

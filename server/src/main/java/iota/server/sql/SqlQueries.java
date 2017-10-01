@@ -59,7 +59,7 @@ class SqlQueries {
     }
 
 
-    public String getInsertDataQuery() {
+    public String getInsertDataQuery(IFuncDef def, String schemaName) {
         return null;
     }
 }

@@ -1,4 +1,4 @@
-package model;
+package iota.client.model;
 
 import java.net.Socket;
 

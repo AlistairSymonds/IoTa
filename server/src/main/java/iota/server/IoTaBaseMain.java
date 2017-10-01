@@ -17,6 +17,7 @@ public class IoTaBaseMain {
     public static DefinitionStore defStore;
     public static StartupParams startupParams;
     public static final Logger logger = Logger.getLogger(Constants.ERROR_LOGGER, null);
+    private static boolean running = true;
 
     public static void main(String[] args) {
         startupParams = new StartupParams(args);
@@ -26,6 +27,10 @@ public class IoTaBaseMain {
 
 
         sql = new SqlHandler(startupParams.getSqlUrl(), startupParams.getSqlUser(), startupParams.getSqlPass(), startupParams.getSchemaName());
+        if (!sql.test()) {
+            System.out.println("Oh noes scoob, SQL is borken.");
+            System.exit(2);
+        }
         sqlThread = new Thread(sql);
         sqlThread.start();
         sqlThread.setName("Sql Thread");
@@ -44,13 +49,13 @@ public class IoTaBaseMain {
         }
 
         Scanner scan = new Scanner(System.in);
-        while (true) {
-            if (scan.hasNext()) {
-                if (scan.next().equalsIgnoreCase("stop")) {
-                    System.out.println("Stopping...");
-                    net.stop = true;
-                    sql.stop = true;
-                }
+        while (running) {
+            String input = scan.nextLine();
+            if (input.equalsIgnoreCase("stop")) {
+                System.out.println("Stopping...");
+                net.requestStop();
+                sql.requestStop();
+                running = false;
             }
         }
 

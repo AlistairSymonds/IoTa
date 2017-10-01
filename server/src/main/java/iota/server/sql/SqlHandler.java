@@ -16,7 +16,7 @@ public class SqlHandler implements Runnable {
     private MysqlDataSource dataSource;
     private SqlQueries queryGen;
 
-    public boolean stop = false;
+    private boolean stop = false;
 
     public SqlHandler(String urlIn, String userIn, String passwordIn, String schemaName) {
         dataSource = new MysqlDataSource();
@@ -65,5 +65,18 @@ public class SqlHandler implements Runnable {
                 IoTaBaseMain.logger.log(Level.SEVERE, e.getMessage(), e);
             }
         }
+    }
+
+    public boolean test() {
+        try {
+            this.dataSource.getConnection();
+        } catch (SQLException e) {
+            return false;
+        }
+        return true;
+    }
+
+    public synchronized void requestStop() {
+        this.stop = true;
     }
 }

@@ -1,7 +1,7 @@
 import java.io.DataOutputStream;
 import java.net.Socket;
 
-public class Blaster {
+public class Blaster implements Runnable {
 
     private static long devId = 64;
 
@@ -42,5 +42,10 @@ public class Blaster {
         }
         long total = System.currentTimeMillis() - start;
         System.out.println("That took " + total + "[ms]");
+    }
+
+    @Override
+    public void run() {
+
     }
 }

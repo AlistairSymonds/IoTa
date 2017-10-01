@@ -9,16 +9,16 @@ import java.util.concurrent.Executors;
 public class NetworkHandler implements Runnable {
 
     private ServerSocket sock;
-    public volatile boolean stop = false;
+    private volatile boolean stop = false;
     private ExecutorService es;
 
     public NetworkHandler(int portNum) {
         try {
             sock = new ServerSocket(portNum);
-            es = Executors.newFixedThreadPool(1000);
+            es = Executors.newFixedThreadPool(100);
         } catch (Exception e) {
             System.out.println(e.toString());
-            System.out.println("Couldn't start network handler on port " + portNum);
+            System.out.println("Couldn't start iota.client.network handler on port " + portNum);
         }
 
     }
@@ -38,4 +38,7 @@ public class NetworkHandler implements Runnable {
 
     }
 
+    public synchronized void requestStop() {
+        this.stop = true;
+    }
 }
