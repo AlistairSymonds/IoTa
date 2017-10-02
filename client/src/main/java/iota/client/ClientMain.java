@@ -9,15 +9,12 @@ public class ClientMain {
 
 
         EspManager devManager = new EspManager();
-        Thread devManagerThread = new Thread(devManager);
-        devManagerThread.start();
+        devManager.start();
 
         JfxMain jfx = new JfxMain();
-        jfx.setManager(devManager);
+        JfxMain.setManager(devManager);
 
-        Thread jfxThread = new Thread(jfx);
-        jfxThread.start();
-
+        jfx.start();
 
     }
 

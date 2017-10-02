@@ -1,7 +1,9 @@
 package iota.client.network;
 
-import java.net.*;
-import java.util.*;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.*;
 
 public class NetworkScanner {
@@ -26,8 +28,6 @@ public class NetworkScanner {
                 }
             }
         }
-        System.out.println("all scanning done");
-        System.out.println((futures.size()));
         for (int i = 0; i < futures.size(); i++) {
             try {
                 results.add(futures.get(i).get());

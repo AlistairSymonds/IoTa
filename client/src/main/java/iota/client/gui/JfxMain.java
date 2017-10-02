@@ -1,38 +1,44 @@
 package iota.client.gui;
 
-import iota.client.model.EspDevice;
 import iota.client.model.EspManager;
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
-import javafx.collections.ObservableList;
-import javafx.collections.ObservableMap;
-import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.ListView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.net.InetAddress;
 import java.util.ArrayList;
 
 public class JfxMain extends Application implements Runnable {
-    private EspManager espManager;
+    private static EspManager espManager;
+    private Thread t;
+    private String threadName = "jfx";
+    ArrayList<String> testList = new ArrayList<>();
+
     private void activateJfx() {
         launch();
+        testList.add("memes");
     }
 
-    public void setManager(EspManager espMng) {
-        this.espManager = espMng;
+    public static void setManager(EspManager espMng) {
+        espManager = espMng;
+    }
+
+    public void start() {
+        System.out.println("Starting " + threadName);
+        if (t == null) {
+            t = new Thread(this, threadName);
+            t.start();
+        }
     }
 
     @Override
     public void start(Stage stage) throws Exception {
+        testList.add("spicy meme");
+        DeviceList deviceListView = new DeviceList(espManager);
         GridPane gp = new GridPane();
-        gp.add(createDeviceList(), 0, 0);
-        gp.add(new Text("Test"), 0, 1);
+
+        gp.add(deviceListView.getView(), 0, 0);
+
         Scene scene = new Scene(gp);
 
         stage.setTitle("IoTa Controller");
@@ -41,15 +47,11 @@ public class JfxMain extends Application implements Runnable {
         stage.show();
     }
 
-    private ListView<EspDevice> createDeviceList() {
-        ArrayList<EspDevice> devList = new ArrayList<EspDevice>();
-        devList.addAll(espManager.getDevMap().values());
-        ObservableList<EspDevice> observList = FXCollections.observableList(devList);
-        return new ListView<>(observList);
-    }
-
     @Override
     public void run() {
         activateJfx();
+        testList.add("Blah");
     }
+
+
 }

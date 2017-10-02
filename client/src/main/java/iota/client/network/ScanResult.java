@@ -1,23 +1,29 @@
 package iota.client.network;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 public class ScanResult {
-    private int[] IPV4;
+    private byte[] IPV4;
     private int port;
     private boolean isOpen;
-    private String ip;
+    private String host;
+    private InetAddress inetAddress;
 
-    public ScanResult(String ip, int port, boolean isOpen) {
-        this.ip = ip;
+    public ScanResult(String host, int port, boolean isOpen) {
+        this.host = this.host;
         this.port = port;
         this.isOpen = isOpen;
-        //String temp[] = ip.split(".");
-        /*for (int i = 0; i < 3; i++){
-			IPV4[i] = Integer.parseInt(temp[i]);
-		}*/
+
+        try {
+            this.inetAddress = InetAddress.getByName(host);
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
     }
 
-    public String getIP() {
-        return this.ip;
+    public InetAddress getHost() {
+        return this.inetAddress;
     }
 
     public int getPort() {
@@ -28,12 +34,8 @@ public class ScanResult {
         return this.isOpen;
     }
 
-    public int[] getIPV4() {
-        return this.IPV4;
-    }
-
     @Override
     public String toString() {
-        return "Port: " + port + " at IP: " + ip + " is open? " + isOpen;
+        return "Port: " + port + " at IP: " + host + " is open? " + isOpen;
     }
 }
