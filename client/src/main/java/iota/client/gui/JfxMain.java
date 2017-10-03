@@ -1,27 +1,28 @@
 package iota.client.gui;
 
 import iota.client.model.EspManager;
+import iota.client.presenter.IoTaPresenter;
+import iota.client.presenter.Presenter;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
-
 public class JfxMain extends Application implements Runnable {
     private static EspManager espManager;
+    private static IoTaPresenter presenter;
     private Thread t;
     private String threadName = "jfx";
-    ArrayList<String> testList = new ArrayList<>();
 
     private void activateJfx() {
         launch();
-        testList.add("memes");
     }
 
     public static void setManager(EspManager espMng) {
         espManager = espMng;
+        presenter = new Presenter(espMng);
     }
+
 
     public void start() {
         System.out.println("Starting " + threadName);
@@ -33,11 +34,12 @@ public class JfxMain extends Application implements Runnable {
 
     @Override
     public void start(Stage stage) throws Exception {
-        testList.add("spicy meme");
-        DeviceList deviceListView = new DeviceList(espManager);
+        DevicesSelector deviceListView = new DevicesSelector(presenter);
         GridPane gp = new GridPane();
 
         gp.add(deviceListView.getView(), 0, 0);
+        DeviceView dv = new DeviceView(presenter.getSelectedEspDevice());
+        gp.add(dv.getView(), 1, 0);
 
         Scene scene = new Scene(gp);
 
@@ -50,7 +52,6 @@ public class JfxMain extends Application implements Runnable {
     @Override
     public void run() {
         activateJfx();
-        testList.add("Blah");
     }
 
 

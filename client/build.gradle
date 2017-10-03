@@ -1,2 +1,6 @@
 apply plugin: 'application'
 mainClassName = "iota.client.ClientMain"
+dependencies {
+    compile project (':common')
+}
+

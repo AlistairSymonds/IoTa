@@ -10,6 +10,7 @@ public class NetworkScanner {
     String baseIp = "192.168.0.";
 
     public List<ScanResult> scan(int port) {
+        System.out.println("Beginning scan");
         final ExecutorService es = Executors.newFixedThreadPool(255);
         final int timeout = 200;
         List<Future<ScanResult>> futures = new ArrayList<>();
@@ -37,6 +38,7 @@ public class NetworkScanner {
                 e.printStackTrace();
             }
         }
+        System.out.println("Finished Scan");
         return results;
     }
 

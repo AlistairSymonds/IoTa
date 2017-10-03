@@ -1,5 +1,9 @@
+plugins {
+    id "com.github.johnrengelman.shadow" version "2.0.1"
+}
 apply plugin: 'java'
 apply plugin: 'eclipse'
+
 
 
 allprojects {
@@ -16,6 +20,8 @@ allprojects {
         compile group: 'commons-cli', name: 'commons-cli', version: '1.4'
     }
 }
+
+
 
 project(':server') {
     dependencies {

@@ -11,7 +11,7 @@ public class ScanResult {
     private InetAddress inetAddress;
 
     public ScanResult(String host, int port, boolean isOpen) {
-        this.host = this.host;
+        this.host = host;
         this.port = port;
         this.isOpen = isOpen;
 

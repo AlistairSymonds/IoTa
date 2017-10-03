@@ -14,6 +14,7 @@ public class EspManager implements Runnable {
     private Thread t;
     private String threadName;
     private ConcurrentHashMap<InetAddress, EspDevice> devices;
+    private volatile boolean running = true;
 
     public EspManager() {
         devices = new ConcurrentHashMap<>();
@@ -26,8 +27,14 @@ public class EspManager implements Runnable {
 
     @Override
     public void run() {
-        updateMap();
-
+        while (running) {
+            updateMap();
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void start() {
@@ -38,10 +45,9 @@ public class EspManager implements Runnable {
         }
     }
 
-    public void updateMap() {
+    private void updateMap() {
         NetworkScanner lanScan = new NetworkScanner();
         List<ScanResult> results = lanScan.scan(2812);
-
         for (ScanResult r : results) {
             if (r.isOpen()) {
                 try (Socket conn = new Socket(r.getHost(), r.getPort())) {
@@ -55,15 +61,18 @@ public class EspManager implements Runnable {
                         System.out.println("Device at " + r.getHost() + " already exists");
                     }
 
-
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
 
             } else {
                 if (devices.containsKey(r.getHost())) {
-                    devices.remove(r.getHost());
-                    System.out.println("Device at " + r.getHost() + " not found, removing");
+                    if (!devices.get(r.getHost()).isConnected()) {
+                        devices.remove(r.getHost());
+                        System.out.println("Device at " + r.getHost() + " not found, removing");
+                    } else {
+                        System.out.println("existing connection still works bro");
+                    }
                 }
             }
         }
