@@ -1,4 +1,4 @@
-package iota.client.gui.functions;
+package iota.client.gui.views.functions;
 
 import iota.client.model.EspDevice;
 import iota.common.definitions.IFuncDef;

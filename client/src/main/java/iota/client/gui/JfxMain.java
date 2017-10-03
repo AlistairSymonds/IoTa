@@ -1,8 +1,10 @@
 package iota.client.gui;
 
+import iota.client.gui.presenter.IoTaPresenter;
+import iota.client.gui.presenter.Presenter;
+import iota.client.gui.views.DeviceView;
+import iota.client.gui.views.DevicesSelector;
 import iota.client.model.EspManager;
-import iota.client.presenter.IoTaPresenter;
-import iota.client.presenter.Presenter;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
@@ -34,19 +36,18 @@ public class JfxMain extends Application implements Runnable {
 
     @Override
     public void start(Stage stage) throws Exception {
-        DevicesSelector deviceListView = new DevicesSelector(presenter);
-        GridPane gp = new GridPane();
-
-        gp.add(deviceListView.getView(), 0, 0);
-        DeviceView dv = new DeviceView(presenter.getSelectedEspDevice());
-        gp.add(dv.getView(), 1, 0);
-
-        Scene scene = new Scene(gp);
 
         stage.setTitle("IoTa Controller");
-        stage.setScene(scene);
+        stage.setScene(makeScene());
         stage.sizeToScene();
         stage.show();
+    }
+
+    private Scene makeScene() {
+        GridPane gp = new GridPane();
+        gp.add(new DevicesSelector(presenter), 0, 0);
+        gp.add(new DeviceView(presenter), 1, 0);
+        return new Scene(gp);
     }
 
     @Override

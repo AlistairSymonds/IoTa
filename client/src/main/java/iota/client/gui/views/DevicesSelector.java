@@ -1,33 +1,29 @@
-package iota.client.gui;
+package iota.client.gui.views;
 
+import iota.client.gui.presenter.IoTaPresenter;
 import iota.client.model.EspDevice;
-import iota.client.presenter.IoTaPresenter;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.scene.control.Control;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 
-public class DevicesSelector extends Control {
+public class DevicesSelector extends VBox implements UpdateAbleView {
     private ListView<EspDevice> lv;
     private Button updateButton;
     private IoTaPresenter presenter;
-    private ObservableList<EspDevice> obsList;
 
     public DevicesSelector(IoTaPresenter presenterIn) {
+        super();
         this.presenter = presenterIn;
-
+        presenter.registerUpdateAbleView(this);
         lv = new ListView<>();
 
         updateButton = new Button("Update List");
         updateButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                System.out.println("button");
                 lv.getItems().setAll(presenter.getDeviceList());
             }
         });
@@ -35,16 +31,16 @@ public class DevicesSelector extends Control {
 
         lv.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> {
+                    System.out.println("selected a dev");
                     presenter.setSelectedEspDevice(newValue);
                 }
         );
+        super.getChildren().add(updateButton);
+        super.getChildren().add(lv);
     }
 
-
-    public Pane getView() {
-        VBox vBox = new VBox();
-        vBox.getChildren().add(updateButton);
-        vBox.getChildren().add(lv);
-        return vBox;
+    @Override
+    public void updateView() {
+        lv.getItems().setAll(presenter.getDeviceList());
     }
 }
