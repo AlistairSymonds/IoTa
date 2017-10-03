@@ -2,6 +2,7 @@ package iota.client.gui.views;
 
 import iota.client.gui.presenter.IoTaPresenter;
 import iota.client.model.EspDevice;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -24,10 +25,9 @@ public class DevicesSelector extends VBox implements UpdateAbleView {
         updateButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                lv.getItems().setAll(presenter.getDeviceList());
+                updateView();
             }
         });
-        lv.getItems().setAll(presenter.getDeviceList());
 
         lv.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> {
@@ -37,10 +37,25 @@ public class DevicesSelector extends VBox implements UpdateAbleView {
         );
         super.getChildren().add(updateButton);
         super.getChildren().add(lv);
+        updateView();
     }
 
     @Override
     public void updateView() {
-        lv.getItems().setAll(presenter.getDeviceList());
+        Platform.runLater(() -> internalUpdater());
+    }
+
+    private void internalUpdater() {
+        for (EspDevice e : lv.getItems()) {
+            if (!presenter.getDeviceList().contains(e)) {
+                lv.getItems().remove(e);
+            }
+        }
+        for (EspDevice e : presenter.getDeviceList()) {
+            if (!lv.getItems().contains(e)) {
+                lv.getItems().add(e);
+            }
+        }
+
     }
 }

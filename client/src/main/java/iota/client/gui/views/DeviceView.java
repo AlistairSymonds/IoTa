@@ -2,6 +2,7 @@ package iota.client.gui.views;
 
 
 import iota.client.gui.presenter.IoTaPresenter;
+import javafx.application.Platform;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.text.Text;
 
@@ -12,6 +13,7 @@ public class DeviceView extends FlowPane implements UpdateAbleView {
         super();
         this.presenter = presenterIn;
         presenter.registerUpdateAbleView(this);
+        updateDevice();
     }
 
     private void updateDevice() {
@@ -25,7 +27,7 @@ public class DeviceView extends FlowPane implements UpdateAbleView {
 
     @Override
     public void updateView() {
-        updateDevice();
+        Platform.runLater(() -> updateDevice());
     }
     //for FUnction f : device.funcs
     //create layouts
