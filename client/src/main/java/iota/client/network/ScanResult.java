@@ -4,7 +4,6 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 public class ScanResult {
-    private byte[] IPV4;
     private int port;
     private boolean isOpen;
     private String host;
