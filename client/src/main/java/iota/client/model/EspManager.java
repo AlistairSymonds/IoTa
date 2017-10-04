@@ -7,9 +7,10 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class EspManager implements Runnable {
+public class EspManager extends Observable implements Runnable {
     private Thread t;
     private String threadName;
     private ConcurrentHashMap<InetAddress, EspDevice> devices;
@@ -45,6 +46,7 @@ public class EspManager implements Runnable {
     }
 
     private void updateMap() {
+
         NetworkScanner lanScan = new NetworkScanner();
         List<ScanResult> results = lanScan.scan(2812);
         for (ScanResult r : results) {
@@ -61,6 +63,7 @@ public class EspManager implements Runnable {
                 }
             }
         }
-
+        setChanged();
+        notifyObservers();
     }
 }

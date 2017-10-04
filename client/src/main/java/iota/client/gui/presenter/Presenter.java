@@ -4,12 +4,9 @@ import iota.client.gui.views.UpdateAbleView;
 import iota.client.model.EspDevice;
 import iota.client.model.EspManager;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
-public class Presenter implements IoTaPresenter {
+public class Presenter implements IoTaPresenter, Observer {
     private EspManager manager;
     private EspDevice selectedDevice;
     private Set<UpdateAbleView> updateAbleViews;
@@ -17,6 +14,7 @@ public class Presenter implements IoTaPresenter {
     public Presenter(EspManager manager) {
         this.manager = manager;
         this.updateAbleViews = new HashSet<>();
+        manager.addObserver(this);
     }
 
     @Override
@@ -36,8 +34,13 @@ public class Presenter implements IoTaPresenter {
 
     @Override
     public void setSelectedEspDevice(EspDevice devIn) {
+        if (selectedDevice != null) {
+            selectedDevice.deleteObserver(this);
+        }
+
         this.selectedDevice = devIn;
         updateAttchedViews();
+        selectedDevice.addObserver(this);
     }
 
     @Override
@@ -55,4 +58,8 @@ public class Presenter implements IoTaPresenter {
     }
 
 
+    @Override
+    public void update(Observable o, Object arg) {
+        updateAttchedViews();
+    }
 }
