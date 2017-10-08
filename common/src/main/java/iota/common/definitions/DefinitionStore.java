@@ -1,5 +1,7 @@
 package iota.common.definitions;
 
+import iota.common.definitions.db.Heartbeat;
+
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
@@ -17,6 +19,8 @@ public class DefinitionStore implements Iterable<IFuncDef> {
 
     public DefinitionStore() {
         defs = new HashMap<Short, IFuncDef>();
+        Heartbeat hb = new Heartbeat();
+        defs.put(hb.getFuncId(), hb);
     }
 
     public int populateStore(Path folder, String globFilter) {

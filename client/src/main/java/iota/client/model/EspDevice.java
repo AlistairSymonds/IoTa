@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Observable;
@@ -34,6 +35,7 @@ public class EspDevice extends Observable {
 
     public EspDevice(InetAddress address) {
         this.address = address;
+        defs = new ArrayList<>();
     }
 
     public synchronized InetAddress getInetAddress() {
@@ -84,7 +86,7 @@ public class EspDevice extends Observable {
                 heartBeatFinish = System.currentTimeMillis();
                 break;
             default:
-                System.out.println("Unkown message from device");
+                System.out.println("Unknown message from device");
         }
 
         setChanged();

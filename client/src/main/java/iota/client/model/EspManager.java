@@ -2,6 +2,7 @@ package iota.client.model;
 
 import iota.client.network.NetworkScanner;
 import iota.client.network.ScanResult;
+import iota.common.definitions.DefinitionStore;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -14,11 +15,13 @@ public class EspManager extends Observable implements Runnable {
     private Thread t;
     private String threadName;
     private ConcurrentHashMap<InetAddress, EspDevice> devices;
+    private DefinitionStore definitionStore;
     private volatile boolean running = true;
 
-    public EspManager() {
+    public EspManager(DefinitionStore definitionStoreIn) {
         devices = new ConcurrentHashMap<>();
         this.threadName = this.toString();
+        this.definitionStore = definitionStoreIn;
     }
 
     public Map<InetAddress, EspDevice> getDevMap() {

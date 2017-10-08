@@ -9,10 +9,12 @@ public class ClientMain {
     public static void main(String[] args) {
 
 
-        EspManager devManager = new EspManager();
-        devManager.start();
+
 
         DefinitionStore defStore = new DefinitionStore();
+
+        EspManager devManager = new EspManager(defStore);
+        devManager.start();
 
         JfxMain jfx = new JfxMain();
         JfxMain.setManager(devManager);
