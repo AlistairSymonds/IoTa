@@ -1,0 +1,30 @@
+plugins {
+    id "com.github.johnrengelman.shadow" version "2.0.1"
+}
+
+
+apply plugin: 'java'
+subprojects{
+    apply plugin: 'java'
+}
+
+
+
+
+
+subprojects {
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        // https://mvnrepository.com/artifact/commons-cli/commons-cli
+        compile group: 'commons-cli', name: 'commons-cli', version: '1.4'
+    }
+}
+
+
+
+
+

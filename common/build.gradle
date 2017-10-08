@@ -2,3 +2,4 @@ jar {
     baseName = 'iotaCommon'
     version = '0.1.0'
 }
+

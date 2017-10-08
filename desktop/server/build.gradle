@@ -1,0 +1,11 @@
+apply plugin: 'application'
+
+dependencies {
+    // https://mvnrepository.com/artifact/mysql/mysql-connector-java
+    compile group: 'mysql', name: 'mysql-connector-java', version: '6.0.6'
+
+}
+mainClassName = "iota.server.IoTaBaseMain"
+
+
+

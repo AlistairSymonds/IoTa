@@ -1,43 +1,28 @@
-plugins {
-    id "com.github.johnrengelman.shadow" version "2.0.1"
-}
-apply plugin: 'java'
-apply plugin: 'eclipse'
 
 
-
-allprojects {
+allprojects{
     apply plugin: 'java'
-    apply plugin: 'eclipse'
+    apply plugin: 'idea'
     task hello << { task -> println "I'm $task.project.name" }
-
-    repositories {
-        mavenCentral()
-    }
-
-    dependencies {
-        // https://mvnrepository.com/artifact/commons-cli/commons-cli
-        compile group: 'commons-cli', name: 'commons-cli', version: '1.4'
-    }
 }
 
-
-
-project(':server') {
+project(':common'){
+    apply plugin: 'java'
+}
+project(':desktop:server') {
     dependencies {
         compile project(':common')
     }
 }
 
-project(':client') {
+project(':desktop:client') {
     dependencies {
         compile project(':common')
     }
 }
 
-project(':tester') {
+project(':desktop:tester') {
     dependencies {
         compile project(':common')
     }
 }
-
