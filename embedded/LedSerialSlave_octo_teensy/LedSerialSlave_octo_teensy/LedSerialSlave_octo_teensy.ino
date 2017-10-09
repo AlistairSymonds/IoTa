@@ -67,7 +67,7 @@ void loop() {
 
 	if (anim_period_counter > anim_period_millis) {
 		programs[state[pid]]->advanceAnim();
-		memcpy(frameBuf, animBuf, NUM_STRIPS * NUM_LEDS_PER_STRIP);
+		memcpy(frameBuf, animBuf, NUM_STRIPS * NUM_LEDS_PER_STRIP * sizeof(CHSV));
 		anim_period_counter = 0;
 	}
 

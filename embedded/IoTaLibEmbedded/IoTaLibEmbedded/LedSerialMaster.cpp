@@ -2,7 +2,7 @@
 #include "LedSerialMaster.h"
 #include "stdlib.h"
 
-#ifdef UNIT_TEST
+
 
 #include <Stream.h>
 
@@ -54,4 +54,3 @@ LedSerialMaster::~LedSerialMaster()
 	delete fh;
 }
 
-#endif

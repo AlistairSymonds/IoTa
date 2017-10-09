@@ -31,7 +31,6 @@ LedSerialMaster led(&Serial, MAX_CLIENTS);
 int nextFreeSpot = 0;
 
 void processClient(WiFiClient);
-void heartbeat(WiFiClient);
 
 void setup() {
 	Serial.begin(9600);
