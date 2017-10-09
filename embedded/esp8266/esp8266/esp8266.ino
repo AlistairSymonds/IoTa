@@ -75,11 +75,10 @@ void loop() {
 		}
 	}
 
-
-
 	for (int c = 0; c < nextFreeSpot; c++) {
 		if (clients[c].connected() && clients[c].available() > 0) {
-			
+			readInAndSubmitData(&clients[c]);
+
 		} else {
 			nextFreeSpot--;
 			if (nextFreeSpot < 0) {
@@ -89,6 +88,16 @@ void loop() {
 	}
 
 	hub.tick();
+
+	for (int c = 0; 0 < nextFreeSpot; c++) {
+		uint8_t buffer[255];
+		hub.copyAndFormatResponses(buffer, &clients[c]);
+		clients[c].write(buffer, buffer[0]);	
+	}
+
+
+	
+	
 
 }
 

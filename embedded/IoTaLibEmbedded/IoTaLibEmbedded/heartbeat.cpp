@@ -33,11 +33,13 @@ int Heartbeat::getStateBufLen()
 	return 1;
 }
 
-int Heartbeat::copyStateBuf(uint8_t * buf, void * clientToken)
-{	
-	*buf = (uint8_t)60;
-	return 1;
+uint8_t * Heartbeat::getStateBuffer(void * clientToken)
+{
+	fh->remove(clientToken);
+	return state;
 }
+
+
 
 int Heartbeat::needsStateBufferUpdate(void * clientToken)
 {

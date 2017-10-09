@@ -16,10 +16,11 @@ public:
 	void tick();
 
 	int getStateBufLen();
-	int copyStateBuf(uint8_t *buf, void * clientToken);
+	uint8_t * getStateBuffer(void * clientToken);
 	int needsStateBufferUpdate(void* clientToken);
 	~Heartbeat();
 private:
 	fixedHeap<void *> *fh;
+	uint8_t state[1];
 };
 #endif

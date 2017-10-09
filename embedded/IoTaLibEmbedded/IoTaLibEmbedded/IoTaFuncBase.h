@@ -11,7 +11,7 @@ public:
 	virtual void tick() = 0;
 	
 	virtual int getStateBufLen() = 0;
-	virtual int copyStateBuf(uint8_t *buf, void * clientToken) = 0;
+	virtual uint8_t * getStateBuffer(void * clientToken) = 0;
 	virtual int needsStateBufferUpdate(void* clientToken) = 0;
 	
 

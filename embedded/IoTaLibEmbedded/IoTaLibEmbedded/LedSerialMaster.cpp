@@ -27,7 +27,7 @@ void LedSerialMaster::processCommand(uint8_t command[],  void * clientToken)
 void LedSerialMaster::tick()
 {
 	if (serial->available()) {
-		//TODO
+		serial->readBytes(this->state, NUM_LED_PROPS);
 	}
 }
 
@@ -36,13 +36,13 @@ int LedSerialMaster::getStateBufLen()
 	return stateCount;
 }
 
-int LedSerialMaster::copyStateBuf(uint8_t * buf, void * clientToken)
-{	
-	for (int i = 0; i < stateCount; i++) {
-		buf[i] = state[i];
-	}
-	return fh->remove(clientToken);
+uint8_t * LedSerialMaster::getStateBuffer(void * clientToken)
+{
+	fh->remove(clientToken);
+	return state;
 }
+
+
 
 int LedSerialMaster::needsStateBufferUpdate(void * clientToken)
 {

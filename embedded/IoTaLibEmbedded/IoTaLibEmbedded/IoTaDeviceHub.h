@@ -8,24 +8,22 @@
 #ifndef _IoTaDeviceHub_h
 #define _IoTaDeviceHub_h
 
-
-
-
 #include <stdint.h>
 #include "IoTaFuncBase.h"
 
 class IoTaDeviceHub {
 	private:
 		int numFuncs;
-		int maxFuncs;
-		IoTaFuncBase **funcs;
+		
 	public: 
 		IoTaDeviceHub();
-		void tick();
 		int addFunc(IoTaFuncBase *func);
 		int processMessage(uint8_t message[], void *clientToken);
-		uint8_t* getResponses(void *clientToken);
+		int copyAndFormatResponses(uint8_t*buf,void *clientToken);
+		void tick();
 
+		int maxFuncs;
+		IoTaFuncBase **funcs;
 };
 #endif
 
