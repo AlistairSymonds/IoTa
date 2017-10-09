@@ -35,6 +35,8 @@ unsigned int anim_period_millis;
 
 LedAnimBase * programs[5];
 
+void processSerial();
+
 void setup() {
 	Serial.begin(9600);
 	for (int i = 0; i < NUM_LED_PROPS; i++) {
@@ -48,7 +50,7 @@ void setup() {
 	SolidColour * scPtr = new SolidColour(animBuf, state);
 	programs[0] = scPtr;
 
-
+	Serial1.begin(9600);
 	LEDS.addLeds<OCTOWS2811>(frameBuf, NUM_LEDS_PER_STRIP);
 }
 
@@ -59,10 +61,15 @@ int pos = 0;
 void loop() {
 	//check serial
 	frame_period_millis = (1000 / state[fps]) ;
-	
+
+	while (Serial1.available() > 0) {
+		processSerial();
+	}
+
+
 	if (anim_period_counter > anim_period_millis) {
 		memcpy(frameBuf, animBuf, NUM_STRIPS * NUM_LEDS_PER_STRIP);
-		anim_period_millis = 0;
+		anim_period_counter = 0;
 	}
 
 	if (frame_period_counter > frame_period_millis) {
@@ -73,3 +80,20 @@ void loop() {
 	}
 }
 
+void processSerial()
+{
+	uint8_t msgLen = Serial1.read();
+	uint8_t msgBuf[255];
+	Serial1.readBytes(msgBuf + 1, msgLen);
+	
+	if (msgBuf[1] == 0)  //set command
+	{
+		state[msgBuf[2]] = msgBuf[3];
+	}
+	else if (msgBuf[1] == 1) //get command
+	{
+		if (msgBuf[2] == 1) {
+			Serial1.write(state, NUM_LED_PROPS);
+		}
+	}
+}
