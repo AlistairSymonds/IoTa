@@ -4,6 +4,7 @@
 Heartbeat::Heartbeat()
 {
 	fh = new fixedHeap<void*>(10);
+	state[0] = 60;
 }
 
 Heartbeat::Heartbeat(int size)

@@ -8,12 +8,16 @@
 #include "IoTaDeviceHub.h"
 #include <stdlib.h>
  // !HUB_SIZE
+#ifdef PC_TEST
+#include <memory.h>
+#endif // PC_TEST
 
 
 
 
 IoTaDeviceHub::IoTaDeviceHub() {
 	maxFuncs = 10;
+	numFuncs = 0;
 	funcs = (IoTaFuncBase **)malloc(sizeof(IoTaFuncBase*) * maxFuncs);
 	
 }
@@ -39,8 +43,9 @@ int IoTaDeviceHub::processMessage(uint8_t message[], void* clientToken)
 {
 	int funcIndex = -1;
 	for (int i = 0; i < numFuncs; i++) {
-		if (funcs[i]->getFuncId() == message[0]) {
-			funcs[i]->processCommand(message + 1, clientToken);
+		if (funcs[i]->getFuncId() == message[2]) {
+			uint8_t * cmdStart = message + 3;
+			funcs[i]->processCommand(cmdStart , clientToken);
 		}
 	}
 	return funcIndex;
@@ -53,11 +58,25 @@ int IoTaDeviceHub::copyAndFormatResponses(uint8_t * buf, void * clientToken)
 	for (int i = 0; i < numFuncs; i++) {
 		if (funcs[i]->needsStateBufferUpdate(clientToken)) {
 			short id = funcs[i]->getFuncId();
-			msg[bytesAdded] = (uint8_t)id;
-			memcpy(msg + bytesAdded + 1, funcs[i]->getStateBuffer(clientToken), funcs[i]->getStateBufLen());
+			msg[bytesAdded] = 0;
+			msg[bytesAdded+1] = (uint8_t)id;
+			bytesAdded = bytesAdded + 2;
 
+			int len = funcs[i]->getStateBufLen();
+			memcpy(msg+bytesAdded, funcs[i]->getStateBuffer(clientToken), len);
+			bytesAdded = bytesAdded + len;
+			/*
+			
+			uint8_t * stateBufPtr = funcs[i]->getStateBuffer(clientToken);
+			for (int j = 0; j < len; j++) {
+				*(msg + bytesAdded + j) = *(stateBufPtr + j);
+			}
+			bytesAdded = bytesAdded + funcs[i]->getStateBufLen();
+			*/
 		}
 	}
+	msg[0] = bytesAdded;
+	memcpy(buf, msg, msg[0]);
 	return 0;
 }
 

@@ -1,8 +1,4 @@
-
-
-
-
-
+#ifndef PC_TEST
 
 #include"IoTaFuncBase.h"
 #ifndef _LEDSERIALMASTER_H
@@ -12,6 +8,9 @@
 #include "fixedHeap.h"
 
  
+
+
+
 
 class LedSerialMaster: public IoTaFuncBase
 {
@@ -39,3 +38,4 @@ private:
 
 #endif // !_LEDSERIALMASTER_H
 
+#endif // !PC_TEST

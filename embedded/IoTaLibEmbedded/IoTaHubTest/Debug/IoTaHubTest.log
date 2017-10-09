@@ -1,4 +1,3 @@
-﻿  LedSerialMaster.cpp
-  HeartbeatTest.cpp
-  IoTaHubTest.vcxproj -> C:\Users\alist\OneDrive\Development\IoTa\IoTaLibEmbedded\Debug\IoTaHubTest.dll
-  IoTaHubTest.vcxproj -> C:\Users\alist\OneDrive\Development\IoTa\IoTaLibEmbedded\Debug\IoTaHubTest.pdb (Partial PDB)
+﻿  IoTaDeviceHub.cpp
+  IoTaHubTest.vcxproj -> C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\Debug\IoTaHubTest.dll
+  IoTaHubTest.vcxproj -> C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\Debug\IoTaHubTest.pdb (Partial PDB)

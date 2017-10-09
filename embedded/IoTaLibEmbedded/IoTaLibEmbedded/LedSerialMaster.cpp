@@ -1,3 +1,7 @@
+#ifndef PC_TEST
+
+
+
 #include "LedPropEnum.h"
 #include "LedSerialMaster.h"
 #include "stdlib.h"
@@ -42,8 +46,6 @@ uint8_t * LedSerialMaster::getStateBuffer(void * clientToken)
 	return state;
 }
 
-
-
 int LedSerialMaster::needsStateBufferUpdate(void * clientToken)
 {
 	return fh->contains(clientToken);
@@ -53,4 +55,4 @@ LedSerialMaster::~LedSerialMaster()
 {
 	delete fh;
 }
-
+#endif // !1
