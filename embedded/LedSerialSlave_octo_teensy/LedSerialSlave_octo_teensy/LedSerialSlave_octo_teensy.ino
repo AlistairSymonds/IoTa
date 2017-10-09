@@ -28,8 +28,6 @@ unsigned int anim_period_millis;
 
 
 #include <stdlib.h>
-
-
 #include "LedAnimBase.h"
 #include "SolidColour.h"
 
@@ -47,8 +45,8 @@ void setup() {
 	state[sat] = 0;
 	state[fps] = 10;
 
-	SolidColour * scPtr = new SolidColour(animBuf, state);
-	programs[0] = scPtr;
+	
+	programs[0] = new SolidColour(animBuf, NUM_STRIPS * NUM_LEDS_PER_STRIP, state);
 
 	Serial1.begin(9600);
 	LEDS.addLeds<OCTOWS2811>(frameBuf, NUM_LEDS_PER_STRIP);
@@ -68,6 +66,7 @@ void loop() {
 
 
 	if (anim_period_counter > anim_period_millis) {
+		programs[state[pid]]->advanceAnim();
 		memcpy(frameBuf, animBuf, NUM_STRIPS * NUM_LEDS_PER_STRIP);
 		anim_period_counter = 0;
 	}
@@ -75,7 +74,7 @@ void loop() {
 	if (frame_period_counter > frame_period_millis) {
 		frame_period_counter = 0;
 		LEDS.show();
-		Serial.println(frame_period_millis);
+		
 		frameReady = 0;
 	}
 }

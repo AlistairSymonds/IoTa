@@ -4,11 +4,12 @@
 class SolidColour : public LedAnimBase
 {
 public:
-	SolidColour(CHSV * animBuf, uint8_t * state);
+	SolidColour(CHSV * animBuf, int numleds, uint8_t * state);
 	void advanceAnim();
 	~SolidColour();
 private:
 	CHSV * animBufPtr;
 	uint8_t * statePtr;
+	int numleds = 0;
 };
 
