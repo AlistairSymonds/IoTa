@@ -37,49 +37,51 @@ C:\Users\alist\AppData\Local\Temp\VMBuilds\LedSerialSlave_octo_teensy\teensy31\R
  C:\Program\ Files\ (x86)\Arduino\hardware\teensy\avr\cores\teensy3/Arduino.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\teensy\avr\cores\teensy3/WProgram.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\teensy\avr\cores\teensy3/IntervalTimer.h \
- C:\Users\alist\OneDrive\Development\IoTa\IoTaLibEmbedded\IoTaLibEmbedded/LedPropEnum.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\teensy\avr\libraries\OctoWS2811/OctoWS2811.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\teensy\avr\cores\teensy3/Arduino.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\teensy\avr\cores\teensy3/DMAChannel.h \
- C:\Users\alist\Documents\Arduino\libraries\FastLED/FastLED.h \
- C:\Users\alist\Documents\Arduino\libraries\FastLED/cpp_compat.h \
- C:\Users\alist\Documents\Arduino\libraries\FastLED/FastLED.h \
- C:\Users\alist\Documents\Arduino\libraries\FastLED/fastled_config.h \
- C:\Users\alist\Documents\Arduino\libraries\FastLED/led_sysdefs.h \
- C:\Users\alist\Documents\Arduino\libraries\FastLED/platforms/arm/k20/led_sysdefs_arm_k20.h \
+ C:\Users\alist\OneDrive\Documents\Arduino\libraries\FastLED/FastLED.h \
+ C:\Users\alist\OneDrive\Documents\Arduino\libraries\FastLED/cpp_compat.h \
+ C:\Users\alist\OneDrive\Documents\Arduino\libraries\FastLED/FastLED.h \
+ C:\Users\alist\OneDrive\Documents\Arduino\libraries\FastLED/fastled_config.h \
+ C:\Users\alist\OneDrive\Documents\Arduino\libraries\FastLED/led_sysdefs.h \
+ C:\Users\alist\OneDrive\Documents\Arduino\libraries\FastLED/platforms/arm/k20/led_sysdefs_arm_k20.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\teensy\avr\cores\teensy3/avr/io.h \
  c:\program\ files\ (x86)\arduino\hardware\teensy\avr\cores\teensy3\avr_emulation.h \
- C:\Users\alist\Documents\Arduino\libraries\FastLED/fastled_delay.h \
- C:\Users\alist\Documents\Arduino\libraries\FastLED/bitswap.h \
- C:\Users\alist\Documents\Arduino\libraries\FastLED/controller.h \
- C:\Users\alist\Documents\Arduino\libraries\FastLED/pixeltypes.h \
- C:\Users\alist\Documents\Arduino\libraries\FastLED/lib8tion.h \
- C:\Users\alist\Documents\Arduino\libraries\FastLED/lib8tion/math8.h \
- C:\Users\alist\Documents\Arduino\libraries\FastLED/lib8tion/scale8.h \
- C:\Users\alist\Documents\Arduino\libraries\FastLED/lib8tion/scale8.h \
- C:\Users\alist\Documents\Arduino\libraries\FastLED/lib8tion/random8.h \
- C:\Users\alist\Documents\Arduino\libraries\FastLED/lib8tion/trig8.h \
- C:\Users\alist\Documents\Arduino\libraries\FastLED/color.h \
- C:\Users\alist\Documents\Arduino\libraries\FastLED/fastpin.h \
- C:\Users\alist\Documents\Arduino\libraries\FastLED/fastspi_types.h \
- c:\users\alist\documents\arduino\libraries\fastled\dmx.h \
- c:\users\alist\documents\arduino\libraries\fastled\FastLED.h \
- C:\Users\alist\Documents\Arduino\libraries\FastLED/platforms.h \
- C:\Users\alist\Documents\Arduino\libraries\FastLED/platforms/arm/k20/fastled_arm_k20.h \
- C:\Users\alist\Documents\Arduino\libraries\FastLED/platforms/arm/k20/fastpin_arm_k20.h \
- C:\Users\alist\Documents\Arduino\libraries\FastLED/platforms/arm/k20/fastspi_arm_k20.h \
- C:\Users\alist\Documents\Arduino\libraries\FastLED/platforms/arm/k20/octows2811_controller.h \
- C:\Users\alist\Documents\Arduino\libraries\FastLED/platforms/arm/k20/smartmatrix_t3.h \
- C:\Users\alist\Documents\Arduino\libraries\FastLED/platforms/arm/k20/clockless_arm_k20.h \
- C:\Users\alist\Documents\Arduino\libraries\FastLED/platforms/arm/k20/clockless_block_arm_k20.h \
+ C:\Users\alist\OneDrive\Documents\Arduino\libraries\FastLED/fastled_delay.h \
+ C:\Users\alist\OneDrive\Documents\Arduino\libraries\FastLED/bitswap.h \
+ C:\Users\alist\OneDrive\Documents\Arduino\libraries\FastLED/controller.h \
+ C:\Users\alist\OneDrive\Documents\Arduino\libraries\FastLED/pixeltypes.h \
+ C:\Users\alist\OneDrive\Documents\Arduino\libraries\FastLED/lib8tion.h \
+ C:\Users\alist\OneDrive\Documents\Arduino\libraries\FastLED/lib8tion/math8.h \
+ C:\Users\alist\OneDrive\Documents\Arduino\libraries\FastLED/lib8tion/scale8.h \
+ C:\Users\alist\OneDrive\Documents\Arduino\libraries\FastLED/lib8tion/scale8.h \
+ C:\Users\alist\OneDrive\Documents\Arduino\libraries\FastLED/lib8tion/random8.h \
+ C:\Users\alist\OneDrive\Documents\Arduino\libraries\FastLED/lib8tion/trig8.h \
+ C:\Users\alist\OneDrive\Documents\Arduino\libraries\FastLED/color.h \
+ C:\Users\alist\OneDrive\Documents\Arduino\libraries\FastLED/fastpin.h \
+ C:\Users\alist\OneDrive\Documents\Arduino\libraries\FastLED/fastspi_types.h \
+ c:\users\alist\onedrive\documents\arduino\libraries\fastled\dmx.h \
+ c:\users\alist\onedrive\documents\arduino\libraries\fastled\FastLED.h \
+ C:\Users\alist\OneDrive\Documents\Arduino\libraries\FastLED/platforms.h \
+ C:\Users\alist\OneDrive\Documents\Arduino\libraries\FastLED/platforms/arm/k20/fastled_arm_k20.h \
+ C:\Users\alist\OneDrive\Documents\Arduino\libraries\FastLED/platforms/arm/k20/fastpin_arm_k20.h \
+ C:\Users\alist\OneDrive\Documents\Arduino\libraries\FastLED/platforms/arm/k20/fastspi_arm_k20.h \
+ C:\Users\alist\OneDrive\Documents\Arduino\libraries\FastLED/platforms/arm/k20/octows2811_controller.h \
+ C:\Users\alist\OneDrive\Documents\Arduino\libraries\FastLED/platforms/arm/k20/smartmatrix_t3.h \
+ C:\Users\alist\OneDrive\Documents\Arduino\libraries\FastLED/platforms/arm/k20/clockless_arm_k20.h \
+ C:\Users\alist\OneDrive\Documents\Arduino\libraries\FastLED/platforms/arm/k20/clockless_block_arm_k20.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\teensy\avr\cores\teensy3/kinetis.h \
- C:\Users\alist\Documents\Arduino\libraries\FastLED/fastled_progmem.h \
- C:\Users\alist\Documents\Arduino\libraries\FastLED/hsv2rgb.h \
- C:\Users\alist\Documents\Arduino\libraries\FastLED/colorutils.h \
- C:\Users\alist\Documents\Arduino\libraries\FastLED/pixelset.h \
- C:\Users\alist\Documents\Arduino\libraries\FastLED/colorpalettes.h \
- C:\Users\alist\Documents\Arduino\libraries\FastLED/noise.h \
- C:\Users\alist\Documents\Arduino\libraries\FastLED/power_mgt.h \
- C:\Users\alist\Documents\Arduino\libraries\FastLED/fastspi.h \
- C:\Users\alist\Documents\Arduino\libraries\FastLED/fastspi_bitbang.h \
- C:\Users\alist\Documents\Arduino\libraries\FastLED/chipsets.h
+ C:\Users\alist\OneDrive\Documents\Arduino\libraries\FastLED/fastled_progmem.h \
+ C:\Users\alist\OneDrive\Documents\Arduino\libraries\FastLED/hsv2rgb.h \
+ C:\Users\alist\OneDrive\Documents\Arduino\libraries\FastLED/colorutils.h \
+ C:\Users\alist\OneDrive\Documents\Arduino\libraries\FastLED/pixelset.h \
+ C:\Users\alist\OneDrive\Documents\Arduino\libraries\FastLED/colorpalettes.h \
+ C:\Users\alist\OneDrive\Documents\Arduino\libraries\FastLED/noise.h \
+ C:\Users\alist\OneDrive\Documents\Arduino\libraries\FastLED/power_mgt.h \
+ C:\Users\alist\OneDrive\Documents\Arduino\libraries\FastLED/fastspi.h \
+ C:\Users\alist\OneDrive\Documents\Arduino\libraries\FastLED/fastspi_bitbang.h \
+ C:\Users\alist\OneDrive\Documents\Arduino\libraries\FastLED/chipsets.h \
+ C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded/LedPropEnum.h \
+ C:\Users\alist\AppData\Local\Temp\VMBuilds\LedSerialSlave_octo_teensy\teensy31\Release\LedAnimBase.h \
+ C:\Users\alist\AppData\Local\Temp\VMBuilds\LedSerialSlave_octo_teensy\teensy31\Release\SolidColour.h

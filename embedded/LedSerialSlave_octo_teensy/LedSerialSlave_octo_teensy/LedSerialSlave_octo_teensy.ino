@@ -4,17 +4,6 @@
  Author:	alist
 */
 
-// the setup function runs once when you press reset or power the board
-
-
-
-
-#include "LedPropEnum.h"
-uint8_t state[NUM_LED_PROPS];
-elapsedMillis frame_period_counter;
-int frame_period_millis;
-
-
 //fast led stuff
 #define USE_OCTOWS2811
 #include<OctoWS2811.h>
@@ -23,10 +12,28 @@ int frame_period_millis;
 #define NUM_LEDS_PER_STRIP 15
 #define NUM_STRIPS 1
 
-CHSV leds_hsv[NUM_STRIPS * NUM_LEDS_PER_STRIP];
-CRGB leds[NUM_STRIPS * NUM_LEDS_PER_STRIP];
+CHSV animBuf[NUM_STRIPS * NUM_LEDS_PER_STRIP];
+CRGB frameBuf[NUM_STRIPS * NUM_LEDS_PER_STRIP];
 
 
+#include "LedPropEnum.h"
+uint8_t state[NUM_LED_PROPS];
+
+
+elapsedMillis frame_period_counter;
+unsigned int frame_period_millis;
+
+elapsedMillis anim_period_counter;
+unsigned int anim_period_millis;
+
+
+#include <stdlib.h>
+
+
+#include "LedAnimBase.h"
+#include "SolidColour.h"
+
+LedAnimBase * programs[5];
 
 void setup() {
 	Serial.begin(9600);
@@ -35,10 +42,14 @@ void setup() {
 	}
 	state[hue] = 128;
 	state[val] = 255;
-	state[sat] = 255;
-	state[fps] = 60;
+	state[sat] = 0;
+	state[fps] = 10;
 
-	LEDS.addLeds<OCTOWS2811>(leds, NUM_LEDS_PER_STRIP);
+	SolidColour * scPtr = new SolidColour(animBuf, state);
+	programs[0] = scPtr;
+
+
+	LEDS.addLeds<OCTOWS2811>(frameBuf, NUM_LEDS_PER_STRIP);
 }
 
 // the loop function runs over and over again until power down or reset
@@ -49,25 +60,9 @@ void loop() {
 	//check serial
 	frame_period_millis = (1000 / state[fps]) ;
 	
-	if (!frameReady) {
-		for (int i = 0; i < 15; i++) {
-			leds_hsv[i].v = leds_hsv[i].v / 2;
-		}
-		leds_hsv[pos].h = state[hue];
-		leds_hsv[pos].s = state[sat];
-		leds_hsv[pos].v = state[val];
-		pos = pos + 1;
-		if (pos == 15) {
-			pos = 0;
-		}
-
-		for (int i = 0; i < 15; i++) {
-			leds[i] = CHSV(leds_hsv[i].h, leds_hsv[i].s, leds_hsv[i].v);
-		}
-
-
-		
-		frameReady = 1;
+	if (anim_period_counter > anim_period_millis) {
+		memcpy(frameBuf, animBuf, NUM_STRIPS * NUM_LEDS_PER_STRIP);
+		anim_period_millis = 0;
 	}
 
 	if (frame_period_counter > frame_period_millis) {
