@@ -1,0 +1,9 @@
+﻿  heapTest.cpp
+LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/LTCG' specification
+     Creating library C:\Users\alist\OneDrive\Development\IoTa\IoTaLibEmbedded\Release\IoTaHubTest.lib and object C:\Users\alist\OneDrive\Development\IoTa\IoTaLibEmbedded\Release\IoTaHubTest.exp
+  Generating code
+  3 of 178 functions ( 1.7%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    16 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  IoTaHubTest.vcxproj -> C:\Users\alist\OneDrive\Development\IoTa\IoTaLibEmbedded\Release\IoTaHubTest.dll

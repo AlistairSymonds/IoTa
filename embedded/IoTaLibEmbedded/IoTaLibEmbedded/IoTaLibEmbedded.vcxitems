@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <ItemsProjectGuid>{0fa9f25a-fb65-436e-ba56-abed0e0fb5a1}</ItemsProjectGuid>
+    <ItemsProjectName>IoTaDeviceHub</ItemsProjectName>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectCapability Include="SourceItemsFromImports" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="$(MSBuildThisFileDirectory)readme.txt" />
+    <Text Include="$(MSBuildThisFileDirectory)library.properties" />
+    <Text Include="$(MSBuildThisFileDirectory)IoTaDeviceHub.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- <ClInclude Include="$(MSBuildThisFileDirectory)IoTaLibEmbedded.h" /> -->
+    <ClInclude Include="$(MSBuildThisFileDirectory)circularBuffer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)fixedHeap.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)heartbeat.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)HubInternalFunc.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)IoTaFuncBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)iota_defines.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)LedPropEnum.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)LedSerialMaster.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)TemperatureLM35.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)HubInternalFunc.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)IoTaDeviceHub.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)heartbeat.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)LedSerialMaster.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)TemperatureLM35.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+</Project>
