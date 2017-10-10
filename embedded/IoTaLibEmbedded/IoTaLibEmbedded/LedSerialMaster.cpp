@@ -1,4 +1,4 @@
-#ifndef _WIN32
+#ifdef ESP8266
 
 
 #include "iota_defines.h"
@@ -18,7 +18,7 @@ LedSerialMaster::LedSerialMaster(Stream * stream, int maxTokens)
 
 short LedSerialMaster::getFuncId()
 {
-	return LED_ID;
+	return LEDS_ID;
 }
 
 void LedSerialMaster::processCommand(uint8_t command[],  void * clientToken)

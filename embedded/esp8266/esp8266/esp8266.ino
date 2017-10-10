@@ -3,7 +3,7 @@
  Created:	10/4/2017 10:50:40 PM
  Author:	alist
 */
-#define ESP_H
+
 #include <ESP8266WiFi.h>          //https://github.com/esp8266/Arduino
 
 //needed for library
@@ -50,13 +50,12 @@ void setup() {
 
 int readInAndSubmitData(WiFiClient *c) {
 	//max length of each message is 256 bytes
-	
 	while (c->available() > 0)
 	{
 		uint8_t msgBuffer[256];
 		int msgLen = c->read();
 		
-		c->readBytes(msgBuffer, msgLen);
+		c->readBytes(&msgBuffer[0], msgLen);
 		hub.processMessage(msgBuffer, c);
 	}
 
@@ -67,6 +66,7 @@ void loop() {
 
 	// Check if a new client has connected
 	WiFiClient newClient = server.available();
+
 	if (newClient) {
 		clients[nextFreeSpot] = newClient;
 		nextFreeSpot++;
@@ -92,12 +92,10 @@ void loop() {
 	for (int c = 0; 0 < nextFreeSpot; c++) {
 		uint8_t buffer[255];
 		hub.copyAndFormatResponses(buffer, &clients[c]);
-		clients[c].write(buffer, buffer[0]);	
+		if (buffer[0] > 1) {
+			clients[c].write(&buffer[0], buffer[0]);
+		}	
 	}
-
-
-	
-	
 
 }
 

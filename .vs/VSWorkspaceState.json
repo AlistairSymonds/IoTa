@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\embedded",
-    "\\embedded\\LedSerialSlave_octo_teensy"
+    "\\embedded\\LedSerialSlave_octo_teensy",
+    "\\embedded\\LedSerialSlave_octo_teensy\\LedSerialSlave_octo_teensy"
   ],
-  "SelectedNode": "\\embedded\\LedSerialSlave_octo_teensy\\LedSerialSlave_octo_teensy.sln",
+  "SelectedNode": "\\embedded\\LedSerialSlave_octo_teensy\\LedSerialSlave_octo_teensy\\LedSerialSlave_octo_teensy.ino",
   "PreviewInSolutionExplorer": false
 }

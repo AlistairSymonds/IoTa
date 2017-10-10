@@ -1,4 +1,4 @@
-#ifndef _WIN32
+#ifdef ESP8266
 
 #include"IoTaFuncBase.h"
 #ifndef _LEDSERIALMASTER_H

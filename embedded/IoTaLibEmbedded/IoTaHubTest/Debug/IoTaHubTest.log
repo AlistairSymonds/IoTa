@@ -3,6 +3,5 @@ c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotahubtest\hu
 c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotahubtest\hubtest.cpp(62): warning C4244: '=': conversion from 'short' to 'uint8_t', possible loss of data
 c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotahubtest\hubtest.cpp(63): warning C4244: '=': conversion from 'short' to 'uint8_t', possible loss of data
 c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotahubtest\hubtest.cpp(74): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
-     Creating library C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\Debug\IoTaHubTest.lib and object C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\Debug\IoTaHubTest.exp
   IoTaHubTest.vcxproj -> C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\Debug\IoTaHubTest.dll
   IoTaHubTest.vcxproj -> C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\Debug\IoTaHubTest.pdb (Partial PDB)

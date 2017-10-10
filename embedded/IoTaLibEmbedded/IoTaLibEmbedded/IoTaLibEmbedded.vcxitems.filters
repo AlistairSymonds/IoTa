@@ -44,6 +44,9 @@
     <ClInclude Include="C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded\IoTaFuncBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded\iota_defines.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded\LedPropEnum.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -51,9 +54,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded\TemperatureLM35.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded\iota_defines.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

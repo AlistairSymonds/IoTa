@@ -18,6 +18,11 @@
 #include <string.h>
 #endif
 
+#ifdef ESP8266
+#include <string.h>
+#endif // 
+
+
 
 
 
@@ -70,14 +75,7 @@ int IoTaDeviceHub::copyAndFormatResponses(uint8_t * buf, void * clientToken)
 			int len = funcs[i]->getStateBufLen();
 			memcpy(msg+bytesAdded, funcs[i]->getStateBuffer(clientToken), len);
 			bytesAdded = bytesAdded + len;
-			/*
-			
-			uint8_t * stateBufPtr = funcs[i]->getStateBuffer(clientToken);
-			for (int j = 0; j < len; j++) {
-				*(msg + bytesAdded + j) = *(stateBufPtr + j);
-			}
-			bytesAdded = bytesAdded + funcs[i]->getStateBufLen();
-			*/
+		
 		}
 	}
 	msg[0] = bytesAdded;
