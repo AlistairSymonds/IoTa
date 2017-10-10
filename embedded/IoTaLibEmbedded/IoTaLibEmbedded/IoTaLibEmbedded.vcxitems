@@ -24,6 +24,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)circularBuffer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)fixedHeap.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)heartbeat.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)HubInternalFunc.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)IoTaFuncBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)iota_defines.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LedPropEnum.h" />
@@ -31,6 +32,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)TemperatureLM35.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)HubInternalFunc.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)IoTaDeviceHub.cpp">
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>

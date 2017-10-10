@@ -7,6 +7,7 @@
 
 #include "IoTaDeviceHub.h"
 #include <stdlib.h>
+#include "HubInternalFunc.h"
  // !HUB_SIZE
 
 
@@ -30,6 +31,8 @@ IoTaDeviceHub::IoTaDeviceHub() {
 	maxFuncs = 10;
 	numFuncs = 0;
 	funcs = (IoTaFuncBase **)malloc(sizeof(IoTaFuncBase*) * maxFuncs);	
+	internalHandler = new HubInternalFunc(&numFuncs, maxFuncs);
+	addFunc(internalHandler);
 }
 
 void IoTaDeviceHub::tick()
@@ -37,8 +40,16 @@ void IoTaDeviceHub::tick()
 
 }
 
+int IoTaDeviceHub::getNumFuncs()
+{
+	return numFuncs;
+}
+
+
+
 int IoTaDeviceHub::addFunc(IoTaFuncBase * newFunc)
 {
+	internalHandler->addFuncId(newFunc->getFuncId());
 	if (numFuncs < maxFuncs) {
 		funcs[numFuncs] = newFunc;
 		numFuncs++;
@@ -52,10 +63,12 @@ int IoTaDeviceHub::addFunc(IoTaFuncBase * newFunc)
 int IoTaDeviceHub::processMessage(uint8_t message[], void* clientToken)
 {
 	int funcIndex = -1;
-	for (int i = 0; i < numFuncs; i++) {
-		if (funcs[i]->getFuncId() == message[2]) {
-			uint8_t * cmdStart = message + 3;
-			funcs[i]->processCommand(cmdStart , clientToken);
+	{
+		for (int i = 0; i < numFuncs; i++) {
+			if (funcs[i]->getFuncId() == message[2]) {
+				uint8_t * cmdStart = message + 3;
+				funcs[i]->processCommand(cmdStart, clientToken);
+			}
 		}
 	}
 	return funcIndex;

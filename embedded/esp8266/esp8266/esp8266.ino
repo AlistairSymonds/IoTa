@@ -53,9 +53,14 @@ int readInAndSubmitData(WiFiClient *c) {
 	while (c->available() > 0)
 	{
 		uint8_t msgBuffer[256];
-		int msgLen = c->read();
+		msgBuffer[0] = c->read();
 		
-		c->readBytes(&msgBuffer[0], msgLen);
+		c->readBytes(&msgBuffer[1], msgBuffer[0]);
+		for (int i = 0; i < msgBuffer[0]; i++) {
+			Serial.print(msgBuffer[i]);
+			Serial.print(" ");
+		}
+		Serial.println("end msg");
 		hub.processMessage(msgBuffer, c);
 	}
 
@@ -70,15 +75,17 @@ void loop() {
 	if (newClient) {
 		clients[nextFreeSpot] = newClient;
 		nextFreeSpot++;
+		Serial.println("new c");
 		if (nextFreeSpot == MAX_CLIENTS) {
 			nextFreeSpot = 0;
 		}
 	}
 
 	for (int c = 0; c < nextFreeSpot; c++) {
-		if (clients[c].connected() && clients[c].available() > 0) {
-			readInAndSubmitData(&clients[c]);
-
+		if (clients[c].connected()) {
+			if(clients[c].available() > 0) {
+				readInAndSubmitData(&clients[c]);
+			}
 		} else {
 			nextFreeSpot--;
 			if (nextFreeSpot < 0) {
@@ -86,16 +93,25 @@ void loop() {
 			}
 		}
 	}
+	
 
 	hub.tick();
+	for (int c = 0; c < nextFreeSpot; c++) {
+		
 
-	for (int c = 0; 0 < nextFreeSpot; c++) {
 		uint8_t buffer[255];
 		hub.copyAndFormatResponses(buffer, &clients[c]);
 		if (buffer[0] > 1) {
 			clients[c].write(&buffer[0], buffer[0]);
+			
+			for (int i = 0; i < buffer[0]; i++) {
+				Serial.print(buffer[i]);
+				Serial.print(" ");
+			}
+			Serial.println("end output");
 		}	
 	}
+	
 
 }
 
