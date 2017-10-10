@@ -1,4 +1,4 @@
-#ifndef PC_TEST
+#ifndef _WIN32
 
 #include"IoTaFuncBase.h"
 #ifndef _LEDSERIALMASTER_H

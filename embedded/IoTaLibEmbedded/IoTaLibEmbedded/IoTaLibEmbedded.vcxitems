@@ -25,8 +25,10 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)fixedHeap.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)heartbeat.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)IoTaFuncBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)iota_defines.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LedPropEnum.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LedSerialMaster.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)TemperatureLM35.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)IoTaDeviceHub.cpp">
@@ -36,6 +38,9 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)LedSerialMaster.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)TemperatureLM35.cpp">
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>

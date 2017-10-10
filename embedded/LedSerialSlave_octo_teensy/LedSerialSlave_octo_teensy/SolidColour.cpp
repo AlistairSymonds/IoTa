@@ -1,9 +1,5 @@
 #include "SolidColour.h"
 #include "LedPropEnum.h"
-
-
-
-
 SolidColour::SolidColour(CHSV * leds, int numleds, uint8_t * state)
 {
 	animBufPtr = leds;

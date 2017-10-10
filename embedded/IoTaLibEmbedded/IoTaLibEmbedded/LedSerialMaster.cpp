@@ -1,7 +1,7 @@
-#ifndef PC_TEST
+#ifndef _WIN32
 
 
-
+#include "iota_defines.h"
 #include "LedPropEnum.h"
 #include "LedSerialMaster.h"
 #include "stdlib.h"
@@ -18,7 +18,7 @@ LedSerialMaster::LedSerialMaster(Stream * stream, int maxTokens)
 
 short LedSerialMaster::getFuncId()
 {
-	return 2;
+	return LED_ID;
 }
 
 void LedSerialMaster::processCommand(uint8_t command[],  void * clientToken)

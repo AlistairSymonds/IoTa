@@ -8,9 +8,15 @@
 #include "IoTaDeviceHub.h"
 #include <stdlib.h>
  // !HUB_SIZE
-#ifdef PC_TEST
+
+
+#ifdef _WIN32
 #include <memory.h>
-#endif // PC_TEST
+#endif
+
+#ifdef __arm__
+#include <string.h>
+#endif
 
 
 
@@ -18,8 +24,7 @@
 IoTaDeviceHub::IoTaDeviceHub() {
 	maxFuncs = 10;
 	numFuncs = 0;
-	funcs = (IoTaFuncBase **)malloc(sizeof(IoTaFuncBase*) * maxFuncs);
-	
+	funcs = (IoTaFuncBase **)malloc(sizeof(IoTaFuncBase*) * maxFuncs);	
 }
 
 void IoTaDeviceHub::tick()
