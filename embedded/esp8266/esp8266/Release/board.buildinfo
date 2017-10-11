@@ -202,6 +202,7 @@ vm.boardsource.path=C:\Users\alist\AppData\Local\arduino15\packages\esp8266\hard
 runtime.platform.path=C:\Users\alist\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0
 vm.platformname.name=esp8266
 build.arch=ESP8266
+windows=256000
 build.flash_ld=eagle.flash.4m.ld
 build.spiffs_start=0x100000
 build.spiffs_end=0x3FB000
@@ -376,7 +377,7 @@ runtime.vm.ide.platforms.path=C:\Program Files (x86)\Microsoft Visual Studio\201
 build.variant.path=C:\Users\alist\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\variants\nodemcu
 archive_file=core.a
 archive_file_path=C:\Users\alist\AppData\Local\Temp\VMBuilds\esp8266\esp8266_nodemcuv2\Release\core.a
-extra.time.local=48311006
+extra.time.local=47778146
 tools.ctags.path={runtime.tools.ctags.path}
 tools.ctags.cmd.path={path}/ctags
 tools.ctags.pattern="{cmd.path}" -u --language-force=c++ -f - --c++-kinds=svpf --fields=KSTtzns --line-directives "{source_file}"

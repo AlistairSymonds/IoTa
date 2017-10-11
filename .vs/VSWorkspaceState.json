@@ -1,8 +1,12 @@
 {
   "ExpandedNodes": [
+    "",
     "\\embedded",
+    "\\embedded\\IoTaLibEmbedded",
+    "\\embedded\\IoTaLibEmbedded\\IoTaLibEmbedded",
     "\\embedded\\LedSerialSlave_octo_teensy",
     "\\embedded\\LedSerialSlave_octo_teensy\\LedSerialSlave_octo_teensy"
   ],
+  "SelectedNode": "\\embedded\\IoTaLibEmbedded\\IoTaLibEmbedded\\iota_defines.h",
   "PreviewInSolutionExplorer": false
 }
