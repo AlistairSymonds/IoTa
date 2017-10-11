@@ -1,4 +1,4 @@
-package iota.common.definitions.db;
+package iota.common.db;
 
 /**
  * Created by alist on 10/07/2017.

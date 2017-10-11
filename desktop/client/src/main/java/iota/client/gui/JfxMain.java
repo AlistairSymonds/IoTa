@@ -55,5 +55,10 @@ public class JfxMain extends Application implements Runnable {
         activateJfx();
     }
 
+    @Override
+    public void stop(){
+        System.exit(0);
+    }
+
 
 }

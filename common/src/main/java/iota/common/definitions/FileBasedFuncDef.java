@@ -1,7 +1,7 @@
 package iota.common.definitions;
 
 
-import iota.common.definitions.db.DbCol;
+import iota.common.db.DbCol;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,7 +17,7 @@ class FileBasedFuncDef implements IFuncDef {
     private short id;
 
     public FileBasedFuncDef(HashMap<String, List<String>> lineMap) {
-        cols = new ArrayList<DbCol>();
+        cols = new ArrayList<>();
         if (lineMap.get("#name") != null) {
             this.name = lineMap.get("#name").get(0);
         } else {
@@ -57,5 +57,20 @@ class FileBasedFuncDef implements IFuncDef {
     @Override
     public short getFuncId() {
         return id;
+    }
+
+    @Override
+    public int submitMessage(byte[] message) {
+        return 0;
+    }
+
+    @Override
+    public int updateStateBuffer(byte[] recievedState) {
+        return 0;
+    }
+
+    @Override
+    public List<IStateItem> getStateItems() {
+        return null;
     }
 }

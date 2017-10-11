@@ -1,7 +1,7 @@
 package iota.server.sql;
 
 import iota.common.definitions.IFuncDef;
-import iota.common.definitions.db.DbCol;
+import iota.common.db.DbCol;
 
 
 /**

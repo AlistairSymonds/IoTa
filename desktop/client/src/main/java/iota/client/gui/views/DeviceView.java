@@ -2,11 +2,12 @@ package iota.client.gui.views;
 
 
 import iota.client.gui.presenter.IoTaPresenter;
+import iota.client.gui.views.functions.FunctionViewFactory;
+import iota.common.definitions.IFuncDef;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.control.Button;
-import javafx.scene.layout.FlowPane;
+
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 public class DeviceView extends FlowPane implements UpdateAbleView {
@@ -16,6 +17,8 @@ public class DeviceView extends FlowPane implements UpdateAbleView {
         super();
         this.presenter = presenterIn;
         presenter.registerUpdateAbleView(this);
+        this.setVgap(8);
+        this.setHgap(4);
         updateDevice();
     }
 
@@ -24,17 +27,14 @@ public class DeviceView extends FlowPane implements UpdateAbleView {
         if (presenter.getSelectedEspDevice() == null) {
             super.getChildren().add(new Text("No Device Selected"));
         } else {
-            super.getChildren().add(new Text(presenter.getSelectedEspDevice().toString()));
-            Button hbeatBtn = new Button("Heartbeat");
+            for(IFuncDef func : presenter.getSelectedEspDevice().getFuncs()){
+                Pane p = FunctionViewFactory.getFunctionView(presenter.getSelectedEspDevice(), func);
 
-            hbeatBtn.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent e) {
-                    presenter.getSelectedEspDevice().heartbeat();
-                }
-            });
+                p.setBorder(new Border(new BorderStroke(Color.BLACK,
+                        BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
-            super.getChildren().add(hbeatBtn);
+                super.getChildren().add(p);
+            }
 
         }
     }

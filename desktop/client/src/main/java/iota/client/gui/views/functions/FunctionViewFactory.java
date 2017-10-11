@@ -2,24 +2,25 @@ package iota.client.gui.views.functions;
 
 import iota.client.model.EspDevice;
 import iota.common.definitions.IFuncDef;
+import iota.common.definitions.UnknownFunction;
 import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FunctionViewFactory {
-    public static List<IFunctionView> getFuncViews(EspDevice device) {
-        List<IFunctionView> viewList = new ArrayList<>();
-        //for
-        return viewList;
-    }
+    public static Pane getFunctionView(EspDevice device, IFuncDef def){
 
-    private static Pane getPaneForFunc(EspDevice device, IFuncDef funcDef) {
-        if (funcDef.getTableName().equals("lighting")) {
-            return new Lighting(device).getView();
+        if(def.getFuncId() == 1){
+            return new HeartbeatView(device).getView();
         }
 
+
+
+
+        //fallback
         return new ErrorView(device).getView();
     }
+
 }
 

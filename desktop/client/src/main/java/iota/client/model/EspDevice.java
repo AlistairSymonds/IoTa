@@ -1,6 +1,8 @@
 package iota.client.model;
 
+import iota.common.definitions.DefinitionStore;
 import iota.common.definitions.IFuncDef;
+import iota.common.definitions.IFuncFactory;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -19,22 +21,20 @@ public class EspDevice extends Observable {
     private InetAddress address;
     private Socket socket;
     private List<IFuncDef> defs;
-    private Thread t;
     private boolean connected;
 
+    private DefinitionStore defStore;
 
-    private DataInputStream dataIn;
-    private DataOutputStream dataOut;
+
 
     private SenderThread senderThread;
-    private RecieverThread recieverThread;
-
-    private long heartBeatStart;
-    private long heartBeatFinish;
+    private ReceiverThread receiverThread;
 
 
-    public EspDevice(InetAddress address) {
+
+    public EspDevice(InetAddress address, DefinitionStore defStoreIn) {
         this.address = address;
+        this.defStore = defStoreIn;
         defs = new ArrayList<>();
     }
 
@@ -47,77 +47,84 @@ public class EspDevice extends Observable {
     }
 
     public synchronized List<IFuncDef> getFuncs() {
-        return null;
+        return defs;
     }
 
-
-
-    public void heartbeat() {
-        byte[] heartBytes = {1, 60};
-        senderThread.sendMessage(heartBytes);
-    }
 
     public void start() throws IOException {
 
         connected = true;
         socket = new Socket();
         socket.connect(new InetSocketAddress(address, 2812));
-        dataIn = new DataInputStream(socket.getInputStream());
-        dataOut = new DataOutputStream(socket.getOutputStream());
-
 
         senderThread = new SenderThread();
-        recieverThread = new RecieverThread();
+        receiverThread = new ReceiverThread();
 
-        recieverThread.start();
+        receiverThread.start();
         senderThread.start();
-
 
         byte[] getFuncs = {0, (byte) 0xFF,(byte) 0xFF};
         senderThread.sendMessage(getFuncs);
     }
 
-    public long getHeartBeatDelta() {
-        return heartBeatFinish - heartBeatStart;
+
+    public int submitMessage(byte[] msg){
+
+
+
+        for(int i = 0; i < defs.size(); i++){
+            if(defs.get(i).getFuncId() == msg[1]){
+                defs.get(i).submitMessage(msg);
+            }
+        }
+
+        senderThread.sendMessage(msg);
+        setChanged();
+        notifyObservers();
+        return 0;
     }
 
-    private void handleMessageRecieved(byte[] message) {
-        switch (message[0]) {
-            case 60:
-                heartBeatFinish = System.currentTimeMillis();
-                break;
-            default:
-                System.out.println("Unknown message from device");
+    private int handleReturnedMessage(byte[] msg){
+
+        //check if there are any data bytes after length and funcid
+        if(msg.length<2){
+            return -1;
         }
+        //check if its an internal message (func id == 0x00FF)
+        if(msg[1] == 0&& msg[2] == -1){
+            for(int i = 4; i < msg.length; i++){
+                IFuncDef f = IFuncFactory.getInstanceById(msg[i]);
+                defs.add(f);
+                System.out.println("Added func " + f.getFuncId() + " name " + f.getTableName());
+            }
+        }
+
+        for (IFuncDef d : defs){
+            if(d.getFuncId() == msg[2]){
+                byte[] stateBuf = new byte[msg.length-3];
+                System.arraycopy(msg,3,stateBuf,0,stateBuf.length);
+                d.updateStateBuffer(stateBuf);
+            }
+        }
+
 
         setChanged();
         notifyObservers();
+        return 0;
     }
 
-    private void writeOut(byte[] bytes) throws IOException {
 
-        byte[] temp = new byte[bytes.length + 1];
-        temp[0] = (byte) (bytes.length+1);
-        StringBuilder byteStr = new StringBuilder("");
-        for (int i = 0; i < temp.length; i++) {
-            byteStr.append(String.format("%02x ", temp[i]));
-        }
-        System.out.println("Sent message: " + byteStr);
-
-        System.arraycopy(bytes, 0, temp, 1, bytes.length);
-        dataOut.write(temp);
-        setChanged();
-        notifyObservers();
-    }
 
     private class SenderThread implements Runnable {
-
+        private DataOutputStream dataOut;
         private ConcurrentLinkedQueue<byte[]> queue;
-        Thread t;
+        private Thread t;
 
-        public void start() {
+        public void start() throws IOException {
             queue = new ConcurrentLinkedQueue<>();
+            dataOut = new DataOutputStream(socket.getOutputStream());
             t = new Thread(this);
+            t.setName(getInetAddress() + "Sender");
             t.start();
         }
 
@@ -125,6 +132,26 @@ public class EspDevice extends Observable {
             queue.add(msg);
             this.notify();
         }
+
+        private void writeOut(byte[] bytes) throws IOException {
+
+            byte[] temp = new byte[bytes.length + 1];
+            temp[0] = (byte) (bytes.length+1);
+
+
+            System.arraycopy(bytes, 0, temp, 1, bytes.length);
+
+            StringBuilder byteStr = new StringBuilder("");
+            for (int i = 0; i < temp.length; i++) {
+                byteStr.append(String.format("%02x ", temp[i]));
+            }
+            System.out.println("Sent message: " + byteStr);
+
+            dataOut.write(temp);
+            setChanged();
+            notifyObservers();
+        }
+
 
         @Override
         public synchronized void run() {
@@ -150,12 +177,16 @@ public class EspDevice extends Observable {
         }
     }
 
-    private class RecieverThread implements Runnable {
+    private class ReceiverThread implements Runnable {
+
+        private DataInputStream dataIn;
         private Thread t;
 
-        public void start() {
+        public void start() throws IOException {
+            dataIn = new DataInputStream(socket.getInputStream());
             t = new Thread(this);
             t.start();
+            t.setName(getInetAddress() + " Receiver");
             System.out.println("Starting \n" + this.toString());
         }
 
@@ -167,24 +198,23 @@ public class EspDevice extends Observable {
                 byte[] msg;
 
                 try {
-                    if(dataIn.available() > 0) {
+                    //if(dataIn.available() > 0) {
                         messageLength = (int) dataIn.readByte();
                         msg = new byte[messageLength];
-                        int bytesRead = dataIn.read(msg, 0, messageLength);
+                        msg[0] = (byte) messageLength;
+                        dataIn.read(msg, 1, messageLength-1);
 
                         StringBuilder byteStr = new StringBuilder("");
                         for (int i = 0; i < msg.length; i++) {
                             byteStr.append(String.format("%02x ", msg[i]));
                         }
                         System.out.println("Got message: " + byteStr);
-                    }
+                        handleReturnedMessage(msg);
+                    //}
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         }
     }
-
-
-
 }

@@ -55,7 +55,7 @@ public class EspManager extends Observable implements Runnable {
         for (ScanResult r : results) {
             if (r.isOpen()) {
                 if (!devices.containsKey(r.getHost())) {
-                    EspDevice device = new EspDevice(r.getHost());
+                    EspDevice device = new EspDevice(r.getHost(), definitionStore);
                     try {
                         device.start();
                     } catch (IOException e) {

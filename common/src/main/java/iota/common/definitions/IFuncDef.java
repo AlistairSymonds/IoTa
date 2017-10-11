@@ -1,7 +1,7 @@
 package iota.common.definitions;
 
 
-import iota.common.definitions.db.DbCol;
+import iota.common.db.DbCol;
 
 import java.util.List;
 
@@ -11,4 +11,11 @@ public interface IFuncDef {
     String getTableName();
 
     short getFuncId();
+
+    int submitMessage(byte[] message);
+
+    int updateStateBuffer(byte[] recievedState);
+
+    public List<IStateItem> getStateItems();
+
 }

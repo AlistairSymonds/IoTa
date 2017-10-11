@@ -2,6 +2,7 @@ package iota.client.gui.views.functions;
 
 import iota.client.model.EspDevice;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 
 public class ErrorView implements IFunctionView {
 
@@ -13,6 +14,11 @@ public class ErrorView implements IFunctionView {
 
     @Override
     public Pane getView() {
-        return null;
+
+        Pane p = new Pane();
+
+        p.getChildren().add(new Text("Unknown for device at" + device.getInetAddress()));
+
+        return p;
     }
 }
