@@ -301,3 +301,10 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+
+
+## my additions
+embedded/LedSerialSlave_octo_teensy/Debug/**
+embedded/LedSerialSlave_octo_teensy/Release/**
+embedded/LedSerialSlave_octo_teensy/LedSerialSlave_octo_teensy/Debug/**
+embedded/LedSerialSlave_octo_teensy/LedSerialSlave_octo_teensy/Release/**
