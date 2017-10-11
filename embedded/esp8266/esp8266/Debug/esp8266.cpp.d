@@ -71,7 +71,10 @@ C:\Users\alist\AppData\Local\Temp\VMBuilds\esp8266\esp8266_nodemcuv2\Debug\esp82
  C:\Users\alist\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0/tools/sdk/lwip/include/lwip/def.h \
  C:\Users\alist\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0/tools/sdk/include/queue.h \
  C:\Users\alist\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0/tools/sdk/include/spi_flash.h \
- C:\Users\alist\OneDrive\Development\IoTa\IoTaLibEmbedded\IoTaLibEmbedded/IoTaDeviceHub.h \
- C:\Users\alist\OneDrive\Development\IoTa\IoTaLibEmbedded\IoTaLibEmbedded/IoTaFuncBase.h \
- C:\Users\alist\OneDrive\Development\IoTa\IoTaLibEmbedded\IoTaLibEmbedded/IoTaFuncDefs.h \
+ C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded/IoTaDeviceHub.h \
+ C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded/IoTaFuncBase.h \
+ C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded/HubInternalFunc.h \
+ C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded/fixedHeap.h \
+ C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded/heartbeat.h \
+ C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded/LedSerialMaster.h \
  C:\Program\ Files\ (x86)\Microsoft\ Visual\ Studio\2017\Community\Common7\IDE\Extensions\53ggn0bh.0i3\Micro\ Platforms\default\debuggers\VM_DBG/VM_DBG.h
