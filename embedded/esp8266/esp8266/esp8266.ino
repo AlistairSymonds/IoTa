@@ -32,6 +32,9 @@ int nextFreeSpot = 0;
 
 void processClient(WiFiClient);
 
+static const size_t bufferSize = 255;
+static uint8_t sbuf[bufferSize];
+
 void setup() {
 	Serial.begin(9600);
 	WiFiManager wifiManager;
@@ -52,30 +55,30 @@ int readInAndSubmitData(WiFiClient *c) {
 	//max length of each message is 256 bytes
 	while (c->available() > 0)
 	{
-		uint8_t msgBuffer[256];
-		msgBuffer[0] = c->read();
 		
-		c->readBytes(&msgBuffer[1], msgBuffer[0]);
-		for (int i = 0; i < msgBuffer[0]; i++) {
-			Serial.print(msgBuffer[i]);
-			Serial.print(" ");
-		}
-		Serial.println("end msg");
-		hub.processMessage(msgBuffer, c);
+		//uint8_t msgBuffer[256];
+		sbuf[0] = c->read();
+		
+
+		//Fixed read in length here, huge speed increase due to fixing timeout!
+		c->readBytes(&sbuf[1], sbuf[0]-1);
+		
+		hub.processMessage(sbuf, c);
 	}
+
 
 }
 
 
 void loop() {
-
+	
 	// Check if a new client has connected
+	//Serial.println(micros());
 	WiFiClient newClient = server.available();
-
+	long time = micros();
 	if (newClient) {
 		clients[nextFreeSpot] = newClient;
 		nextFreeSpot++;
-		Serial.println("new c");
 		if (nextFreeSpot == MAX_CLIENTS) {
 			nextFreeSpot = 0;
 		}
@@ -97,21 +100,12 @@ void loop() {
 
 	hub.tick();
 	for (int c = 0; c < nextFreeSpot; c++) {
-		
-
 		uint8_t buffer[255];
 		hub.copyAndFormatResponses(buffer, &clients[c]);
 		if (buffer[0] > 1) {
 			clients[c].write(&buffer[0], buffer[0]);
-			
-			for (int i = 0; i < buffer[0]; i++) {
-				Serial.print(buffer[i]);
-				Serial.print(" ");
-			}
-			Serial.println("end output");
 		}	
 	}
-	
 
 }
 
