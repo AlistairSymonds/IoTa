@@ -6,12 +6,17 @@ import javafx.scene.layout.Pane;
 public class Lighting implements IFunctionView {
     private final EspDevice device;
 
-    public Lighting(EspDevice deviceIn) {
+    protected Lighting(EspDevice deviceIn) {
         this.device = deviceIn;
     }
 
     @Override
     public Pane getView() {
         return null;
+    }
+
+    @Override
+    public void updateView() {
+
     }
 }

@@ -1,5 +1,6 @@
 package iota.client.gui.views.functions;
 
+import iota.client.gui.views.DefaultStateDisp;
 import iota.client.model.EspDevice;
 import iota.common.definitions.Heartbeat;
 import iota.common.definitions.IFuncDef;
@@ -9,21 +10,26 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HeartbeatView implements IFunctionView {
     private final EspDevice device;
+    private List<DefaultStateDisp> stateDisps;
+    private IFuncDef funcInstance;
 
-    public HeartbeatView(EspDevice deviceIn) {
+    protected HeartbeatView(EspDevice deviceIn) {
         device = deviceIn;
     }
+
 
     @Override
     public Pane getView() {
         VBox pane = new VBox();
 
 
-        IFuncDef funcInstance = null;
+        funcInstance = null;
         for(IFuncDef def : device.getFuncs()){
             if(def.getFuncId() == 1){
                 funcInstance = def;
@@ -46,14 +52,23 @@ public class HeartbeatView implements IFunctionView {
         });
 
         pane.getChildren().add(hbeatBtn);
+        stateDisps = new ArrayList<>();
 
         if(funcInstance instanceof Heartbeat){
             for (IStateItem state : funcInstance.getStateItems()){
-                pane.getChildren().add(new Text("State of " + state.getName() + " is " + state.getVal()));
+                stateDisps.add(new DefaultStateDisp(state));
             }
         }
-
+        pane.getChildren().addAll(stateDisps);
 
         return pane;
+    }
+
+    @Override
+    public void updateView() {
+
+        for (DefaultStateDisp s : stateDisps) {
+            s.updateView();
+        }
     }
 }

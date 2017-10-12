@@ -11,7 +11,6 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Observable;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -198,19 +197,18 @@ public class EspDevice extends Observable {
                 byte[] msg;
 
                 try {
-                    //if(dataIn.available() > 0) {
-                        messageLength = (int) dataIn.readByte();
-                        msg = new byte[messageLength];
-                        msg[0] = (byte) messageLength;
-                        dataIn.read(msg, 1, messageLength-1);
+                    messageLength = (int) dataIn.readByte();
+                    msg = new byte[messageLength];
+                    msg[0] = (byte) messageLength;
+                    dataIn.read(msg, 1, messageLength - 1);
 
-                        StringBuilder byteStr = new StringBuilder("");
-                        for (int i = 0; i < msg.length; i++) {
-                            byteStr.append(String.format("%02x ", msg[i]));
-                        }
-                        System.out.println("Got message: " + byteStr);
-                        handleReturnedMessage(msg);
-                    //}
+                    StringBuilder byteStr = new StringBuilder("");
+                    for (int i = 0; i < msg.length; i++) {
+                        byteStr.append(String.format("%02x ", msg[i]));
+                    }
+                    System.out.println("Got message: " + byteStr);
+                    handleReturnedMessage(msg);
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
