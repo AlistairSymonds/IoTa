@@ -63,7 +63,7 @@ void loop() {
 	while (Serial1.available() > 0) {
 		processSerial();
 	}
-
+	LEDS.setBrightness(state[brightness]);
 
 	if (anim_period_counter > anim_period_millis) {
 		programs[state[pid]]->advanceAnim();
@@ -83,8 +83,17 @@ void processSerial()
 {
 	uint8_t msgLen = Serial1.read();
 	uint8_t msgBuf[255];
+	msgBuf[0] = msgLen;
 	Serial1.readBytes(msgBuf + 1, msgLen);
 	
+	//echo everything recieved over hardware serial through usb serial
+	for (int i = 0; i < msgBuf[0]; i++) {
+		Serial.print(" ");
+		Serial.print(msgBuf[i]);
+	}
+	Serial.println();
+	
+
 	if (msgBuf[1] == 0)  //set command
 	{
 		state[msgBuf[2]] = msgBuf[3];

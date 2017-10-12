@@ -10,7 +10,6 @@ SolidColour::SolidColour(CHSV * leds, int numleds, uint8_t * state)
 void SolidColour::advanceAnim()
 {
 	for (int i = 0; i < numleds; i++) {
-		Serial1.println(statePtr[hue]);
 		
 		animBufPtr[i].h = statePtr[hue];
 		animBufPtr[i].s = statePtr[sat];

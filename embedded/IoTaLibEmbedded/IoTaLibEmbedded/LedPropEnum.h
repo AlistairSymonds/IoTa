@@ -6,6 +6,7 @@ enum ledProp
 	pid,
 	fps,
 	anim_hz,
+	brightness,
 	hue,
 	sat,
 	val,
