@@ -24,7 +24,11 @@ short LedSerialMaster::getFuncId()
 void LedSerialMaster::processCommand(uint8_t command[],  void * clientToken)
 {
 	enum ledProp prop;
-	serial->write(command, command[0]+1);
+	
+	
+	
+	serial->write(command, command[0]);
+	fh->add(clientToken);
 	
 }
 

@@ -73,7 +73,6 @@ int readInAndSubmitData(WiFiClient *c) {
 void loop() {
 	
 	// Check if a new client has connected
-	//Serial.println(micros());
 	WiFiClient newClient = server.available();
 	long time = micros();
 	if (newClient) {
