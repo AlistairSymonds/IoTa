@@ -91,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LedAnimBase.h" />
+    <ClInclude Include="RainbowAnim.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SolidColour.h" />
     <ClInclude Include="__vm\.LedSerialSlave_octo_teensy.vsarduino.h" />
@@ -99,6 +100,7 @@
     <ResourceCompile Include="LedSerialSlave_octo_teensy.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="RainbowAnim.cpp" />
     <ClCompile Include="SolidColour.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
