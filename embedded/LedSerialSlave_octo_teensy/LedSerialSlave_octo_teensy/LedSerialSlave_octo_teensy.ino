@@ -47,7 +47,6 @@ void setup() {
 	state[val] = 128;
 	state[fps] = 60;
 
-	state[delta_hue] = 2;
 
 	state[pid] = 1;
 	
@@ -78,9 +77,9 @@ void loop() {
 	if (anim_period_counter > anim_period_millis) {
 		programs[state[pid]]->advanceAnim();
 
-		state[hue] += state[delta_hue];
-		state[sat] += state[delta_sat];
-		state[val] += state[delta_val];
+		state[hue] = state[hue] + state[delta_hue];
+		state[sat] = state[sat] + state[delta_sat];
+		state[val] = state[val] + state[delta_val];
 
 
 		//memcpy doesn't work here due to the byte representation's being different. oops		

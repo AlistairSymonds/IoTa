@@ -1,5 +1,5 @@
 #ifdef ESP8266
-
+#include "LedPropEnum.h"
 #include"IoTaFuncBase.h"
 #ifndef _LEDSERIALMASTER_H
 #define _LEDSERIALMASTER_H
@@ -28,8 +28,7 @@ public:
 	~LedSerialMaster();
 
 private:
-	static const int stateCount = 8;
-	uint8_t state[stateCount];
+	uint8_t state[NUM_LED_PROPS];
 	Stream* serial;
 	fixedHeap<void*> *fh;
 
