@@ -1,5 +1,6 @@
 #include "RainbowAnim.h"
 #include "LedPropEnum.h"
+#include <FastLED.h>
 
 
 

@@ -31,6 +31,7 @@ unsigned int anim_period_millis;
 #include "LedAnimBase.h"
 #include "SolidColour.h"
 #include "RainbowAnim.h"
+#include "Glitter.h"
 
 LedAnimBase * programs[5];
 
@@ -50,10 +51,11 @@ void setup() {
 
 	state[pid] = 1;
 	
-	state[anim_hz] = 60;
+	state[anim_hz] = 10;
 
 	programs[0] = new SolidColour(animBuf, NUM_STRIPS * NUM_LEDS_PER_STRIP, state);
 	programs[1] = new RainbowAnim(animBuf, NUM_STRIPS * NUM_LEDS_PER_STRIP, state);
+	programs[2] = new Glitter(animBuf, NUM_STRIPS * NUM_LEDS_PER_STRIP, state);
 
 	Serial1.begin(9600);
 	LEDS.addLeds<OCTOWS2811>(frameBuf, NUM_LEDS_PER_STRIP);
