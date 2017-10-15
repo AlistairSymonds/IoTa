@@ -1,6 +1,6 @@
 #pragma once
 #include <stdlib.h>
-#define NUM_LED_PROPS 8
+#define NUM_LED_PROPS 10
 enum ledProp
 {
 	pid,

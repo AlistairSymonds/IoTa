@@ -30,6 +30,12 @@
     <ClInclude Include="SolidColour.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="RainbowAnim.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Glitter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="LedSerialSlave_octo_teensy.rc">
@@ -38,6 +44,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SolidColour.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RainbowAnim.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Glitter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -9,7 +9,7 @@
 #include<OctoWS2811.h>
 #include<FastLED.h>
 
-#define NUM_LEDS_PER_STRIP 15
+#define NUM_LEDS_PER_STRIP 400
 #define NUM_STRIPS 1
 
 CHSV animBuf[NUM_STRIPS * NUM_LEDS_PER_STRIP];
@@ -30,6 +30,8 @@ unsigned int anim_period_millis;
 #include <stdlib.h>
 #include "LedAnimBase.h"
 #include "SolidColour.h"
+#include "RainbowAnim.h"
+#include "Glitter.h"
 
 LedAnimBase * programs[5];
 
@@ -40,13 +42,20 @@ void setup() {
 	for (int i = 0; i < NUM_LED_PROPS; i++) {
 		state[i] = 0;
 	}
-	state[hue] = 128;
-	state[val] = 255;
-	state[sat] = 0;
-	state[fps] = 10;
+	state[hue] = 0;
+	state[brightness] = 255;
+	state[sat] = 255;
+	state[val] = 128;
+	state[fps] = 60;
 
+
+	state[pid] = 1;
 	
+	state[anim_hz] = 10;
+
 	programs[0] = new SolidColour(animBuf, NUM_STRIPS * NUM_LEDS_PER_STRIP, state);
+	programs[1] = new RainbowAnim(animBuf, NUM_STRIPS * NUM_LEDS_PER_STRIP, state);
+	programs[2] = new Glitter(animBuf, NUM_STRIPS * NUM_LEDS_PER_STRIP, state);
 
 	Serial1.begin(9600);
 	LEDS.addLeds<OCTOWS2811>(frameBuf, NUM_LEDS_PER_STRIP);
@@ -59,22 +68,32 @@ int pos = 0;
 void loop() {
 	//check serial
 	frame_period_millis = (1000 / state[fps]) ;
+	anim_period_millis = (1000 / state[anim_hz]);
 
 	while (Serial1.available() > 0) {
 		processSerial();
 	}
+
 	LEDS.setBrightness(state[brightness]);
 
 	if (anim_period_counter > anim_period_millis) {
 		programs[state[pid]]->advanceAnim();
-		memcpy(frameBuf, animBuf, NUM_STRIPS * NUM_LEDS_PER_STRIP * sizeof(CHSV));
+
+		state[hue] = state[hue] + state[delta_hue];
+		state[sat] = state[sat] + state[delta_sat];
+		state[val] = state[val] + state[delta_val];
+
+
+		//memcpy doesn't work here due to the byte representation's being different. oops		
+		for (int i = 0; i < NUM_STRIPS * NUM_LEDS_PER_STRIP; i++) {
+			frameBuf[i].setHSV(animBuf[i].h, animBuf[i].s, animBuf[i].v);
+		}
 		anim_period_counter = 0;
 	}
 
 	if (frame_period_counter > frame_period_millis) {
 		frame_period_counter = 0;
 		LEDS.show();
-		
 		frameReady = 0;
 	}
 }
@@ -88,8 +107,8 @@ void processSerial()
 	
 	//echo everything recieved over hardware serial through usb serial
 	for (int i = 0; i < msgBuf[0]; i++) {
-		Serial.print(" ");
 		Serial.print(msgBuf[i]);
+		Serial.print(" ");
 	}
 	Serial.println();
 	

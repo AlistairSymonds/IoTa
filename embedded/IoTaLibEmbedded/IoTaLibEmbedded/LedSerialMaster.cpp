@@ -23,7 +23,6 @@ short LedSerialMaster::getFuncId()
 
 void LedSerialMaster::processCommand(uint8_t command[],  void * clientToken)
 {
-	enum ledProp prop;
 	
 	
 	
@@ -41,7 +40,7 @@ void LedSerialMaster::tick()
 
 int LedSerialMaster::getStateBufLen()
 {
-	return stateCount;
+	return NUM_LED_PROPS;
 }
 
 uint8_t * LedSerialMaster::getStateBuffer(void * clientToken)
