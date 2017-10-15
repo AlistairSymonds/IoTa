@@ -53,7 +53,6 @@ public class Presenter implements IoTaPresenter, Observer {
     private void updateAttchedViews() {
         for (UpdateAbleView v : updateAbleViews) {
             v.updateView();
-            System.out.println("Just updated view: " + v.toString());
         }
     }
 

@@ -1,26 +1,22 @@
 package iota.client.gui.views.functions;
 
+import iota.client.gui.views.UpdateAbleView;
 import iota.client.model.EspDevice;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-public class ErrorView implements IFunctionView {
+public class ErrorView extends VBox implements UpdateAbleView {
 
     private final EspDevice device;
 
     protected ErrorView(EspDevice deviceIn) {
+        super();
         this.device = deviceIn;
-    }
 
-    @Override
-    public Pane getView() {
 
-        VBox p = new VBox();
+        super.getChildren().add(new Text("Unknown for device at" + device.getInetAddress()));
 
-        p.getChildren().add(new Text("Unknown for device at" + device.getInetAddress()));
 
-        return p;
     }
 
     @Override

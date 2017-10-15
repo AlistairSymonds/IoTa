@@ -1,6 +1,7 @@
 package iota.client.gui.views.functions;
 
-import iota.client.gui.views.DefaultStateDisp;
+import iota.client.gui.views.UpdateAbleView;
+import iota.client.gui.views.state.DefaultStateDisp;
 import iota.client.model.EspDevice;
 import iota.common.definitions.Heartbeat;
 import iota.common.definitions.IFuncDef;
@@ -8,26 +9,19 @@ import iota.common.definitions.IStateItem;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HeartbeatView implements IFunctionView {
+public class HeartbeatView extends VBox implements UpdateAbleView {
     private final EspDevice device;
     private List<DefaultStateDisp> stateDisps;
     private IFuncDef funcInstance;
 
     protected HeartbeatView(EspDevice deviceIn) {
+        super();
         device = deviceIn;
-    }
-
-
-    @Override
-    public Pane getView() {
-        VBox pane = new VBox();
-
 
         funcInstance = null;
         for(IFuncDef def : device.getFuncs()){
@@ -36,9 +30,6 @@ public class HeartbeatView implements IFunctionView {
                 break;
             }
         }
-
-
-
 
 
         Button hbeatBtn = new Button("Heartbeat");
@@ -51,7 +42,7 @@ public class HeartbeatView implements IFunctionView {
             }
         });
 
-        pane.getChildren().add(hbeatBtn);
+        super.getChildren().add(hbeatBtn);
         stateDisps = new ArrayList<>();
 
         if(funcInstance instanceof Heartbeat){
@@ -59,14 +50,13 @@ public class HeartbeatView implements IFunctionView {
                 stateDisps.add(new DefaultStateDisp(state));
             }
         }
-        pane.getChildren().addAll(stateDisps);
+        super.getChildren().addAll(stateDisps);
+        updateView();
 
-        return pane;
     }
 
     @Override
     public void updateView() {
-
         for (DefaultStateDisp s : stateDisps) {
             s.updateView();
         }
