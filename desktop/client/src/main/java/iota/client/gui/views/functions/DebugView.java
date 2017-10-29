@@ -1,6 +1,5 @@
 package iota.client.gui.views.functions;
 
-import com.sun.javaws.exceptions.InvalidArgumentException;
 import iota.client.gui.views.UpdateAbleView;
 import iota.client.model.EspDevice;
 import iota.common.IoTaUtil;
@@ -31,7 +30,7 @@ public class DebugView extends VBox implements UpdateAbleView {
             public void handle(ActionEvent e) {
                 try {
                     device.submitMessage(IoTaUtil.hexStringToByteArray(textField.getCharacters().toString()));
-                } catch (InvalidArgumentException e1) {
+                } catch (IllegalArgumentException e1) {
                     e1.printStackTrace();
                 }
             }

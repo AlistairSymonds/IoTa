@@ -1,7 +1,7 @@
 package iota.common;
 
 
-import com.sun.javaws.exceptions.InvalidArgumentException;
+
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -57,7 +57,7 @@ public class IoTaUtil {
 
     //from stack overflow
     //https://stackoverflow.com/questions/140131/convert-a-string-representation-of-a-hex-dump-to-a-byte-array-using-java
-    public static byte[] hexStringToByteArray(String s) throws InvalidArgumentException {
+    public static byte[] hexStringToByteArray(String s) throws IllegalArgumentException {
         int len = s.length();
         s = s.toLowerCase();
 
@@ -72,7 +72,7 @@ public class IoTaUtil {
 
             if (!isValid) {
                 String[] errorMsg = {s.substring(i, i), "isn't valid hex!"};
-                throw new InvalidArgumentException(errorMsg);
+                throw new IllegalArgumentException(new Throwable(errorMsg[1]));
             }
         }
 

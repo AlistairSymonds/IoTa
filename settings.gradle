@@ -1,1 +1,3 @@
 include "desktop:server", ":common", "desktop:client", "desktop:tester"
+include 'desktop:assistance'
+

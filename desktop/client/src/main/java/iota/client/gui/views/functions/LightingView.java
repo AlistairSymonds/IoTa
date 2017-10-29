@@ -1,6 +1,5 @@
 package iota.client.gui.views.functions;
 
-import com.sun.javaws.exceptions.InvalidArgumentException;
 import iota.client.gui.views.UpdateAbleView;
 import iota.client.gui.views.state.DefaultStateDisp;
 import iota.client.model.EspDevice;
@@ -74,7 +73,7 @@ public class LightingView extends GridPane implements UpdateAbleView {
                             device.submitMessage(msg);
                             newVals.get(i).setPromptText(val);
                             newVals.get(i).clear();
-                        } catch (InvalidArgumentException e1) {
+                        } catch (IllegalArgumentException e1) {
                             newVals.get(i).setPromptText(val + " is invalid, input hex!");
                             newVals.get(i).clear();
                         }

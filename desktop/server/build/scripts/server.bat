@@ -63,7 +63,7 @@ set CMD_LINE_ARGS=%*
 :execute
 @rem Setup the command line
 
-set CLASSPATH=%APP_HOME%\lib\server.jar;%APP_HOME%\lib\commons-cli-1.4.jar;%APP_HOME%\lib\iotaCommon-0.1.0.jar;%APP_HOME%\lib\mysql-connector-java-6.0.6.jar
+set CLASSPATH=%APP_HOME%\lib\server.jar;%APP_HOME%\lib\iotaCommon-0.1.0.jar;%APP_HOME%\lib\commons-cli-1.4.jar;%APP_HOME%\lib\mysql-connector-java-6.0.6.jar
 
 @rem Execute server
 "%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %SERVER_OPTS%  -classpath "%CLASSPATH%" iota.server.IoTaBaseMain %CMD_LINE_ARGS%
