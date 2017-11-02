@@ -9,7 +9,7 @@ html
         block content
             .container
 
-                form(action="/iota/oauth2/authorize", method="post")
+                form(action="/"+process.env.REVPROX+"oauth2/authorize", method="post")
                     h2=user.username
                     input.input-block-level(type="submit", value="Allow")
                     input.input-block-level(type="submit", value="Deny", name="cancel")

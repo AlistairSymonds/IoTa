@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 var express = require('express');
 var mongoose = require('mongoose');
 var bodyparser = require('body-parser');
@@ -59,7 +61,7 @@ router.route('/oauth2/token')
 
 
 
-app.use('/iota', router);
+app.use('/', router);
 
 app.listen(port);
 console.log("Running on " + port);
