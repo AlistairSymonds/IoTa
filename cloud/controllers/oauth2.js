@@ -41,6 +41,9 @@ server.grant(oauth2orize.grant.code(function(client, redirectUri, user, ares, ca
 
 // Exchange authorization codes for access tokens
 server.exchange(oauth2orize.exchange.code(function(client, code, redirectUri, callback) {
+    console.log("exchanging");
+    console.log(client);
+    console.log(code);
     Code.findOne({ value: code }, function (err, authCode) {
         if (err) { return callback(err); }
         if (authCode === undefined) { return callback(null, false); }
@@ -58,6 +61,9 @@ server.exchange(oauth2orize.exchange.code(function(client, code, redirectUri, ca
                 userId: authCode.userId
             });
 
+            console.log("Returning token");
+            console.log(token);
+
             // Save the access token and check for errors
             token.save(function (err) {
                 if (err) { return callback(err); }
@@ -73,7 +79,7 @@ server.exchange(oauth2orize.exchange.code(function(client, code, redirectUri, ca
 exports.authorization = [
     server.authorization(function(clientId, redirectUri, callback) {
 
-        Client.findOne({ id: clientId }, function (err, client) {
+        Client.findOne({ clientId: clientId }, function (err, client) {
             if (err) { return callback(err); }
 
             return callback(null, client, redirectUri);

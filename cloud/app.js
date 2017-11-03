@@ -24,6 +24,8 @@ app.use(bodyparser.urlencoded({
     extended: true
 }));
 
+//app.use(bodyparser.json);
+
 app.use(session({
     secret: 'Super Secret Session Key',
     saveUninitialized: true,
@@ -34,9 +36,27 @@ app.use(session({
 app.use(passport.initialize());
 app.set('view engine', 'jade');
 
+
+app.all('*', function(req, res, next) {
+    console.log("=======BEGIN INCOMING REQUEST=======");
+    console.log(req.method + req.url);
+    console.log("headers: ");
+    console.log(req.headers);
+    console.log("body ");
+    console.log(req.body);
+
+
+    console.log("========END INCOMING REQUEST========");
+
+ next();
+});
+
 router.get('/', function(req, res) {
     res.render('index', {title: 'IoTa'});
 });
+
+
+
 
 router.route('/device')
     .post(authController.isAuthenticated, deviceController.updateDeviceState);
@@ -58,6 +78,7 @@ router.route('/oauth2/authorize')
 // Create endpoint handlers for oauth2 token
 router.route('/oauth2/token')
     .post(authController.isClientAuthenticated, oauth2Controller.token);
+
 
 
 

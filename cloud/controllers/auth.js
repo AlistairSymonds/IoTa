@@ -4,6 +4,7 @@ var BasicStrategy = require('passport-http').BasicStrategy;
 var User = require('../models/user');
 var Client = require('../models/client');
 var BearerStrategy = require('passport-http-bearer').Strategy;
+var LocalStrategy = require('passport-local');
 var Token = require('../models/token');
 
 passport.use(new BasicStrategy(
@@ -29,22 +30,25 @@ passport.use(new BasicStrategy(
 ));
 
 
-passport.use('client-basic', new BasicStrategy(
-    function(username, password, callback) {
-        Client.findOne({ id: username }, function (err, client) {
-            if (err) { return callback(err); }
+passport.use('client-basic',new LocalStrategy(
+    {
+        usernameField: 'client_id',
+        passwordField: 'client_secret'
+    },
+    function(username, password, done) {
+        Client.findOne({ clientId: username }, function (err, client) {
 
-            // No client found with that id or bad password
-            if (!client || client.secret !== password) { return callback(null, false); }
+            if (err) { return done(err); }
+            if (!client || client.secret !== password) { return done(null, false); }
 
-            // Success
-            return callback(null, client);
+            return done(null, client);
         });
     }
 ));
 
 passport.use(new BearerStrategy(
     function(accessToken, callback) {
+        console.log("Someone is trying to auth with" + accessToken.toString());
         Token.findOne({value: accessToken }, function (err, token) {
             if (err) { return callback(err); }
 
