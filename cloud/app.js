@@ -20,8 +20,9 @@ var router = express.Router();
 
 mongoose.connect('mongodb://localhost:27017/iota');
 
+app.use(bodyparser.json())
 app.use(bodyparser.urlencoded({
-    extended: true
+    extended: false
 }));
 
 //app.use(bodyparser.json);

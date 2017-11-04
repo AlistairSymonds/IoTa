@@ -5,11 +5,13 @@ var User = require('../models/user');
 var Client = require('../models/client');
 var BearerStrategy = require('passport-http-bearer').Strategy;
 var LocalStrategy = require('passport-local');
+var CustomBearerStrategy = require('passport-http-custom-bearer');
 var Token = require('../models/token');
 
 passport.use(new BasicStrategy(
     function(username, password, callback) {
         User.findOne({ username: username }, function (err, user) {
+            console.log("Someone is trying to auth with basic");
             if (err) { return callback(err); }
 
             // No user found with that username
@@ -46,18 +48,43 @@ passport.use('client-basic',new LocalStrategy(
     }
 ));
 
-passport.use(new BearerStrategy(
-    function(accessToken, callback) {
-        console.log("Someone is trying to auth with" + accessToken.toString());
-        Token.findOne({value: accessToken }, function (err, token) {
-            if (err) { return callback(err); }
 
+
+
+
+passport.use('api-bearer', new CustomBearerStrategy(
+
+    function(token, done) {
+        User.findOne({ token: token }, function (err, user) {
+            console.log(token);
+            if (err) {
+                console.log("errr");
+                console.log(err);
+                return done(err); }
+            if (!user) { return done(null, false); }
+            return done(null, user, { scope: 'all' });
+        });
+    }
+));
+
+
+passport.use('my-bearer',new BearerStrategy(
+    function(value, callback) {
+
+        Token.findOne({value: value }, function (err, token) {
+            console.log("Someone is trying to auth with");
+            console.log(value);
+            if (err) {
+                console.log(err);
+                return callback(err);
+            }
+            console.log("Found token of %s", token);
             // No token found
             if (!token) { return callback(null, false); }
 
             User.findOne({ _id: token.userId }, function (err, user) {
                 if (err) { return callback(err); }
-
+                console.log("Matched token to user %s", user.username);
                 // No user found
                 if (!user) { return callback(null, false); }
 
@@ -68,6 +95,5 @@ passport.use(new BearerStrategy(
     }
 ));
 
-exports.isAuthenticated = passport.authenticate(['basic', 'bearer'], { session : false });
+exports.isAuthenticated = passport.authenticate(['basic', 'my-bearer'], { session : false });
 exports.isClientAuthenticated = passport.authenticate('client-basic', { session : false });
-exports.isBearerAuthenticated = passport.authenticate('bearer', { session: false });

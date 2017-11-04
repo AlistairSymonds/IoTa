@@ -54,11 +54,15 @@ server.exchange(oauth2orize.exchange.code(function(client, code, redirectUri, ca
         authCode.remove(function (err) {
             if(err) { return callback(err); }
 
+            var tokStr = uid(256);
             // Create a new access token
             var token = new Token({
-                value: uid(256),
-                clientId: authCode.clientId,
+                tokenType: "Bearer",
+                value: tokStr,
+                refreshToken: "refresh",
+                expiresIn: "6000",
                 userId: authCode.userId
+
             });
 
             console.log("Returning token");
@@ -68,7 +72,7 @@ server.exchange(oauth2orize.exchange.code(function(client, code, redirectUri, ca
             token.save(function (err) {
                 if (err) { return callback(err); }
 
-                callback(null, token);
+                callback(null, tokStr);
             });
         });
     });
