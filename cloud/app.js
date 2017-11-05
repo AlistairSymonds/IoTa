@@ -13,6 +13,8 @@ var authController = require('./controllers/auth');
 var clientController = require('./controllers/client');
 var oauth2Controller = require('./controllers/oauth2');
 
+var googleAssistantController = require('./controllers/google-assistant');
+
 
 var app = express();
 var port = 3000;
@@ -20,7 +22,9 @@ var router = express.Router();
 
 mongoose.connect('mongodb://localhost:27017/iota');
 
-app.use(bodyparser.json())
+app.use(bodyparser.json({
+    extended: true
+}));
 app.use(bodyparser.urlencoded({
     extended: false
 }));
@@ -80,6 +84,8 @@ router.route('/oauth2/authorize')
 router.route('/oauth2/token')
     .post(authController.isClientAuthenticated, oauth2Controller.token);
 
+router.route('/iota/google-assistant')
+    .post(authController.isAuthenticated, googleAssistantController.postGoogleAssistant);
 
 
 
