@@ -1,9 +1,9 @@
-package iota.client.gui.views;
+package iota.desktop.jfx.views;
 
 
 import iota.client.gui.presenter.IoTaPresenter;
-import iota.client.gui.views.functions.DebugView;
-import iota.client.gui.views.functions.FunctionViewFactory;
+import iota.desktop.jfx.views.functions.DebugView;
+import iota.desktop.jfx.views.functions.FunctionViewFactory;
 import iota.client.model.EspDevice;
 import iota.common.definitions.IFuncDef;
 import javafx.application.Platform;
@@ -71,6 +71,11 @@ public class DeviceView extends FlowPane implements UpdateAbleView {
 
         device = presenter.getSelectedEspDevice();
 
+    }
+
+    @Override
+    public Node getView() {
+        return this;
     }
 
     @Override

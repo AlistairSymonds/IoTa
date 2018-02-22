@@ -1,10 +1,11 @@
-package iota.client.gui.views.functions;
+package iota.desktop.jfx.views.functions;
 
-import iota.client.gui.views.UpdateAbleView;
+import iota.desktop.jfx.views.UpdateAbleView;
 import iota.client.model.EspDevice;
 import iota.common.IoTaUtil;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -42,6 +43,10 @@ public class DebugView extends VBox implements UpdateAbleView {
     }
 
 
+    @Override
+    public Node getView() {
+        return this;
+    }
 
     @Override
     public void updateView() {

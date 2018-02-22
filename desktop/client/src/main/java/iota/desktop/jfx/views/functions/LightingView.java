@@ -1,13 +1,14 @@
-package iota.client.gui.views.functions;
+package iota.desktop.jfx.views.functions;
 
-import iota.client.gui.views.UpdateAbleView;
-import iota.client.gui.views.state.DefaultStateDisp;
+import iota.desktop.jfx.views.UpdateAbleView;
+import iota.desktop.jfx.views.state.DefaultStateDisp;
 import iota.client.model.EspDevice;
 import iota.common.IoTaUtil;
 import iota.common.definitions.IFuncDef;
 import iota.common.definitions.IStateItem;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -87,6 +88,11 @@ public class LightingView extends GridPane implements UpdateAbleView {
 
 
 
+    }
+
+    @Override
+    public Node getView() {
+        return this;
     }
 
     @Override

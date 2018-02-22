@@ -1,4 +1,4 @@
-package iota.client.gui.views.state;
+package iota.desktop.jfx.views.state;
 
 import iota.common.definitions.IStateItem;
 import javafx.scene.layout.VBox;

@@ -34,7 +34,7 @@ public class IoTaBaseMain {
         sqlThread = new Thread(sql);
         sqlThread.start();
         sqlThread.setName("Sql Thread");
-        if (sqlThread.isAlive() == true) {
+        if (sqlThread.isAlive()) {
             System.out.println("Sql Thread Alive at ID " + sqlThread.getId());
         }
 
@@ -44,7 +44,7 @@ public class IoTaBaseMain {
         netThread.start();
         netThread.setName("Network Thread");
 
-        if (netThread.isAlive() == true) {
+        if (netThread.isAlive()) {
             System.out.println("Network Thread Alive at ID " + netThread.getId());
         }
 

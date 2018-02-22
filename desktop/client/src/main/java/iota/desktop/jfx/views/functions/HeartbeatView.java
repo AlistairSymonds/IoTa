@@ -1,13 +1,14 @@
-package iota.client.gui.views.functions;
+package iota.desktop.jfx.views.functions;
 
-import iota.client.gui.views.UpdateAbleView;
-import iota.client.gui.views.state.DefaultStateDisp;
+import iota.desktop.jfx.views.UpdateAbleView;
+import iota.desktop.jfx.views.state.DefaultStateDisp;
 import iota.client.model.EspDevice;
 import iota.common.definitions.Heartbeat;
 import iota.common.definitions.IFuncDef;
 import iota.common.definitions.IStateItem;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
@@ -53,6 +54,11 @@ public class HeartbeatView extends VBox implements UpdateAbleView {
         super.getChildren().addAll(stateDisps);
         updateView();
 
+    }
+
+    @Override
+    public Node getView() {
+        return this;
     }
 
     @Override

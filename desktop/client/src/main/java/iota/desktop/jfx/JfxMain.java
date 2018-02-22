@@ -1,9 +1,9 @@
-package iota.client.gui;
+package iota.desktop.jfx;
 
 import iota.client.gui.presenter.IoTaPresenter;
 import iota.client.gui.presenter.Presenter;
-import iota.client.gui.views.DeviceView;
-import iota.client.gui.views.DevicesSelector;
+import iota.desktop.jfx.views.DeviceView;
+import iota.desktop.jfx.views.DevicesSelector;
 import iota.client.model.EspManager;
 import javafx.application.Application;
 import javafx.scene.Scene;

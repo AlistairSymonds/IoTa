@@ -65,8 +65,6 @@ class Lighting implements IFuncDef {
         return new ArrayList<>(stateItems);
     }
 
-    ;
-
     private class ByteState implements IStateItem {
         private String name;
         private byte val;
