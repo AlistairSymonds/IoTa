@@ -1,6 +1,6 @@
 package iota.desktop.jfx.views.functions;
 
-import iota.desktop.jfx.views.UpdateAbleView;
+import iota.client.UpdateAbleView;
 import iota.desktop.jfx.views.state.DefaultStateDisp;
 import iota.client.model.EspDevice;
 import iota.common.definitions.Heartbeat;
@@ -54,11 +54,6 @@ public class HeartbeatView extends VBox implements UpdateAbleView {
         super.getChildren().addAll(stateDisps);
         updateView();
 
-    }
-
-    @Override
-    public Node getView() {
-        return this;
     }
 
     @Override

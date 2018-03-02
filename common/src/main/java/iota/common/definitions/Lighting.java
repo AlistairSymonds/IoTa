@@ -23,6 +23,7 @@ class Lighting implements IFuncDef {
         stateItems.add(new ByteState("delta hue"));
         stateItems.add(new ByteState("delta sat"));
         stateItems.add(new ByteState("delta val"));
+        stateItems.add(new ByteState("density"));
     }
 
     @Override

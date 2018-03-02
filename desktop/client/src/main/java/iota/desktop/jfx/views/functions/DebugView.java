@@ -1,6 +1,6 @@
 package iota.desktop.jfx.views.functions;
 
-import iota.desktop.jfx.views.UpdateAbleView;
+import iota.client.UpdateAbleView;
 import iota.client.model.EspDevice;
 import iota.common.IoTaUtil;
 import javafx.event.ActionEvent;
@@ -40,12 +40,6 @@ public class DebugView extends VBox implements UpdateAbleView {
 
         super.getChildren().add(textField);
         super.getChildren().add(sendBtn);
-    }
-
-
-    @Override
-    public Node getView() {
-        return this;
     }
 
     @Override

@@ -1,6 +1,6 @@
 package iota.desktop.jfx.views.functions;
 
-import iota.desktop.jfx.views.UpdateAbleView;
+import iota.client.UpdateAbleView;
 import iota.client.model.EspDevice;
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
@@ -18,11 +18,6 @@ public class ErrorView extends VBox implements UpdateAbleView {
         super.getChildren().add(new Text("Unknown for device at" + device.getInetAddress()));
 
 
-    }
-
-    @Override
-    public Node getView() {
-        return this;
     }
 
     @Override

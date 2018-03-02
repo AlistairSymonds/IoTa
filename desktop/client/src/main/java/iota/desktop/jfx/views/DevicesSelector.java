@@ -1,5 +1,6 @@
 package iota.desktop.jfx.views;
 
+import iota.client.UpdateAbleView;
 import iota.client.gui.presenter.IoTaPresenter;
 import iota.client.model.EspDevice;
 import javafx.application.Platform;
@@ -39,11 +40,6 @@ public class DevicesSelector extends VBox implements UpdateAbleView {
         super.getChildren().add(updateButton);
         super.getChildren().add(lv);
         updateView();
-    }
-
-    @Override
-    public Node getView() {
-        return this;
     }
 
     @Override
