@@ -1,4 +1,4 @@
-package iota.client.gui.views;
+package iota.desktop.jfx.views.state;
 
 import iota.common.definitions.IStateItem;
 import javafx.scene.layout.VBox;
@@ -15,6 +15,7 @@ public class DefaultStateDisp extends VBox {
         disp = new Text();
         super.getChildren().add(disp);
     }
+
 
     public void updateView() {
         disp.setText("State of " + state.getName() + " is " + state.getVal());

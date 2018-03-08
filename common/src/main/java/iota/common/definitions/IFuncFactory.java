@@ -6,6 +6,8 @@ public class IFuncFactory {
 
         if(funcId == 1){
             return new Heartbeat();
+        } else if (funcId == 2) {
+            return new Lighting();
         }
 
         return new UnknownFunction(funcId);

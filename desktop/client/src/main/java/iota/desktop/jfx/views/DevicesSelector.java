@@ -1,10 +1,12 @@
-package iota.client.gui.views;
+package iota.desktop.jfx.views;
 
+import iota.client.UpdateAbleView;
 import iota.client.gui.presenter.IoTaPresenter;
 import iota.client.model.EspDevice;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;

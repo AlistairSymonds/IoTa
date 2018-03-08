@@ -1,6 +1,6 @@
-package iota.client;
+package iota.desktop;
 
-import iota.client.gui.JfxMain;
+import iota.desktop.jfx.JfxMain;
 import iota.client.model.EspManager;
 import iota.common.definitions.DefinitionStore;
 

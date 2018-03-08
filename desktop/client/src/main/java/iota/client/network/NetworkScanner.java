@@ -6,8 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
 
+/**
+ * Scans all IP 192.168.0.*:<port> addresses on the network for being open or not
+ * Also spawns and kills 255 threads in the process, TODO: change that
+ */
 public class NetworkScanner {
-    String baseIp = "192.168.0.";
+    private String baseIp = "192.168.0.";
 
     public List<ScanResult> scan(int port) {
         System.out.println("Beginning scan");

@@ -1,6 +1,6 @@
 package iota.client.gui.presenter;
 
-import iota.client.gui.views.UpdateAbleView;
+import iota.client.UpdateAbleView;
 import iota.client.model.EspDevice;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package iota.client.gui.presenter;
 
-import iota.client.gui.views.UpdateAbleView;
+import iota.client.UpdateAbleView;
 import iota.client.model.EspDevice;
 import iota.client.model.EspManager;
 
@@ -53,7 +53,6 @@ public class Presenter implements IoTaPresenter, Observer {
     private void updateAttchedViews() {
         for (UpdateAbleView v : updateAbleViews) {
             v.updateView();
-            System.out.println("Just updated view: " + v.toString());
         }
     }
 

@@ -22,7 +22,11 @@ public class DefinitionStore implements Iterable<IFuncDef> {
     }
 
 
-
+    /**
+     * @param folder
+     * @param globFilter
+     * @return
+     */
     public int populateStore(Path folder, String globFilter) {
         int defsAdded = 0;
         System.out.println("Searching for definitions in: " + folder.toString());

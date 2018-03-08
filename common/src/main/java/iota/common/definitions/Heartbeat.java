@@ -12,7 +12,7 @@ public class Heartbeat implements IFuncDef {
 
     List<IStateItem> stateItems;
 
-    public Heartbeat(){
+    protected Heartbeat() {
         stateItems = new ArrayList<>();
         tDel = new TimeDelta();
         stateItems.add(tDel);

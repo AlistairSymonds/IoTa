@@ -64,7 +64,7 @@ case "`uname`" in
     ;;
 esac
 
-CLASSPATH=$APP_HOME/lib/server.jar:$APP_HOME/lib/commons-cli-1.4.jar:$APP_HOME/lib/iotaCommon-0.1.0.jar:$APP_HOME/lib/mysql-connector-java-6.0.6.jar
+CLASSPATH=$APP_HOME/lib/server.jar:$APP_HOME/lib/iotaCommon-0.1.0.jar:$APP_HOME/lib/commons-cli-1.4.jar:$APP_HOME/lib/mysql-connector-java-6.0.6.jar
 
 # Determine the Java command to use to start the JVM.
 if [ -n "$JAVA_HOME" ] ; then

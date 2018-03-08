@@ -1,6 +1,8 @@
 package iota.common;
 
 
+
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -53,11 +55,41 @@ public class IoTaUtil {
         return b;
     }
 
+    //from stack overflow
+    //https://stackoverflow.com/questions/140131/convert-a-string-representation-of-a-hex-dump-to-a-byte-array-using-java
+    public static byte[] hexStringToByteArray(String s) throws IllegalArgumentException {
+        int len = s.length();
+        s = s.toLowerCase();
+
+        char[] validVals = getHexChars();
+        for (int i = 0; i < len; i++) {
+            boolean isValid = false;
+            for (int j = 0; j < validVals.length && !isValid; j++) {
+                if (s.charAt(i) == validVals[j]) {
+                    isValid = true;
+                }
+            }
+
+            if (!isValid) {
+                String[] errorMsg = {s.substring(i, i), "isn't valid hex!"};
+                throw new IllegalArgumentException(new Throwable(errorMsg[1]));
+            }
+        }
+
+
+        byte[] data = new byte[len / 2];
+        for (int i = 0; i < len; i += 2) {
+
+
+            data[i / 2] = (byte) ((Character.digit(s.charAt(i), 16) << 4)
+                    + Character.digit(s.charAt(i + 1), 16));
+        }
+        return data;
+    }
+
     public static HashMap createFlagMap(String args[]) {
         HashMap<String, String> flags = new HashMap<String, String>();
-        if (args.length == 0) {
 
-        }
         int firstArg = 0;
         while (!args[firstArg].startsWith("-")) {
             firstArg++;
@@ -80,4 +112,9 @@ public class IoTaUtil {
         return flags;
     }
 
+
+    public static char[] getHexChars() {
+        char[] chars = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
+        return chars;
+    }
 }
