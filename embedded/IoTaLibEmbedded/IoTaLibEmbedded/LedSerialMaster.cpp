@@ -13,7 +13,7 @@
 LedSerialMaster::LedSerialMaster(Stream * stream, int maxTokens)
 {
 	serial = stream;
-	fh = new fixedHeap<void *>(maxTokens);
+	fh = new fixedMap<void *>(maxTokens);
 }
 
 short LedSerialMaster::getFuncId()

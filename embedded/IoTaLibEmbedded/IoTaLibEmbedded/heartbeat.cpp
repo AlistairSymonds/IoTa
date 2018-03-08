@@ -3,13 +3,13 @@
 
 Heartbeat::Heartbeat()
 {
-	fh = new fixedHeap<void*>(10);
+	fh = new fixedMap<void*>(10);
 	state[0] = 60;
 }
 
 Heartbeat::Heartbeat(int size)
 {
-	fh = new fixedHeap<void*>(size);
+	fh = new fixedMap<void*>(size);
 }
 
 short Heartbeat::getFuncId()

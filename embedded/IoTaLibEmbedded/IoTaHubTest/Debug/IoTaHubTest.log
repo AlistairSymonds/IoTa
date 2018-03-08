@@ -1,7 +1,18 @@
-﻿  HubTest.cpp
+﻿  stdafx.cpp
+  HeartbeatTest.cpp
+  HubTest.cpp
 c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotahubtest\hubtest.cpp(38): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
 c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotahubtest\hubtest.cpp(63): warning C4244: '=': conversion from 'short' to 'uint8_t', possible loss of data
 c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotahubtest\hubtest.cpp(64): warning C4244: '=': conversion from 'short' to 'uint8_t', possible loss of data
 c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotahubtest\hubtest.cpp(75): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
-  IoTaHubTest.vcxproj -> C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\Debug\IoTaHubTest.dll
-  IoTaHubTest.vcxproj -> C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\Debug\IoTaHubTest.pdb (Partial PDB)
+  heapTest.cpp
+  byteBufTest.cpp
+  TemperatureLM35.cpp
+  LedSerialMaster.cpp
+  heartbeat.cpp
+  IoTaDeviceHub.cpp
+c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotalibembedded\iotadevicehub.cpp(41): error C2059: syntax error: '}'
+c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotalibembedded\iotadevicehub.cpp(52): warning C4244: 'argument': conversion from 'short' to 'uint8_t', possible loss of data
+  HubInternalFunc.cpp
+  Compiling...
+  Generating Code...

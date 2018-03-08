@@ -3,10 +3,11 @@
     "",
     "\\embedded",
     "\\embedded\\IoTaLibEmbedded",
+    "\\embedded\\IoTaLibEmbedded\\IoTaHubTest",
     "\\embedded\\IoTaLibEmbedded\\IoTaLibEmbedded",
     "\\embedded\\LedSerialSlave_octo_teensy",
     "\\embedded\\LedSerialSlave_octo_teensy\\LedSerialSlave_octo_teensy"
   ],
-  "SelectedNode": "\\embedded\\IoTaLibEmbedded\\IoTaLibEmbedded\\IoTaDeviceHub.cpp",
+  "SelectedNode": "\\embedded\\IoTaLibEmbedded\\IoTaHubTest\\HubTest.cpp",
   "PreviewInSolutionExplorer": false
 }

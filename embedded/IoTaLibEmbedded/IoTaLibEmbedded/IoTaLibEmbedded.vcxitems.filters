@@ -13,53 +13,53 @@
   <ItemGroup>
     <Text Include="$(MSBuildThisFileDirectory)readme.txt" />
     <Text Include="$(MSBuildThisFileDirectory)library.properties" />
-    <Text Include="C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded\IoTaDeviceHub.h">
+    <Text Include="$(MSBuildThisFileDirectory)IoTaDeviceHub.h">
       <Filter>Header Files</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded\HubInternalFunc.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)HubInternalFunc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded\IoTaDeviceHub.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)IoTaDeviceHub.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded\heartbeat.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)heartbeat.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded\LedSerialMaster.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)LedSerialMaster.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded\TemperatureLM35.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)TemperatureLM35.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded\circularBuffer.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)circularBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded\fixedHeap.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)heartbeat.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded\heartbeat.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)HubInternalFunc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded\HubInternalFunc.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)IoTaFuncBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded\IoTaFuncBase.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)iota_defines.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded\iota_defines.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)LedPropEnum.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded\LedPropEnum.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)LedSerialMaster.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded\LedSerialMaster.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)TemperatureLM35.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded\TemperatureLM35.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)fixedMap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

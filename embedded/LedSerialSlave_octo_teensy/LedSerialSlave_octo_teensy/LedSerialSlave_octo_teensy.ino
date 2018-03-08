@@ -42,14 +42,15 @@ void setup() {
 	for (int i = 0; i < NUM_LED_PROPS; i++) {
 		state[i] = 0;
 	}
-	state[hue] = 0;
+	state[hue] = 38;
 	state[brightness] = 255;
-	state[sat] = 255;
-	state[val] = 128;
+	state[sat] = 225;
+	state[val] = 239;
 	state[fps] = 60;
+	state[density] = 
 
 
-	state[pid] = 1;
+	state[pid] = 2;
 	
 	state[anim_hz] = 10;
 
@@ -116,6 +117,10 @@ void processSerial()
 	if (msgBuf[1] == 0)  //set command
 	{
 		state[msgBuf[2]] = msgBuf[3];
+		
+		
+		Serial1.write(state, NUM_LED_PROPS);
+		Serial.println("Sent state");
 	}
 	else if (msgBuf[1] == 1) //get command
 	{

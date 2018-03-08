@@ -30,7 +30,7 @@ public:
 private:
 	uint8_t state[NUM_LED_PROPS];
 	Stream* serial;
-	fixedHeap<void*> *fh;
+	fixedMap<void*> *fh;
 
 
 };

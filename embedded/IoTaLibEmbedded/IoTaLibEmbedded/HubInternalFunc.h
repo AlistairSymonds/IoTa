@@ -2,7 +2,7 @@
 #define _HUBFUNCINTERNAL_H
 
 #include "IoTaFuncBase.h"
-#include "fixedHeap.h"
+#include "fixedMap.h"
 #include <stdlib.h>
 
 class HubInternalFunc : public IoTaFuncBase {
@@ -22,7 +22,7 @@ public:
 private:
 	uint8_t * funcIds;
 	int * numFuncsPtr;
-	fixedHeap<void *> *fh;
+	fixedMap<void *> *fh;
 
 };
 #endif

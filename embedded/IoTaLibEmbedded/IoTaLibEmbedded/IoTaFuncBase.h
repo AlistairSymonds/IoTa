@@ -13,6 +13,7 @@ public:
 	virtual int getStateBufLen() = 0;
 	virtual uint8_t * getStateBuffer(void * clientToken) = 0;
 	virtual int needsStateBufferUpdate(void* clientToken) = 0;
+
 	
 
 private:

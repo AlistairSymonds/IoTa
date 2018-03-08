@@ -37,7 +37,7 @@ IoTaDeviceHub::IoTaDeviceHub() {
 
 void IoTaDeviceHub::tick()
 {
-
+	for
 }
 
 int IoTaDeviceHub::getNumFuncs()
@@ -74,7 +74,7 @@ int IoTaDeviceHub::processMessage(uint8_t message[], void* clientToken)
 	return funcIndex;
 }
 
-int IoTaDeviceHub::copyAndFormatResponses(uint8_t * buf, void * clientToken)
+int IoTaDeviceHub::getResponse(uint8_t * buf, void * clientToken)
 {
 	uint8_t msg[255];
 	int bytesAdded = 1;
@@ -93,6 +93,11 @@ int IoTaDeviceHub::copyAndFormatResponses(uint8_t * buf, void * clientToken)
 	}
 	msg[0] = bytesAdded;
 	memcpy(buf, msg, msg[0]);
+	return 0;
+}
+
+int IoTaDeviceHub::getBroadcast(uint8_t * buf)
+{
 	return 0;
 }
 

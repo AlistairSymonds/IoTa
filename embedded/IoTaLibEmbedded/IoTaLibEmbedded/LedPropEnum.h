@@ -12,5 +12,6 @@ enum ledProp
 	val,
 	delta_hue,
 	delta_val,
-	delta_sat
+	delta_sat,
+	density
 };

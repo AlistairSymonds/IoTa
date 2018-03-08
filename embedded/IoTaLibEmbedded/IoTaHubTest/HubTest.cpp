@@ -31,7 +31,7 @@ namespace IoTaHubTest
 			hub.tick();
 
 			uint8_t output[255];
-			hub.copyAndFormatResponses(output, tok);
+			hub.getResponse(output, tok);
 
 			uint8_t expected[] = {4,0,1,60};
 			for (int i = 0; i < 4; i++) {
@@ -68,7 +68,7 @@ namespace IoTaHubTest
 			hub.tick();
 
 			uint8_t output[255];
-			hub.copyAndFormatResponses(output, tok);
+			hub.getResponse(output, tok);
 
 			uint8_t expected[] = { 10,0,1,60 };
 			for (int i = 0; i < 4; i++) {
@@ -91,7 +91,7 @@ namespace IoTaHubTest
 			hub.tick();
 
 			uint8_t output[3];
-			hub.copyAndFormatResponses(output, tok);
+			hub.getResponse(output, tok);
 
 			Assert::AreEqual((uint8_t)1, output[0]);
 		}
@@ -114,7 +114,7 @@ namespace IoTaHubTest
 			hub.tick();
 
 			uint8_t output[10];
-			hub.copyAndFormatResponses(output, tok);
+			hub.getResponse(output, tok);
 
 			Assert::AreEqual((uint8_t)6, output[0]);
 			Assert::AreEqual((uint8_t)0, output[1]);

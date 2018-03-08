@@ -22,7 +22,7 @@
   <ItemGroup>
     <!-- <ClInclude Include="$(MSBuildThisFileDirectory)IoTaLibEmbedded.h" /> -->
     <ClInclude Include="$(MSBuildThisFileDirectory)circularBuffer.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)fixedHeap.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)fixedMap.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)heartbeat.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)HubInternalFunc.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)IoTaFuncBase.h" />

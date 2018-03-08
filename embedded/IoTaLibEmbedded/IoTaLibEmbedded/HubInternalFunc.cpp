@@ -7,7 +7,7 @@ HubInternalFunc::HubInternalFunc(int * numFuncs, int maxFuncs)
 
 	numFuncsPtr = numFuncs;
 	funcIds = new uint8_t[maxFuncs];
-	fh = new fixedHeap<void *>(10);
+	fh = new fixedMap<void *>(10);
 }
 
 short HubInternalFunc::getFuncId()

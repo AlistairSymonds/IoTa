@@ -4,7 +4,7 @@
 
 #include <stdint.h>
 #include "IoTaFuncBase.h"
-#include "fixedHeap.h"
+#include "fixedMap.h"
 
 
 class Heartbeat: public IoTaFuncBase {
@@ -20,7 +20,7 @@ public:
 	int needsStateBufferUpdate(void* clientToken);
 	~Heartbeat();
 private:
-	fixedHeap<void *> *fh;
+	fixedMap<void *> *fh;
 	uint8_t state[1];
 };
 #endif

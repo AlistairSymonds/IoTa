@@ -7,7 +7,7 @@
 TemperatureLM35::TemperatureLM35(int adc_pin)
 {
 	pinNum = adc_pin;
-	fh = new fixedHeap<void*>(10);
+	fh = new fixedMap<void*>(10);
 	temp_mCelsius = 1000;
 }
 

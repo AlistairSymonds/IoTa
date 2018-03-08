@@ -98,9 +98,16 @@ void loop() {
 	
 
 	hub.tick();
+	uint8_t castBuffer[255];
+	hub.getBroadcasts(castBuffer);
+	for (int c = 0; c < nextFreeSpot; c++) {
+		clients[c].write(&castBuffer[0], castBuffer[0]);
+	}
+
+
 	for (int c = 0; c < nextFreeSpot; c++) {
 		uint8_t buffer[255];
-		hub.copyAndFormatResponses(buffer, &clients[c]);
+		hub.getResponses(buffer, &clients[c]);
 		if (buffer[0] > 1) {
 			clients[c].write(&buffer[0], buffer[0]);
 		}	

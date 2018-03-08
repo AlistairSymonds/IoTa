@@ -1,6 +1,6 @@
 #pragma once
 #include "IoTaFuncBase.h"
-#include "fixedHeap.h"
+#include "fixedMap.h"
 class TemperatureLM35 :
 	public IoTaFuncBase
 {
@@ -17,6 +17,6 @@ public:
 private:
 	int pinNum = 0;
 	int temp_mCelsius;
-	fixedHeap<void *> *fh;
+	fixedMap<void *> *fh;
 };
 
