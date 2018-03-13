@@ -34,17 +34,27 @@ int Heartbeat::getStateBufLen()
 	return 1;
 }
 
-uint8_t * Heartbeat::getStateBuffer(void * clientToken)
+int Heartbeat::isStateBufferUpdated(void * clientToken)
 {
-	fh->remove(clientToken);
-	return state;
+	if (fh->contains(clientToken)) {
+		fh->remove(clientToken);
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
+	
 }
 
-
-
-int Heartbeat::needsStateBufferUpdate(void * clientToken)
+int Heartbeat::isStateBufferUpdated()
 {
-	return fh->contains(clientToken);
+	return 0;
+}
+
+uint8_t * Heartbeat::getStateBuffer()
+{
+	return state;
 }
 
 Heartbeat::~Heartbeat()

@@ -37,7 +37,9 @@ IoTaDeviceHub::IoTaDeviceHub() {
 
 void IoTaDeviceHub::tick()
 {
-	for
+	for (int i = 0; i < numFuncs; i++) {
+		funcs[i]->tick();
+	}
 }
 
 int IoTaDeviceHub::getNumFuncs()
@@ -74,29 +76,43 @@ int IoTaDeviceHub::processMessage(uint8_t message[], void* clientToken)
 	return funcIndex;
 }
 
-int IoTaDeviceHub::getResponse(uint8_t * buf, void * clientToken)
+int IoTaDeviceHub::numResponsesRemaining()
+{
+	return 0;
+}
+
+int IoTaDeviceHub::getNextResponse(uint8_t * buf, void * clientToken)
 {
 	uint8_t msg[255];
 	int bytesAdded = 1;
 	for (int i = 0; i < numFuncs; i++) {
-		if (funcs[i]->needsStateBufferUpdate(clientToken)) {
+		if (funcs[i]->isStateBufferUpdated() != 0) {
+
+		}
+		else if (funcs[i]->isStateBufferUpdated(clientToken)) {
 			short id = funcs[i]->getFuncId();
 			msg[bytesAdded] = 0;
-			msg[bytesAdded+1] = (uint8_t)id;
+			msg[bytesAdded + 1] = (uint8_t)id;
 			bytesAdded = bytesAdded + 2;
 
 			int len = funcs[i]->getStateBufLen();
-			memcpy(msg+bytesAdded, funcs[i]->getStateBuffer(clientToken), len);
+			memcpy(msg + bytesAdded, funcs[i]->getStateBuffer(clientToken), len);
 			bytesAdded = bytesAdded + len;
-		
+
 		}
+
 	}
 	msg[0] = bytesAdded;
 	memcpy(buf, msg, msg[0]);
 	return 0;
 }
 
-int IoTaDeviceHub::getBroadcast(uint8_t * buf)
+int IoTaDeviceHub::numBroadcastsRemaining()
+{
+	return 0;
+}
+
+int IoTaDeviceHub::getNextBroadcast(uint8_t * buf)
 {
 	return 0;
 }

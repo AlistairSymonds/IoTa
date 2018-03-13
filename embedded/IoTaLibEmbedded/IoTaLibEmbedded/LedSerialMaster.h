@@ -5,7 +5,7 @@
 #define _LEDSERIALMASTER_H
 
 #include <Stream.h>
-#include "fixedHeap.h"
+#include "fixedMap.h"
 
  
 
@@ -30,7 +30,7 @@ public:
 private:
 	uint8_t state[NUM_LED_PROPS];
 	Stream* serial;
-	fixedMap<void*> *fh;
+	fixedMap<void*> *tokenMap;
 
 
 };

@@ -13,7 +13,7 @@
 LedSerialMaster::LedSerialMaster(Stream * stream, int maxTokens)
 {
 	serial = stream;
-	fh = new fixedMap<void *>(maxTokens);
+	tokenMap = new fixedMap<void *>(maxTokens);
 }
 
 short LedSerialMaster::getFuncId()
@@ -23,12 +23,8 @@ short LedSerialMaster::getFuncId()
 
 void LedSerialMaster::processCommand(uint8_t command[],  void * clientToken)
 {
-	
-	
-	
 	serial->write(command, command[0]);
-	fh->add(clientToken);
-	
+	tokenMap->add(clientToken);
 }
 
 void LedSerialMaster::tick()
@@ -45,17 +41,17 @@ int LedSerialMaster::getStateBufLen()
 
 uint8_t * LedSerialMaster::getStateBuffer(void * clientToken)
 {
-	fh->remove(clientToken);
+	tokenMap->remove(clientToken);
 	return state;
 }
 
 int LedSerialMaster::needsStateBufferUpdate(void * clientToken)
 {
-	return fh->contains(clientToken);
+	return tokenMap->contains(clientToken);
 }
 
 LedSerialMaster::~LedSerialMaster()
 {
-	delete fh;
+	delete tokenMap;
 }
 #endif // !1

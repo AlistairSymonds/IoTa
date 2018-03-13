@@ -1,18 +1,10 @@
-﻿  stdafx.cpp
-  HeartbeatTest.cpp
+﻿  IoTaDeviceHub.cpp
+c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotalibembedded\iotadevicehub.cpp(30): error C2512: 'CircularBuffer<uint8_t *>': no appropriate default constructor available
+  c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotalibembedded\iotadevicehub.h(24): note: see declaration of 'CircularBuffer<uint8_t *>'
+c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotalibembedded\iotadevicehub.cpp(54): warning C4244: 'argument': conversion from 'short' to 'uint8_t', possible loss of data
+c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotalibembedded\iotadevicehub.cpp(99): error C2660: 'IoTaFuncBase::getStateBuffer': function does not take 1 arguments
+c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotalibembedded\iotadevicehub.cpp(99): error C2660: 'memcpy': function does not take 2 arguments
   HubTest.cpp
-c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotahubtest\hubtest.cpp(38): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
-c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotahubtest\hubtest.cpp(63): warning C4244: '=': conversion from 'short' to 'uint8_t', possible loss of data
-c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotahubtest\hubtest.cpp(64): warning C4244: '=': conversion from 'short' to 'uint8_t', possible loss of data
-c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotahubtest\hubtest.cpp(75): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
-  heapTest.cpp
-  byteBufTest.cpp
-  TemperatureLM35.cpp
-  LedSerialMaster.cpp
-  heartbeat.cpp
-  IoTaDeviceHub.cpp
-c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotalibembedded\iotadevicehub.cpp(41): error C2059: syntax error: '}'
-c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotalibembedded\iotadevicehub.cpp(52): warning C4244: 'argument': conversion from 'short' to 'uint8_t', possible loss of data
-  HubInternalFunc.cpp
-  Compiling...
+c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotahubtest\hubtest.cpp(36): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
+c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotahubtest\hubtest.cpp(64): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
   Generating Code...

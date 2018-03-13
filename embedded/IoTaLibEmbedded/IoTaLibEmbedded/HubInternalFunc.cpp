@@ -7,7 +7,7 @@ HubInternalFunc::HubInternalFunc(int * numFuncs, int maxFuncs)
 
 	numFuncsPtr = numFuncs;
 	funcIds = new uint8_t[maxFuncs];
-	fh = new fixedMap<void *>(10);
+	map = new fixedMap<void *>(10);
 }
 
 short HubInternalFunc::getFuncId()
@@ -18,7 +18,7 @@ short HubInternalFunc::getFuncId()
 void HubInternalFunc::processCommand(uint8_t command[], void * clientToken)
 {
 	if (command[0] == HUB_ID) {
-		fh->add(clientToken);
+		map->add(clientToken);
 	}
 }
 
@@ -31,15 +31,20 @@ int HubInternalFunc::getStateBufLen()
 	return *numFuncsPtr;
 }
 
-uint8_t * HubInternalFunc::getStateBuffer(void * clientToken)
+uint8_t * HubInternalFunc::getStateBuffer()
 {
-	fh->remove(clientToken);
+	
 	return funcIds;
 }
 
-int HubInternalFunc::needsStateBufferUpdate(void * clientToken)
+int HubInternalFunc::isStateBufferUpdated()
 {
-	return fh->contains(clientToken);
+	return 0;
+}
+
+int HubInternalFunc::isStateBufferUpdated(void * clientToken)
+{
+	return map->contains(clientToken);
 }
 
 void HubInternalFunc::addFuncId(uint8_t id)

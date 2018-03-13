@@ -83,6 +83,7 @@ void loop() {
 		}
 	}
 
+	//storing connected clients
 	for (int c = 0; c < nextFreeSpot; c++) {
 		if (clients[c].connected()) {
 			if(clients[c].available() > 0) {
@@ -96,18 +97,21 @@ void loop() {
 		}
 	}
 	
-
+	//process internal updates from hub
 	hub.tick();
+
+
+	//get and broadcast state updates
 	uint8_t castBuffer[255];
-	hub.getBroadcasts(castBuffer);
+	hub.getBroadcast(castBuffer);
 	for (int c = 0; c < nextFreeSpot; c++) {
 		clients[c].write(&castBuffer[0], castBuffer[0]);
 	}
 
-
+	//get and tx specific responses
 	for (int c = 0; c < nextFreeSpot; c++) {
 		uint8_t buffer[255];
-		hub.getResponses(buffer, &clients[c]);
+		hub.getResponse(buffer, &clients[c]);
 		if (buffer[0] > 1) {
 			clients[c].write(&buffer[0], buffer[0]);
 		}	

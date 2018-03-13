@@ -16,7 +16,7 @@ CHSV animBuf[NUM_STRIPS * NUM_LEDS_PER_STRIP];
 CRGB frameBuf[NUM_STRIPS * NUM_LEDS_PER_STRIP];
 
 
-#include "LedPropEnum.h"
+#include "
 uint8_t state[NUM_LED_PROPS];
 
 

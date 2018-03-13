@@ -11,6 +11,7 @@
 #include <stdint.h>
 #include "IoTaFuncBase.h"
 #include "HubInternalFunc.h"
+#include "circularBuffer.h"
 
 class IoTaDeviceHub {
 	private:
@@ -20,6 +21,11 @@ class IoTaDeviceHub {
 		IoTaFuncBase **funcs;
 		HubInternalFunc * internalHandler;
 
+		CircularBuffer<uint8_t *> broadcastStorage;
+
+
+
+
 
 
 	public: 
@@ -27,12 +33,15 @@ class IoTaDeviceHub {
 		int addFunc(IoTaFuncBase *func);
 		int processMessage(uint8_t message[], void *clientToken);
 		
-		int getResponse(uint8_t*buf,void *clientToken);
+		int numResponsesRemaining();
+		int getNextResponse(uint8_t*buf,void *clientToken);
 		
-		int getBroadcast(uint8_t*buf);
+		int numBroadcastsRemaining();
+		int getNextBroadcast(uint8_t*buf);
+
+
 		void tick();
 		int getNumFuncs();
-		//int copyAndFormatFuncIds(uint8_t *buf);
 
 
 		

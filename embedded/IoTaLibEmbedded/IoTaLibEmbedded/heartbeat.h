@@ -15,10 +15,18 @@ public:
 	void processCommand(uint8_t command[],  void* clientToken);
 	void tick();
 
+	
+	int isStateBufferUpdated(void* clientToken);
+	int isStateBufferUpdated();
+
 	int getStateBufLen();
-	uint8_t * getStateBuffer(void * clientToken);
-	int needsStateBufferUpdate(void* clientToken);
+	int getStateBuffer(uint8_t * buffer);
+
 	~Heartbeat();
+
+	
+
+	
 private:
 	fixedMap<void *> *fh;
 	uint8_t state[1];

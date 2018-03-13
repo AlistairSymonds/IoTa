@@ -8,6 +8,6 @@
     "\\embedded\\LedSerialSlave_octo_teensy",
     "\\embedded\\LedSerialSlave_octo_teensy\\LedSerialSlave_octo_teensy"
   ],
-  "SelectedNode": "\\embedded\\IoTaLibEmbedded\\IoTaHubTest\\HubTest.cpp",
+  "SelectedNode": "\\embedded\\IoTaLibEmbedded\\IoTaHubTest\\stdafx.cpp",
   "PreviewInSolutionExplorer": false
 }

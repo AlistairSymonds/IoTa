@@ -29,7 +29,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)iota_defines.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LedPropEnum.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LedSerialMaster.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)TemperatureLM35.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)HubInternalFunc.cpp">
@@ -42,9 +41,6 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)LedSerialMaster.cpp">
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)TemperatureLM35.cpp">
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>

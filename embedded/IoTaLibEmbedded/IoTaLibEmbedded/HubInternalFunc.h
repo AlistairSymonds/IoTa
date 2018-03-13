@@ -5,6 +5,9 @@
 #include "fixedMap.h"
 #include <stdlib.h>
 
+
+//this class handles communication with the hub class for outside inputs
+//as usually the hub itself is designed to be transparent to others
 class HubInternalFunc : public IoTaFuncBase {
 public:
 	HubInternalFunc(int * numFuncs, int maxFuncs);
@@ -13,8 +16,9 @@ public:
 	void tick();
 
 	int getStateBufLen();
-	uint8_t * getStateBuffer(void * clientToken);
-	int needsStateBufferUpdate(void* clientToken);
+	uint8_t * getStateBuffer();
+	int isStateBufferUpdated(void* clientToken);
+	int isStateBufferUpdated();
 
 	void addFuncId(uint8_t id);
 
@@ -22,7 +26,7 @@ public:
 private:
 	uint8_t * funcIds;
 	int * numFuncsPtr;
-	fixedMap<void *> *fh;
+	fixedMap<void *> *map;
 
 };
 #endif
