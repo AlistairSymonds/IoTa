@@ -1,10 +1,11 @@
+#include <string.h>
 #include "heartbeat.h"
 
 
 Heartbeat::Heartbeat()
 {
 	fh = new fixedMap<void*>(10);
-	state[0] = 60;
+	state[0] = (uint8_t)60;
 }
 
 Heartbeat::Heartbeat(int size)
@@ -52,9 +53,10 @@ int Heartbeat::isStateBufferUpdated()
 	return 0;
 }
 
-uint8_t * Heartbeat::getStateBuffer()
-{
-	return state;
+int Heartbeat::getStateBuffer(uint8_t * buffer)
+{	
+	memcpy(buffer, state, getStateBufLen());
+	return 1;
 }
 
 Heartbeat::~Heartbeat()

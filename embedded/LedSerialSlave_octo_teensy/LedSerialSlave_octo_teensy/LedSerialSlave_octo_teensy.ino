@@ -8,6 +8,12 @@
 #define USE_OCTOWS2811
 #include<OctoWS2811.h>
 #include<FastLED.h>
+#include <stdlib.h>
+#include "LedAnimBase.h"
+#include "SolidColour.h"
+#include "RainbowAnim.h"
+#include "Glitter.h"
+#include "LedPropEnum.h"
 
 #define NUM_LEDS_PER_STRIP 400
 #define NUM_STRIPS 1
@@ -16,7 +22,6 @@ CHSV animBuf[NUM_STRIPS * NUM_LEDS_PER_STRIP];
 CRGB frameBuf[NUM_STRIPS * NUM_LEDS_PER_STRIP];
 
 
-#include "
 uint8_t state[NUM_LED_PROPS];
 
 
@@ -27,11 +32,7 @@ elapsedMillis anim_period_counter;
 unsigned int anim_period_millis;
 
 
-#include <stdlib.h>
-#include "LedAnimBase.h"
-#include "SolidColour.h"
-#include "RainbowAnim.h"
-#include "Glitter.h"
+
 
 LedAnimBase * programs[5];
 

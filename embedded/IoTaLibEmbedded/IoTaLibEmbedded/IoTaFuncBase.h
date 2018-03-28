@@ -9,7 +9,7 @@ public:
 	//get the funcId
 	virtual short getFuncId() = 0;
 
-	//submit a command and uinque identifier of who sent it (ie, memory address of
+	//submit a command and unique identifier of who sent it (ie, memory address of
 	//client in memory)
 	virtual void processCommand(uint8_t command[],  void* clientToken) = 0;
 	virtual void tick() = 0;

@@ -1,3 +1,4 @@
+#include <string.h>
 #include "HubInternalFunc.h"
 #include "iota_defines.h"
 
@@ -31,10 +32,10 @@ int HubInternalFunc::getStateBufLen()
 	return *numFuncsPtr;
 }
 
-uint8_t * HubInternalFunc::getStateBuffer()
+int HubInternalFunc::getStateBuffer(uint8_t * buffer)
 {
-	
-	return funcIds;
+	memcpy(buffer, funcIds, getStateBufLen());
+	return 1;
 }
 
 int HubInternalFunc::isStateBufferUpdated()

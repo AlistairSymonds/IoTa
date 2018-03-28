@@ -31,6 +31,8 @@ IoTaDeviceHub::IoTaDeviceHub() {
 	maxFuncs = 10;
 	numFuncs = 0;
 	funcs = (IoTaFuncBase **)malloc(sizeof(IoTaFuncBase*) * maxFuncs);	
+
+	broadcastStorage = new CircularBuffer<uint8_t *>(64);
 	internalHandler = new HubInternalFunc(&numFuncs, maxFuncs);
 	addFunc(internalHandler);
 }
@@ -62,12 +64,12 @@ int IoTaDeviceHub::addFunc(IoTaFuncBase * newFunc)
 	}
 }
 
-int IoTaDeviceHub::processMessage(uint8_t message[], void* clientToken)
+int IoTaDeviceHub::processMessage(DataCapsule capsuleIn)
 {
 	int funcIndex = -1;
 	{
 		for (int i = 0; i < numFuncs; i++) {
-			if (funcs[i]->getFuncId() == message[2]) {
+			if (funcs[i]->getFuncId() == capsuleIn) {
 				uint8_t * cmdStart = message + 3;
 				funcs[i]->processCommand(cmdStart, clientToken);
 			}
@@ -76,13 +78,14 @@ int IoTaDeviceHub::processMessage(uint8_t message[], void* clientToken)
 	return funcIndex;
 }
 
-int IoTaDeviceHub::numResponsesRemaining()
+int IoTaDeviceHub::numCapsulesRemaining()
 {
 	return 0;
 }
 
-int IoTaDeviceHub::getNextResponse(uint8_t * buf, void * clientToken)
+int IoTaDeviceHub::getNextOutputCapsule(DataCapsule * emptyCapsule)
 {
+	/*
 	uint8_t msg[255];
 	int bytesAdded = 1;
 	for (int i = 0; i < numFuncs; i++) {
@@ -104,16 +107,7 @@ int IoTaDeviceHub::getNextResponse(uint8_t * buf, void * clientToken)
 	}
 	msg[0] = bytesAdded;
 	memcpy(buf, msg, msg[0]);
-	return 0;
-}
-
-int IoTaDeviceHub::numBroadcastsRemaining()
-{
-	return 0;
-}
-
-int IoTaDeviceHub::getNextBroadcast(uint8_t * buf)
-{
+	*/
 	return 0;
 }
 

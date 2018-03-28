@@ -1,10 +1,10 @@
 ﻿  IoTaDeviceHub.cpp
 c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotalibembedded\iotadevicehub.cpp(30): error C2512: 'CircularBuffer<uint8_t *>': no appropriate default constructor available
   c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotalibembedded\iotadevicehub.h(24): note: see declaration of 'CircularBuffer<uint8_t *>'
-c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotalibembedded\iotadevicehub.cpp(54): warning C4244: 'argument': conversion from 'short' to 'uint8_t', possible loss of data
-c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotalibembedded\iotadevicehub.cpp(99): error C2660: 'IoTaFuncBase::getStateBuffer': function does not take 1 arguments
-c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotalibembedded\iotadevicehub.cpp(99): error C2660: 'memcpy': function does not take 2 arguments
-  HubTest.cpp
-c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotahubtest\hubtest.cpp(36): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
-c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotahubtest\hubtest.cpp(64): warning C4838: conversion from 'int' to 'char' requires a narrowing conversion
-  Generating Code...
+c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotalibembedded\iotadevicehub.cpp(35): error C2679: binary '=': no operator found which takes a right-hand operand of type 'CircularBuffer<uint8_t *> *' (or there is no acceptable conversion)
+  c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotalibembedded\circularbuffer.h(25): note: could be 'CircularBuffer<uint8_t *> &CircularBuffer<uint8_t *>::operator =(const CircularBuffer<uint8_t *> &)'
+  c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotalibembedded\iotadevicehub.cpp(35): note: while trying to match the argument list '(CircularBuffer<uint8_t *>, CircularBuffer<uint8_t *> *)'
+c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotalibembedded\iotadevicehub.cpp(56): warning C4244: 'argument': conversion from 'short' to 'uint8_t', possible loss of data
+c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotalibembedded\iotadevicehub.cpp(72): error C2677: binary '==': no global operator found which takes type 'DataCapsule' (or there is no acceptable conversion)
+c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotalibembedded\iotadevicehub.cpp(73): error C2065: 'message': undeclared identifier
+c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotalibembedded\iotadevicehub.cpp(74): error C2065: 'clientToken': undeclared identifier

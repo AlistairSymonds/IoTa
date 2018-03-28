@@ -9,11 +9,14 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx</Extensions>
     </Filter>
-    <Filter Include="util">
-      <UniqueIdentifier>{18381ddd-8924-4785-81c1-079b75c1285b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\functions">
       <UniqueIdentifier>{c6a1d2a1-4044-4863-927c-af9e2de80902}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="iota_util">
+      <UniqueIdentifier>{18381ddd-8924-4785-81c1-079b75c1285b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\functions">
+      <UniqueIdentifier>{39b1f949-a91e-440b-96e3-e76c9d4ae192}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -24,16 +27,19 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)HubInternalFunc.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)IoTaDeviceHub.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)heartbeat.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\functions</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)LedSerialMaster.cpp">
+      <Filter>Source Files\functions</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)HubInternalFunc.cpp">
+      <Filter>Source Files\functions</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)DataCapsule.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -42,10 +48,10 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)circularBuffer.h">
-      <Filter>util</Filter>
+      <Filter>iota_util</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)fixedMap.h">
-      <Filter>util</Filter>
+      <Filter>iota_util</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)heartbeat.h">
       <Filter>Header Files\functions</Filter>
@@ -61,6 +67,9 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)LedPropEnum.h">
       <Filter>Header Files\functions</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)DataCapsule.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

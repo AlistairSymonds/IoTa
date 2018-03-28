@@ -15,10 +15,12 @@ public:
 	void processCommand(uint8_t command[], void* clientToken);
 	void tick();
 
-	int getStateBufLen();
-	uint8_t * getStateBuffer();
+
 	int isStateBufferUpdated(void* clientToken);
 	int isStateBufferUpdated();
+
+	int getStateBufLen();
+	int getStateBuffer(uint8_t * buffer);
 
 	void addFuncId(uint8_t id);
 

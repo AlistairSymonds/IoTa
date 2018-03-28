@@ -22,6 +22,7 @@
   <ItemGroup>
     <!-- <ClInclude Include="$(MSBuildThisFileDirectory)IoTaLibEmbedded.h" /> -->
     <ClInclude Include="$(MSBuildThisFileDirectory)circularBuffer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)DataCapsule.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)fixedMap.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)heartbeat.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)HubInternalFunc.h" />
@@ -31,6 +32,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)LedSerialMaster.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)DataCapsule.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)HubInternalFunc.cpp">
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
