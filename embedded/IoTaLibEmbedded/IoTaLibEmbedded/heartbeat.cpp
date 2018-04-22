@@ -1,16 +1,18 @@
 #include <string.h>
+#include "iota_defines.h"
 #include "heartbeat.h"
+
 
 
 Heartbeat::Heartbeat()
 {
-	fh = new fixedMap<void*>(10);
+	fh = new fixedMap<long>(10);
 	state[0] = (uint8_t)60;
 }
 
 Heartbeat::Heartbeat(int size)
 {
-	fh = new fixedMap<void*>(size);
+	fh = new fixedMap<long>(size);
 }
 
 short Heartbeat::getFuncId()
@@ -18,11 +20,15 @@ short Heartbeat::getFuncId()
 	return 1;
 }
 
-void Heartbeat::processCommand(uint8_t command[],  void * clientToken)
+void Heartbeat::processCommand(DataCapsule *capsule)
 {
-	if (command[0] == 60) {
-		fh->add(clientToken);
+	uint8_t *data = new uint8_t[capsule->getDataSize()];
+	
+	capsule->copyDataOut(data);
+	if (data[0] == HEARTBEAT_ID) {
+		fh->add(capsule->getSource());
 	}
+	delete data;
 }
 
 void Heartbeat::tick()
@@ -35,10 +41,16 @@ int Heartbeat::getStateBufLen()
 	return 1;
 }
 
-int Heartbeat::isStateBufferUpdated(void * clientToken)
+int Heartbeat::getStateBuffer(DataCapsule * capsule)
 {
-	if (fh->contains(clientToken)) {
-		fh->remove(clientToken);
+	capsule->updateData(this->getStateBufLen(), state);
+	return 0;
+}
+
+int Heartbeat::isStateBufferUpdated(long clientId)
+{
+	if (fh->contains(clientId)) {
+		fh->remove(clientId);
 		return 1;
 	}
 	else
@@ -53,11 +65,7 @@ int Heartbeat::isStateBufferUpdated()
 	return 0;
 }
 
-int Heartbeat::getStateBuffer(uint8_t * buffer)
-{	
-	memcpy(buffer, state, getStateBufLen());
-	return 1;
-}
+
 
 Heartbeat::~Heartbeat()
 {

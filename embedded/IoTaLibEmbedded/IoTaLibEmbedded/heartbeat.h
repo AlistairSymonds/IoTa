@@ -12,15 +12,15 @@ public:
 	Heartbeat();
 	Heartbeat(int size);
 	short getFuncId();
-	void processCommand(uint8_t command[],  void* clientToken);
+	void processCommand(DataCapsule *capsule);
 	void tick();
 
 	
-	int isStateBufferUpdated(void* clientToken);
+	int isStateBufferUpdated(long clientId);
 	int isStateBufferUpdated();
 
 	int getStateBufLen();
-	int getStateBuffer(uint8_t * buffer);
+	int getStateBuffer(DataCapsule *capsule);
 
 	~Heartbeat();
 
@@ -28,7 +28,7 @@ public:
 
 	
 private:
-	fixedMap<void *> *fh;
+	fixedMap<long> *fh;
 	uint8_t state[1];
 };
 #endif

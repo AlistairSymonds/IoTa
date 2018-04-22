@@ -21,10 +21,13 @@ short LedSerialMaster::getFuncId()
 	return LEDS_ID;
 }
 
-void LedSerialMaster::processCommand(uint8_t command[],  void * clientToken)
+void LedSerialMaster::processCommand(DataCapsule capsule)
 {
-	serial->write(command, command[0]);
-	tokenMap->add(clientToken);
+	uint8_t *data = new uint8_t[this->getStateBufLen()];
+	capsule.copyDataOut(data);
+	serial->write(data, data[0]);
+	delete data;
+	
 }
 
 void LedSerialMaster::tick()
@@ -34,21 +37,27 @@ void LedSerialMaster::tick()
 	}
 }
 
+int LedSerialMaster::isStateBufferUpdated(long clientId)
+{
+	return 0;
+}
+
+int LedSerialMaster::isStateBufferUpdated()
+{
+	return 0;
+}
+
 int LedSerialMaster::getStateBufLen()
 {
 	return NUM_LED_PROPS;
 }
 
-uint8_t * LedSerialMaster::getStateBuffer(void * clientToken)
+int LedSerialMaster::getStateBuffer(DataCapsule * capsule)
 {
-	tokenMap->remove(clientToken);
-	return state;
+	return 0;
 }
 
-int LedSerialMaster::needsStateBufferUpdate(void * clientToken)
-{
-	return tokenMap->contains(clientToken);
-}
+
 
 LedSerialMaster::~LedSerialMaster()
 {

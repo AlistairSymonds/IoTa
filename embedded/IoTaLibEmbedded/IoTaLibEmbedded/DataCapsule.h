@@ -1,15 +1,31 @@
 #pragma once
 #include <stdint.h>
+//Memory layout
+// 0x00 to 0x07 = source
+// 0x08 to 0x0F = destination
+// 0x10 to 0x12 = id of function associated with message
+// 0x13 to 0x14 = size of attached data
+// 0x15 to 0x15+ize = data
+
+
+
 
 class DataCapsule
 {
 public:
-	DataCapsule(long sourceIn, long destinationIn, int dataSize, uint8_t * dataIn);
-	DataCapsule(long sourceIn, long destinationIn, DataCapsule toEncapsulate);
+	DataCapsule(long sourceIn, long destinationIn, short funcId, short dataSize, uint8_t * dataIn);
+	//uuid of where message originated from
 	long getSource();
+	//uuid of physical device recipient
 	long getDestination();
-	int copyData(uint8_t *buf);
 
+	//id of func associated with message
+	short getFuncId();
+
+	int copyDataOut(uint8_t *buf);
+	short getDestFunc();
+
+	int updateData(int dataSize, uint8_t * dataIn);
 	int getDataSize();
 
 	
@@ -17,7 +33,9 @@ public:
 private:
 	long source;
 	long destination = 0;
-	uint8_t* data;
-	int dataSize = 0;
+	short funcId = 0;
+	short dataSize = 0;
+	uint8_t data[255];
+	
 };
 

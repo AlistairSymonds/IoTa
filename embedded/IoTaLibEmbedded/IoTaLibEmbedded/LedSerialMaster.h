@@ -18,12 +18,15 @@ public:
 	LedSerialMaster(Stream* stream, int maxTokens);
 	
 	short getFuncId();
-	void processCommand(uint8_t command[], void* clientToken);
+	void processCommand(DataCapsule *capsule);
 	void tick();
 
+
+	int isStateBufferUpdated(long clientId);
+	int isStateBufferUpdated();
+
 	int getStateBufLen();
-	uint8_t * getStateBuffer(void * clientToken);
-	int needsStateBufferUpdate(void* clientToken);
+	int getStateBuffer(DataCapsule *capsule);
 
 	~LedSerialMaster();
 

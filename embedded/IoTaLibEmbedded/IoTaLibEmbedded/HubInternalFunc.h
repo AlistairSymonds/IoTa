@@ -12,15 +12,15 @@ class HubInternalFunc : public IoTaFuncBase {
 public:
 	HubInternalFunc(int * numFuncs, int maxFuncs);
 	short getFuncId();
-	void processCommand(uint8_t command[], void* clientToken);
+	void processCommand(DataCapsule *capsule);
 	void tick();
 
 
-	int isStateBufferUpdated(void* clientToken);
+	int isStateBufferUpdated(long clientId);
 	int isStateBufferUpdated();
 
 	int getStateBufLen();
-	int getStateBuffer(uint8_t * buffer);
+	int getStateBuffer(DataCapsule *capsule);
 
 	void addFuncId(uint8_t id);
 
@@ -28,7 +28,7 @@ public:
 private:
 	uint8_t * funcIds;
 	int * numFuncsPtr;
-	fixedMap<void *> *map;
+	fixedMap<long> *map;
 
 };
 #endif

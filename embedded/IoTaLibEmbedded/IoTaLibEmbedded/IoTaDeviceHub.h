@@ -21,16 +21,16 @@ class IoTaDeviceHub {
 
 		IoTaFuncBase **funcs;
 		HubInternalFunc * internalHandler;
-		CircularBuffer<uint8_t*> broadcastStorage;
+		CircularBuffer<DataCapsule *> * msgStorage;
 
 
 	public: 
 		IoTaDeviceHub();
 		int addFunc(IoTaFuncBase *func);
-		int processMessage(DataCapsule capsuleIn);
+		int processMessage(DataCapsule *capsule);
 		
-		int numCapsulesRemaining();
-		int getNextOutputCapsule(DataCapsule * emptyCapsule);
+		int numCapsulesForClient(long clientId);
+		int getNextOutputCapsule(DataCapsule * capsulePtr);
 		
 		
 		/*

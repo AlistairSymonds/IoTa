@@ -4,15 +4,20 @@
 
 
 
-DataCapsule::DataCapsule(long sourceIn, long destinationIn, int dataSize, uint8_t * dataIn)
+DataCapsule::DataCapsule(long sourceIn, long destinationIn, short funcId, short dataSize, uint8_t * dataIn)
 {
 	this->destination = destinationIn;
 	this->source = sourceIn;
-	this->data = nullptr;
+	this->funcId = funcId;
 	if (dataSize <= 255) {
+
 		memcpy(this->data, dataIn, dataSize);
 		this->dataSize = dataSize;
 	}
+}
+long DataCapsule::getSource()
+{
+	return source;
 }
 /*
 DataCapsule::DataCapsule(long sourceIn, long destinationIn, DataCapsule cap) {
@@ -29,10 +34,30 @@ long DataCapsule::getDestination()
 	return this->destination;
 }
 
-int DataCapsule::copyData(uint8_t * buf)
+short DataCapsule::getFuncId()
 {
-	memcpy(this->data, buf, this->dataSize);
+	return this->funcId;
+}
+
+int DataCapsule::copyDataOut(uint8_t * buf)
+{
+	memcpy(buf, this->data, this->dataSize);
 	return dataSize;
+}
+
+short DataCapsule::getDestFunc()
+{
+	return data[0];
+}
+
+int DataCapsule::updateData(int dataSize, uint8_t * dataIn)
+{
+	if (dataSize <= 255) {
+		memcpy(this->data, dataIn, dataSize);
+		this->dataSize = dataSize;
+	}
+
+	return 1;
 }
 
 int DataCapsule::getDataSize() {

@@ -21,12 +21,24 @@ namespace IoTaHubTest
 			IoTaDeviceHub hub;
 			Heartbeat h;
 			hub.addFunc(&h);
+			long source = 1;
+			uint8_t msg[] = { (uint8_t)HEARTBEAT_ID };
 
-			uint8_t msg[100];
-			msg[0] = 4;
-			msg[1] = (h.getFuncId() << 8);
-			msg[2] = (uint8_t)h.getFuncId();
-			msg[3] = (uint8_t)60;
+			DataCapsule *cap;
+			cap = new DataCapsule(source, 2, short(HEARTBEAT_ID), 1, msg);
+			
+			hub.processMessage(cap);
+			delete cap;
+
+			hub.tick();
+
+			int capsToBeReturned = hub.numCapsulesForClient(source);
+			Assert::AreEqual(capsToBeReturned, 1);
+
+			for (size_t i = 0; i < capsToBeReturned; i++)
+			{
+
+			}
 			
 		}
 			

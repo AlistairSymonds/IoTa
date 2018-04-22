@@ -31,14 +31,15 @@ IoTaDeviceHub::IoTaDeviceHub() {
 	maxFuncs = 10;
 	numFuncs = 0;
 	funcs = (IoTaFuncBase **)malloc(sizeof(IoTaFuncBase*) * maxFuncs);	
-
-	broadcastStorage = new CircularBuffer<uint8_t *>(64);
+	msgStorage = new CircularBuffer<DataCapsule *>(100);
+	
 	internalHandler = new HubInternalFunc(&numFuncs, maxFuncs);
 	addFunc(internalHandler);
 }
 
 void IoTaDeviceHub::tick()
 {
+	//process all attached functions 
 	for (int i = 0; i < numFuncs; i++) {
 		funcs[i]->tick();
 	}
@@ -64,27 +65,39 @@ int IoTaDeviceHub::addFunc(IoTaFuncBase * newFunc)
 	}
 }
 
-int IoTaDeviceHub::processMessage(DataCapsule capsuleIn)
-{
+int IoTaDeviceHub::processMessage(DataCapsule *capsule)
+{	
+
 	int funcIndex = -1;
 	{
 		for (int i = 0; i < numFuncs; i++) {
-			if (funcs[i]->getFuncId() == capsuleIn) {
-				uint8_t * cmdStart = message + 3;
-				funcs[i]->processCommand(cmdStart, clientToken);
+			if (funcs[i]->getFuncId() == capsule->getFuncId()) {
+				funcs[i]->processCommand(capsule);
 			}
 		}
 	}
 	return funcIndex;
 }
 
-int IoTaDeviceHub::numCapsulesRemaining()
+int IoTaDeviceHub::numCapsulesForClient(long clientId)
 {
-	return 0;
+	int capCount = 0;
+	for (int i = 0; i < numFuncs; i++) {
+		if (funcs[i]->isStateBufferUpdated(clientId)) {
+			capCount++;
+		} else if(funcs[i]->isStateBufferUpdated()) {
+			capCount++;
+		}
+	}
+	return capCount;
 }
 
 int IoTaDeviceHub::getNextOutputCapsule(DataCapsule * emptyCapsule)
 {
+
+	if
+
+
 	/*
 	uint8_t msg[255];
 	int bytesAdded = 1;
