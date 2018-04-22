@@ -4,7 +4,7 @@
 
 #include <stdint.h>
 #include "IoTaFuncBase.h"
-#include "fixedMap.h"
+#include "circularBuffer.h"
 
 
 class Heartbeat: public IoTaFuncBase {
@@ -16,11 +16,11 @@ public:
 	void tick();
 
 	
-	int isStateBufferUpdated(long clientId);
-	int isStateBufferUpdated();
+	int getReponsesRemaining();
+	long getNextMsgDest();
 
 	int getStateBufLen();
-	int getStateBuffer(DataCapsule *capsule);
+	int getStateBuffer(uint8_t *buf);
 
 	~Heartbeat();
 
@@ -28,7 +28,7 @@ public:
 
 	
 private:
-	fixedMap<long> *fh;
+	CircularBuffer<long> *responseMap;
 	uint8_t state[1];
 };
 #endif

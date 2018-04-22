@@ -16,11 +16,11 @@ public:
 	void tick();
 
 
-	int isStateBufferUpdated(long clientId);
-	int isStateBufferUpdated();
+	int getReponsesRemaining();
+	long getNextMsgDest();
 
 	int getStateBufLen();
-	int getStateBuffer(DataCapsule *capsule);
+	int getStateBuffer(uint8_t *buf);
 
 	void addFuncId(uint8_t id);
 

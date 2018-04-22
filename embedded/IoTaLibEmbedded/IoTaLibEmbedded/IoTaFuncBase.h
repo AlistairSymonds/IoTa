@@ -16,11 +16,11 @@ public:
 	virtual void processCommand(DataCapsule *capsule) = 0;
 	virtual void tick() = 0;
 	
-	virtual int isStateBufferUpdated(long clientId) = 0;
-	virtual int isStateBufferUpdated() = 0;
+	virtual int getReponsesRemaining() = 0;
+	virtual long getNextMsgDest() = 0;
 
 	virtual int getStateBufLen() = 0;
-	virtual int getStateBuffer(DataCapsule *capsule) = 0;
+	virtual int getStateBuffer(uint8_t *buf) = 0;
 	
 
 	

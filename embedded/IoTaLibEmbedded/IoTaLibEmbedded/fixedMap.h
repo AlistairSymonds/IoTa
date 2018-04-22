@@ -11,7 +11,7 @@ public:
 	int add(T item);
 	int contains(T item);
 	int remove(T item);
-
+	int size();
 	~fixedMap();
 private:
 	int freeSpace;
@@ -73,6 +73,12 @@ int fixedMap<T>::remove(T item)
 		}
 	}
 	return -1;
+}
+
+template<class T>
+int fixedMap<T>::size()
+{
+	return totalSize - freeSpace;
 }
 
 template<class T>

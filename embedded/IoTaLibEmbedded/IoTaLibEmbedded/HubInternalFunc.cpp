@@ -31,26 +31,24 @@ void HubInternalFunc::tick()
 {
 }
 
+int HubInternalFunc::getReponsesRemaining()
+{
+	return 0;
+}
+
+long HubInternalFunc::getNextMsgDest()
+{
+	return 0;
+}
+
 int HubInternalFunc::getStateBufLen()
 {
 	return *numFuncsPtr;
 }
 
-int HubInternalFunc::getStateBuffer(DataCapsule *capsule)
-{
-	//memcpy(buffer, funcIds, getStateBufLen());
-	capsule->updateData(this->getStateBufLen(), funcIds);
-	return 1;
-}
-
-int HubInternalFunc::isStateBufferUpdated()
+int HubInternalFunc::getStateBuffer(uint8_t * buf)
 {
 	return 0;
-}
-
-int HubInternalFunc::isStateBufferUpdated(long clientId)
-{
-	return map->contains(clientId);
 }
 
 void HubInternalFunc::addFuncId(uint8_t id)

@@ -6,6 +6,7 @@
 // 0x10 to 0x12 = id of function associated with message
 // 0x13 to 0x14 = size of attached data
 // 0x15 to 0x15+ize = data
+//total size 8+8+2+2+size of data
 
 
 
@@ -14,6 +15,9 @@ class DataCapsule
 {
 public:
 	DataCapsule(long sourceIn, long destinationIn, short funcId, short dataSize, uint8_t * dataIn);
+
+	//copy constructor for generate specific capsules from broadcast template
+	DataCapsule(const DataCapsule &bcastCap, long newDest);
 	//uuid of where message originated from
 	long getSource();
 	//uuid of physical device recipient
@@ -24,10 +28,11 @@ public:
 
 	int copyDataOut(uint8_t *buf);
 	short getDestFunc();
-
 	int updateData(int dataSize, uint8_t * dataIn);
 	int getDataSize();
 
+	short getTcpPacketLength();
+	int createTcpPacket(uint8_t* packet);
 	
 	~DataCapsule();
 private:

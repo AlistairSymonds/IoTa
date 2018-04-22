@@ -1,18 +1,19 @@
 #include <string.h>
 #include "iota_defines.h"
 #include "heartbeat.h"
+#include "circularBuffer.h"
 
 
 
 Heartbeat::Heartbeat()
 {
-	fh = new fixedMap<long>(10);
+	responseMap = new CircularBuffer<long>(10);
 	state[0] = (uint8_t)60;
 }
 
 Heartbeat::Heartbeat(int size)
 {
-	fh = new fixedMap<long>(size);
+	responseMap = new CircularBuffer<long>(10);
 }
 
 short Heartbeat::getFuncId()
@@ -26,7 +27,7 @@ void Heartbeat::processCommand(DataCapsule *capsule)
 	
 	capsule->copyDataOut(data);
 	if (data[0] == HEARTBEAT_ID) {
-		fh->add(capsule->getSource());
+		responseMap->add(capsule->getSource());
 	}
 	delete data;
 }
@@ -36,40 +37,32 @@ void Heartbeat::tick()
 	//lol
 }
 
+int Heartbeat::getReponsesRemaining()
+{
+	return responseMap->available();
+}
+
+long Heartbeat::getNextMsgDest()
+{
+	return responseMap->read();
+}
+
 int Heartbeat::getStateBufLen()
 {
 	return 1;
 }
 
-int Heartbeat::getStateBuffer(DataCapsule * capsule)
+int Heartbeat::getStateBuffer(uint8_t * buf)
 {
-	capsule->updateData(this->getStateBufLen(), state);
-	return 0;
-}
-
-int Heartbeat::isStateBufferUpdated(long clientId)
-{
-	if (fh->contains(clientId)) {
-		fh->remove(clientId);
-		return 1;
-	}
-	else
-	{
-		return 0;
-	}
-	
-}
-
-int Heartbeat::isStateBufferUpdated()
-{
-	return 0;
+	 memcpy(buf, this->state, this->getStateBufLen());
+	 return 1;
 }
 
 
 
 Heartbeat::~Heartbeat()
 {
-	delete fh;
+	delete responseMap;
 }
 
 

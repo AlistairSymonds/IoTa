@@ -15,6 +15,21 @@ DataCapsule::DataCapsule(long sourceIn, long destinationIn, short funcId, short 
 		this->dataSize = dataSize;
 	}
 }
+
+//Used for transparentally generating specifically addressed capsules from broadcast capsule
+DataCapsule::DataCapsule(const DataCapsule &bcastCap, long newDest)
+{
+	this->destination = newDest;
+	this->source = bcastCap.source;
+	this->funcId = bcastCap.funcId;
+	this->dataSize = bcastCap.dataSize;
+
+	if (this->dataSize <= 255) {
+		memcpy(this->data, bcastCap.data, dataSize);
+		this->dataSize = dataSize;
+	}
+
+}
 long DataCapsule::getSource()
 {
 	return source;
@@ -62,6 +77,19 @@ int DataCapsule::updateData(int dataSize, uint8_t * dataIn)
 
 int DataCapsule::getDataSize() {
 	return dataSize;
+}
+
+short DataCapsule::getTcpPacketLength()
+{
+	return 2 + 20 + dataSize;
+}
+
+int DataCapsule::createTcpPacket(uint8_t * packet)
+{
+	short packetLength = getTcpPacketLength();
+	packet[0] = packetLength << 8;
+	packet[1] = packetLength;
+	return 0;
 }
 
 
