@@ -36,7 +36,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)DataCapsule.cpp">
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)DummyBroadcaster.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)DummyBroadcaster.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)HubInternalFunc.cpp">
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>

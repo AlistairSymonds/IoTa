@@ -1,17 +1,2 @@
 ﻿  BroadcastTest.cpp
-c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotahubtest\broadcasttest.cpp(24): error C2259: 'DummyBroadcaster': cannot instantiate abstract class
-  c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotahubtest\broadcasttest.cpp(24): note: due to following members:
-  c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotahubtest\broadcasttest.cpp(24): note: 'short IoTaFuncBase::getFuncId(void)': is abstract
-  c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotalibembedded\iotafuncbase.h(12): note: see declaration of 'IoTaFuncBase::getFuncId'
-  c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotahubtest\broadcasttest.cpp(24): note: 'void IoTaFuncBase::processCommand(DataCapsule *)': is abstract
-  c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotalibembedded\iotafuncbase.h(16): note: see declaration of 'IoTaFuncBase::processCommand'
-  c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotahubtest\broadcasttest.cpp(24): note: 'void IoTaFuncBase::tick(void)': is abstract
-  c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotalibembedded\iotafuncbase.h(17): note: see declaration of 'IoTaFuncBase::tick'
-  c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotahubtest\broadcasttest.cpp(24): note: 'int IoTaFuncBase::getReponsesRemaining(void)': is abstract
-  c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotalibembedded\iotafuncbase.h(19): note: see declaration of 'IoTaFuncBase::getReponsesRemaining'
-  c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotahubtest\broadcasttest.cpp(24): note: 'long IoTaFuncBase::getNextMsgDest(void)': is abstract
-  c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotalibembedded\iotafuncbase.h(20): note: see declaration of 'IoTaFuncBase::getNextMsgDest'
-  c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotahubtest\broadcasttest.cpp(24): note: 'int IoTaFuncBase::getStateBufLen(void)': is abstract
-  c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotalibembedded\iotafuncbase.h(22): note: see declaration of 'IoTaFuncBase::getStateBufLen'
-  c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotahubtest\broadcasttest.cpp(24): note: 'int IoTaFuncBase::getStateBuffer(uint8_t *)': is abstract
-  c:\users\alist\onedrive\development\iota\embedded\iotalibembedded\iotalibembedded\iotafuncbase.h(23): note: see declaration of 'IoTaFuncBase::getStateBuffer'
+  IoTaHubTest.vcxproj -> C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\Debug\IoTaHubTest.dll

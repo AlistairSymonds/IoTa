@@ -19,6 +19,7 @@ public:
 
 private:
 	int ticked = 0;
+	int bufferSize = 15;
 	uint8_t state[15];
 };
 

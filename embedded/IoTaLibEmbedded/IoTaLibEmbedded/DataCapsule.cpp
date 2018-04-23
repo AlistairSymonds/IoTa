@@ -17,15 +17,16 @@ DataCapsule::DataCapsule(long sourceIn, long destinationIn, short funcId, short 
 }
 
 //Used for transparentally generating specifically addressed capsules from broadcast capsule
-DataCapsule::DataCapsule(const DataCapsule &bcastCap, long newDest)
+DataCapsule::DataCapsule(DataCapsule *bcastCap, long newDest)
 {
+	
 	this->destination = newDest;
-	this->source = bcastCap.source;
-	this->funcId = bcastCap.funcId;
-	this->dataSize = bcastCap.dataSize;
+	this->source = bcastCap->source;
+	this->funcId = bcastCap->funcId;
+	this->dataSize = bcastCap->dataSize;
 
 	if (this->dataSize <= 255) {
-		memcpy(this->data, bcastCap.data, dataSize);
+		memcpy(this->data, bcastCap->data, dataSize);
 		this->dataSize = dataSize;
 	}
 

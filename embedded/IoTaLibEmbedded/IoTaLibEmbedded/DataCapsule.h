@@ -17,7 +17,7 @@ public:
 	DataCapsule(long sourceIn, long destinationIn, short funcId, short dataSize, uint8_t * dataIn);
 
 	//copy constructor for generate specific capsules from broadcast template
-	DataCapsule(const DataCapsule &bcastCap, long newDest);
+	DataCapsule(DataCapsule *bcastCap, long newDest);
 	//uuid of where message originated from
 	long getSource();
 	//uuid of physical device recipient

@@ -25,7 +25,21 @@ namespace IoTaHubTest
 			hub.addFunc(&db);
 
 			hub.tick();
+		
+			Assert::AreEqual(1, hub.numCapsulesRemaining());
+			DataCapsule *txCap;
+			hub.getNextOutputCapsule(&txCap);
 
+			Assert::AreEqual(0, hub.numCapsulesRemaining());
+
+			Assert::AreEqual(0L, txCap->getDestination());
+			
+			//convert it capsule for delivery to clientID = 9999;
+			long newDest = 9999;
+			DataCapsule *specificCap;
+			specificCap = new DataCapsule(txCap, newDest);
+			Assert::AreEqual(txCap->getFuncId(), specificCap->getFuncId());
+			
 			
 
 			

@@ -22,10 +22,10 @@ namespace IoTaHubTest
 			Heartbeat h;
 			hub.addFunc(&h);
 			long source = 1;
-			uint8_t msg[] = { (uint8_t)HEARTBEAT_ID };
+			uint8_t msg[] = { (uint8_t)FID_HEARTBEAT };
 
 			DataCapsule *cap;
-			cap = new DataCapsule(source, uuid, short(HEARTBEAT_ID), 1, msg);
+			cap = new DataCapsule(source, uuid, short(FID_HEARTBEAT), 1, msg);
 			
 			hub.processMessage(cap);
 			delete cap;

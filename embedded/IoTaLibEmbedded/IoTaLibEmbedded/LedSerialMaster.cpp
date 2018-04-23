@@ -18,7 +18,7 @@ LedSerialMaster::LedSerialMaster(Stream * stream, int maxTokens)
 
 short LedSerialMaster::getFuncId()
 {
-	return LEDS_ID;
+	return FID_LEDS;
 }
 
 void LedSerialMaster::processCommand(DataCapsule capsule)

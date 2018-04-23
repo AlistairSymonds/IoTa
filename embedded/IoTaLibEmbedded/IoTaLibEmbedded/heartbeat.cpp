@@ -26,7 +26,7 @@ void Heartbeat::processCommand(DataCapsule *capsule)
 	uint8_t *data = new uint8_t[capsule->getDataSize()];
 	
 	capsule->copyDataOut(data);
-	if (data[0] == HEARTBEAT_ID) {
+	if (data[0] == FID_HEARTBEAT) {
 		responseMap->add(capsule->getSource());
 	}
 	delete data;

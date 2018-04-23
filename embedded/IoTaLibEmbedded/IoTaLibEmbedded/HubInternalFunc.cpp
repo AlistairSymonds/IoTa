@@ -13,7 +13,7 @@ HubInternalFunc::HubInternalFunc(int * numFuncs, int maxFuncs)
 
 short HubInternalFunc::getFuncId()
 {
-	return HUB_ID;
+	return FID_HUB;
 }
 
 void HubInternalFunc::processCommand(DataCapsule *capsule)

@@ -1,7 +1,7 @@
 #pragma once
-#define HEARTBEAT_ID 1
-#define LEDS_ID 2
-#define TEMPERATURE_ID 3
-#define HUB_ID 255
-#define BROADCAST_DUMMY 16000;
+#define FID_HEARTBEAT 1
+#define FID_LEDS 2
+#define FID_TEMPERATURE 3
+#define FID_HUB 255
+#define FID_BROADCAST_DUMMY 16000;
 
