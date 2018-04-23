@@ -22,11 +22,13 @@ public:
 	void tick();
 
 
-	int isStateBufferUpdated(long clientId);
-	int isStateBufferUpdated();
+	
+	// Inherited via IoTaFuncBase
+	virtual int getReponsesRemaining() override;
+	virtual long getNextMsgDest() override;
 
+	virtual int getStateBuffer(uint8_t * buf) override;
 	int getStateBufLen();
-	int getStateBuffer(DataCapsule *capsule);
 
 	~LedSerialMaster();
 
@@ -34,7 +36,11 @@ private:
 	uint8_t state[NUM_LED_PROPS];
 	Stream* serial;
 	fixedMap<void*> *tokenMap;
+	uint8_t newMsgThisTick = 0;
 
+
+
+	
 
 };
 

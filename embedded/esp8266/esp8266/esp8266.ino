@@ -33,7 +33,7 @@ int nextFreeSpot = 0;
 
 void processClient(WiFiClient);
 
-static const size_t bufferSize = 255;
+static const size_t bufferSize = 1024;
 static uint8_t sbuf[bufferSize];
 
 void setup() {
@@ -63,6 +63,7 @@ int readInAndSubmitData(WiFiClient *c) {
 
 		//Fixed read in length here, huge speed increase due to fixing timeout!
 		c->readBytes(&sbuf[1], sbuf[0]-1);
+
 		long source = (sbuf[1] << 56 | sbuf[2] << 48 | sbuf[3] << 40 | sbuf[4] << 32 | sbuf[5] << 24 | sbuf[6] << 16 | sbuf[7] << 8 | sbuf[8]);
 		long dest = (sbuf[9] << 56 | sbuf[10] << 48 | sbuf[11] << 40 | sbuf[12] << 32 | sbuf[13] << 24 | sbuf[14] << 16 | sbuf[15] << 8 | sbuf[16]);
 		short func = (sbuf[17] << 8 | sbuf[18]);
@@ -70,7 +71,7 @@ int readInAndSubmitData(WiFiClient *c) {
 		uint8_t * data = new uint8_t[size];
 
 		DataCapsule capsule(source, dest, func, size, data);
-		hub.processMessage(capsule);
+		hub.processMessage(&capsule);
 
 		delete data;
 	}
@@ -116,17 +117,20 @@ void loop() {
 	
 	while (hub.numCapsulesRemaining() > 0)
 	{
+		DataCapsule *cap;
+		hub.getNextOutputCapsule(&cap);
 
+		if (cap->getDestination() == 0) {//broadcast to all connect clients
+			
+		}
+		else
+		{
+
+		}
 	}
 
-	//get and tx specific responses
-	for (int c = 0; c < nextFreeSpot; c++) {
-		uint8_t buffer[255];
-		hub.getResponse(buffer, &clients[c]);
-		if (buffer[0] > 1) {
-			clients[c].write(&buffer[0], buffer[0]);
-		}	
-	}
+	
+	
 
 }
 
