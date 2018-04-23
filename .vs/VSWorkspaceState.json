@@ -6,6 +6,6 @@
     "\\embedded\\IoTaLibEmbedded\\IoTaHubTest",
     "\\embedded\\IoTaLibEmbedded\\IoTaLibEmbedded"
   ],
-  "SelectedNode": "\\embedded\\IoTaLibEmbedded\\IoTaLibEmbedded\\heartbeat.cpp",
+  "SelectedNode": "\\embedded\\IoTaLibEmbedded\\IoTaHubTest\\HubTest.cpp",
   "PreviewInSolutionExplorer": false
 }
