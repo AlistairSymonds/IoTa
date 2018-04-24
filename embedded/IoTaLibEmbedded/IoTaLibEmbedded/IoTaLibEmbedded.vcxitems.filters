@@ -53,9 +53,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)circularBuffer.h">
       <Filter>iota_util</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)fixedMap.h">
-      <Filter>iota_util</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)heartbeat.h">
       <Filter>Header Files\functions</Filter>
     </ClInclude>
@@ -76,6 +73,12 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)DummyBroadcaster.h">
       <Filter>Header Files\functions</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)Map.h">
+      <Filter>iota_util</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)fixedSet.h">
+      <Filter>iota_util</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

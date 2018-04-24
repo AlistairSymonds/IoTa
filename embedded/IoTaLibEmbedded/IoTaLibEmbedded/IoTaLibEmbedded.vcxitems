@@ -31,6 +31,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)iota_defines.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LedPropEnum.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LedSerialMaster.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Map.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)DataCapsule.cpp">

@@ -1,5 +1,5 @@
 #include "CppUnitTest.h"
-#include "fixedMap.h"
+#include "fixedSet.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 namespace IoTaHubTest
@@ -7,13 +7,13 @@ namespace IoTaHubTest
 	TEST_CLASS(byteBufTest)
 	{
 		TEST_METHOD(addAndContains) {
-			fixedMap<int> fh(5);
+			fixedSet<int> fh(5);
 			fh.add(1);
 			Assert::AreEqual(1,fh.contains(1));
 		}
 
 		TEST_METHOD(addAndRemove) {
-			fixedMap<int> fh(5);
+			fixedSet<int> fh(5);
 			fh.add(1);
 			Assert::AreEqual(1, fh.contains(1));
 			fh.remove(1);
