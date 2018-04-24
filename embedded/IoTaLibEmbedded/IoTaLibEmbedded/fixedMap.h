@@ -1,18 +1,18 @@
 #pragma once
-#ifndef _FIXEDHEAP_H
-#define _FIXEDHEAP_H
+#ifndef _FIXEDSET_H
+#define _FIXEDSET_H
 
 //this entire class should be replaced by a hashmap
 template <class T>
-class fixedMap
+class fixedSet
 {
 public:
-	fixedMap(int size);
+	fixedSet(int size);
 	int add(T item);
 	int contains(T item);
 	int remove(T item);
 	int size();
-	~fixedMap();
+	~fixedSet();
 private:
 	int freeSpace;
 	int totalSize;
@@ -23,7 +23,7 @@ private:
 
 
 template<class T>
-fixedMap<T>::fixedMap(int size)
+fixedSet<T>::fixedSet(int size)
 {
 	freeSpace = size;
 	totalSize = size;
@@ -35,7 +35,7 @@ fixedMap<T>::fixedMap(int size)
 }
 
 template<class T>
-int fixedMap<T>::add(T item)
+int fixedSet<T>::add(T item)
 {	
 	if(freeSpace > 0) {
 		for (int i = 0; i < totalSize; i++) {
@@ -50,7 +50,7 @@ int fixedMap<T>::add(T item)
 }
 
 template<class T>
-int fixedMap<T>::contains(T item)
+int fixedSet<T>::contains(T item)
 {
 	for (int i = 0; i < totalSize; i++) {
 		if (heap[i] == item && occupied[i] == 1) {
@@ -61,7 +61,7 @@ int fixedMap<T>::contains(T item)
 }
 
 template<class T>
-int fixedMap<T>::remove(T item)
+int fixedSet<T>::remove(T item)
 {
 	int removed = 0;
 	for (int i = 0; i < totalSize; i++) {
@@ -76,13 +76,13 @@ int fixedMap<T>::remove(T item)
 }
 
 template<class T>
-int fixedMap<T>::size()
+int fixedSet<T>::size()
 {
 	return totalSize - freeSpace;
 }
 
 template<class T>
-fixedMap<T>::~fixedMap()
+fixedSet<T>::~fixedSet()
 {
 	delete occupied;
 	delete heap;

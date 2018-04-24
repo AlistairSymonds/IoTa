@@ -22,7 +22,6 @@
 
 
 WiFiServer server(2812);
-WiFiClient clients[MAX_CLIENTS];
 
 IoTaDeviceHub hub;
 Heartbeat hb;
@@ -59,16 +58,17 @@ int readInAndSubmitData(WiFiClient *c) {
 		
 		//uint8_t msgBuffer[256];
 		sbuf[0] = c->read();
-		
-
+		sbuf[1] = c->read();
+		short msgLen = (sbuf[0] << 8 |sbuf[1]);
 		//Fixed read in length here, huge speed increase due to fixing timeout!
-		c->readBytes(&sbuf[1], sbuf[0]-1);
+		c->readBytes(&sbuf[1], msgLen);
 
-		long source = (sbuf[1] << 56 | sbuf[2] << 48 | sbuf[3] << 40 | sbuf[4] << 32 | sbuf[5] << 24 | sbuf[6] << 16 | sbuf[7] << 8 | sbuf[8]);
-		long dest = (sbuf[9] << 56 | sbuf[10] << 48 | sbuf[11] << 40 | sbuf[12] << 32 | sbuf[13] << 24 | sbuf[14] << 16 | sbuf[15] << 8 | sbuf[16]);
-		short func = (sbuf[17] << 8 | sbuf[18]);
-		short size = (sbuf[19] << 8 | sbuf[20]);
+		long source = (sbuf[2] << 56 | sbuf[3] << 48 | sbuf[4] << 40 | sbuf[5] << 32 | sbuf[6] << 24 | sbuf[7] << 16 | sbuf[8] << 8 | sbuf[9]);
+		long dest = (sbuf[10] << 56 | sbuf[11] << 48 | sbuf[12] << 40 | sbuf[13] << 32 | sbuf[14] << 24 | sbuf[15] << 16 | sbuf[16] << 8 | sbuf[17]);
+		short func = (sbuf[18] << 8 | sbuf[19]);
+		short size = (sbuf[20] << 8 | sbuf[21]);
 		uint8_t * data = new uint8_t[size];
+		memcpy(data, &sbuf[22], size);
 
 		DataCapsule capsule(source, dest, func, size, data);
 		hub.processMessage(&capsule);

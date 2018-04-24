@@ -35,7 +35,7 @@ public:
 private:
 	uint8_t state[NUM_LED_PROPS];
 	Stream* serial;
-	fixedMap<void*> *tokenMap;
+	fixedSet<void*> *tokenMap;
 	uint8_t newMsgThisTick = 0;
 
 

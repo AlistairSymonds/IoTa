@@ -28,7 +28,7 @@ public:
 private:
 	uint8_t * funcIds;
 	int * numFuncsPtr;
-	fixedMap<long> *map;
+	fixedSet<long> *map;
 
 };
 #endif
