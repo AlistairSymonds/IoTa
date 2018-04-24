@@ -24,7 +24,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)circularBuffer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)DataCapsule.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)DummyBroadcaster.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)fixedMap.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)fixedSet.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)heartbeat.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)HubInternalFunc.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)IoTaFuncBase.h" />
