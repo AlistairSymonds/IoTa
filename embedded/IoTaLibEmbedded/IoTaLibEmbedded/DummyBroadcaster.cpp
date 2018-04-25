@@ -1,4 +1,4 @@
-#include <string>
+#include <string.h>
 #include "iota_defines.h"
 #include "DummyBroadcaster.h"
 

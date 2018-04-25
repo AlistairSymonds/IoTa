@@ -106,9 +106,6 @@ int IoTaDeviceHub::getNextOutputCapsule(DataCapsule **capsulePtr)
 {
 
 	*capsulePtr = msgStorage->read();
-	 
-
-	
 	return 0;
 }
 

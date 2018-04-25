@@ -17,8 +17,7 @@
 #define __ets__
 #define ICACHE_FLASH
 #define F_CPU 160000000L
-#define LWIP_OPEN_SRC
-#define ARDUINO 10805
+#define ARDUINO 10609
 #define ARDUINO_ESP8266_NODEMCU
 #define ARDUINO_ARCH_ESP8266
 #define ESP8266
@@ -91,7 +90,7 @@ typedef long __PTRDIFF_TYPE__;
 #include "Esp.h"
 
 
-#include <arduino.h>
+#include <Arduino.h>
 #include <pins_arduino.h> 
 
 #include "..\generic\Common.h"
