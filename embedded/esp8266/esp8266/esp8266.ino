@@ -35,7 +35,7 @@ Heartbeat hb;
 LedSerialMaster led(&Serial, MAX_CLIENTS);
 
 
-std::pair<int, WiFiClient*> *unAuthClients;
+std::pair<int, WiFiClient> *unAuthClients;
 
 int nextFreeSpot = 0;
 
@@ -69,7 +69,7 @@ void setup() {
 	hub->addFunc(&hb);
 	hub->addFunc(&led);
 	
-	unAuthClients = new std::pair<int, WiFiClient*>[MAX_UNAUTH_CLIENTS];
+	unAuthClients = new std::pair<int, WiFiClient>[MAX_UNAUTH_CLIENTS];
 	for (int i = 0; i < MAX_UNAUTH_CLIENTS; i++) {
 		unAuthClients[i].first = -1;
 	}
@@ -147,22 +147,21 @@ void loop() {
 			{
 				Serial.print("New unauth client at ");
 				Serial.print(i);
-				int now = millis();
+				int now = micros();
 				Serial.print(" t = ");
 				Serial.println(now);
 				unAuthClients[i].first = now;
-				unAuthClients[i].second = &newClient;
+				unAuthClients[i].second = newClient;
 				i = MAX_UNAUTH_CLIENTS;
 			}
-		}
-		
-		
+		}	
 	}
 	
-	int tnow = millis();
-	int timeout_ms = 4000;
+	int tnow = micros();
+	int timeout_us = 4000000;
 	for (int i = 0; i < MAX_UNAUTH_CLIENTS; i++) {
-		if (tnow - unAuthClients[i].first > timeout_ms && unAuthClients[i].first > 0) {
+		yield();
+		if (tnow - unAuthClients[i].first > timeout_us && unAuthClients[i].first > 0) {
 			//remove due to lack of connections
 			Serial.print("Removing client timeout ");
 			Serial.println(i);
@@ -173,14 +172,14 @@ void loop() {
 			//Serial.print("Checking ");
 			//Serial.println(i);
 			//try to handshake
-			if (unAuthClients[i].second->available() > 0 && unAuthClients[i].second->connected()) {
-				uint8_t firstContact = unAuthClients[i].second->read();
+			if (unAuthClients[i].second.available() > 0) {
+				uint8_t firstContact = unAuthClients[i].second.read();
 				Serial.print("Unauth sent: ");
 				Serial.println(firstContact);
 
 				if (firstContact == MAGIC_BYTE) {
 					Serial.println("Got first part of handshake, responding");
-					unAuthClients[i].second->write(MAGIC_BYTE + 1);
+					unAuthClients[i].second.write(MAGIC_BYTE + 1);
 				}
 			}
 			
