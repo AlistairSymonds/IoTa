@@ -1,6 +1,7 @@
 package iota.desktop.jfx.views.functions;
 
 import iota.client.UpdateAbleView;
+import iota.client.network.DataCapsule;
 import iota.desktop.jfx.views.state.DefaultStateDisp;
 import iota.client.model.EspDevice;
 import iota.common.IoTaUtil;
@@ -68,10 +69,17 @@ public class LightingView extends GridPane implements UpdateAbleView {
 
                         try {
                             byte[] bytes = IoTaUtil.hexStringToByteArray(val);
-                            byte[] msg = {0, 2, 4, 0, 0, 0};
-                            msg[4] = (byte) i;
-                            msg[5] = bytes[0];
-                            device.submitMessage(msg);
+                            //byte[] msg = {0, 2, 4, 0, 0, 0};
+                            //msg[4] = (byte) i;
+                            //msg[5] = bytes[0];
+
+                            List<Byte> msg = new ArrayList<>();
+                            msg.add((byte) i);
+                            msg.add(bytes[0]);
+
+
+                            DataCapsule cap = new DataCapsule(funcInstance, msg);
+                            device.submitMessage(cap);
                             newVals.get(i).setPromptText(val);
                             newVals.get(i).clear();
                         } catch (IllegalArgumentException e1) {

@@ -6,6 +6,7 @@ import iota.common.definitions.DefinitionStore;
 
 import java.io.IOException;
 import java.net.InetAddress;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
@@ -16,12 +17,14 @@ public class EspManager extends Observable implements Runnable {
     private String threadName;
     private ConcurrentHashMap<InetAddress, EspDevice> devices;
     private DefinitionStore definitionStore;
+
     private volatile boolean running = true;
 
     public EspManager(DefinitionStore definitionStoreIn) {
         devices = new ConcurrentHashMap<>();
         this.threadName = this.toString();
         this.definitionStore = definitionStoreIn;
+
     }
 
     public Map<InetAddress, EspDevice> getDevMap() {
@@ -50,22 +53,42 @@ public class EspManager extends Observable implements Runnable {
 
     private void updateMap() {
 
+        ArrayList<EspDevice> staging = new ArrayList<>();
+
         NetworkScanner lanScan = new NetworkScanner();
         List<ScanResult> results = lanScan.scan(2812);
         for (ScanResult r : results) {
             if (r.isOpen()) {
                 if (!devices.containsKey(r.getHost())) {
                     EspDevice device = new EspDevice(r.getHost(), definitionStore);
-                    try {
-                        device.start();
-                    } catch (IOException e) {
-                        System.out.println("exception, couldn't intialise");
-                        e.printStackTrace();
-                    }
-                    devices.put(r.getHost(), device);
+                    staging.add(device);
+
+
                 }
             }
         }
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        for (EspDevice d : staging) {
+            try {
+                d.start();
+            } catch (IOException e) {
+                System.out.println("exception, couldn't intialise");
+                e.printStackTrace();
+            }
+        }
+
+        for (EspDevice d : staging) {
+            if (d.getAuthenticated()) {
+                devices.put(d.getInetAddress(), d);
+
+            }
+        }
+
+
         setChanged();
         notifyObservers();
     }

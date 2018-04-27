@@ -1,6 +1,10 @@
 package iota.client.model;
 
+import iota.client.network.DataCapsule;
+import iota.common.Constants;
+import iota.common.IoTaUtil;
 import iota.common.definitions.DefinitionStore;
+import iota.common.definitions.HubInternal;
 import iota.common.definitions.IFuncDef;
 import iota.common.definitions.IFuncFactory;
 
@@ -20,7 +24,9 @@ public class EspDevice extends Observable {
     private InetAddress address;
     private Socket socket;
     private List<IFuncDef> defs;
+    private long deviceId;
     private boolean connected;
+    private boolean authenticated = false;
 
     private DefinitionStore defStore;
 
@@ -32,6 +38,7 @@ public class EspDevice extends Observable {
 
 
     public EspDevice(InetAddress address, DefinitionStore defStoreIn) {
+        this.deviceId = 0;
         this.address = address;
         this.defStore = defStoreIn;
         defs = new ArrayList<>();
@@ -49,12 +56,17 @@ public class EspDevice extends Observable {
         return defs;
     }
 
+    public synchronized boolean getAuthenticated() {
+        return authenticated;
+    }
 
     public void start() throws IOException {
 
         connected = true;
         socket = new Socket();
+        System.out.println("Connecting to socket...");
         socket.connect(new InetSocketAddress(address, 2812));
+
 
         senderThread = new SenderThread();
         receiverThread = new ReceiverThread();
@@ -62,25 +74,54 @@ public class EspDevice extends Observable {
         receiverThread.start();
         senderThread.start();
 
-        byte[] getFuncs = {0, (byte) 0xFF,(byte) 0xFF};
-        senderThread.sendMessage(getFuncs);
+        System.out.println("Sending magic byte");
+        byte[] magic = new byte[1];
+        magic[0] = 0x41;
+        this.senderThread.sendMessage(magic);
+
+
+        //manually crafting an empty capsule to send id
+        DataCapsule capsule = new DataCapsule(new HubInternal(), new ArrayList<Byte>());
+
+        //this.submitMessage(capsule);
+
+
+        //senderThread.sendMessage(getFuncs);
     }
 
 
-    public int submitMessage(byte[] msg){
+    public int submitMessage(DataCapsule capsule) {
 
 
+        //convert Datacapsule to TCP packet
 
-        for(int i = 0; i < defs.size(); i++){
-            if(defs.get(i).getFuncId() == msg[1]){
-                defs.get(i).submitMessage(msg);
-            }
+        byte[] msg = new byte[22 + capsule.getData().size()];
+        short msgLen = (short) msg.length;
+        msg[0] = (byte) (msgLen << 8);
+        msg[1] = (byte) (msgLen);
+
+        long thisId = capsule.getSourceId();
+        for (int i = 0; i < 8; i++) {
+            msg[10 - i] = (byte) (thisId << 8 * i);
+        }
+        long destId = this.deviceId;
+        for (int i = 0; i < 8; i++) {
+            msg[17 - i] = (byte) (thisId << 8 * i);
+        }
+
+        for (int i = 0; i < 1; i++) {
+            msg[19 - i] = (byte) (capsule.getFuncId().getFuncId() << 8 * i);
+        }
+
+        List<Byte> data = capsule.getData();
+        for (int i = 0; i < data.size(); i++) {
+            msg[22 + i] = data.get(i);
         }
 
         senderThread.sendMessage(msg);
         setChanged();
         notifyObservers();
-        return 0;
+        return msg.length;
     }
 
     private int handleReturnedMessage(byte[] msg){
@@ -127,30 +168,10 @@ public class EspDevice extends Observable {
             t.start();
         }
 
-        public synchronized void sendMessage(byte[] msg) {
+        synchronized void sendMessage(byte[] msg) {
             queue.add(msg);
             this.notify();
         }
-
-        private void writeOut(byte[] bytes) throws IOException {
-
-            byte[] temp = new byte[bytes.length + 1];
-            temp[0] = (byte) (bytes.length+1);
-
-
-            System.arraycopy(bytes, 0, temp, 1, bytes.length);
-
-            StringBuilder byteStr = new StringBuilder("");
-            for (int i = 0; i < temp.length; i++) {
-                byteStr.append(String.format("%02x ", temp[i]));
-            }
-            System.out.println("Sent message: " + byteStr);
-
-            dataOut.write(temp);
-            setChanged();
-            notifyObservers();
-        }
-
 
         @Override
         public synchronized void run() {
@@ -159,7 +180,17 @@ public class EspDevice extends Observable {
                 while (!queue.isEmpty()) {
                     try {
                         byte[] valsOut = queue.poll();
-                        writeOut(valsOut);
+
+                        StringBuilder byteStr = new StringBuilder("");
+                        for (int i = 0; i < valsOut.length; i++) {
+                            byteStr.append("0x");
+                            byteStr.append(String.format("%02x ", valsOut[i]));
+                        }
+                        System.out.println("Sent message: " + byteStr);
+
+                        dataOut.write(valsOut);
+                        setChanged();
+                        notifyObservers();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -210,7 +241,7 @@ public class EspDevice extends Observable {
                     handleReturnedMessage(msg);
 
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    //e.printStackTrace();
                 }
             }
         }
