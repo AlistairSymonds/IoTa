@@ -1,3 +1,127 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--EDRS Version 2.0-->
-<global/>
+<global>
+   <file name="C:\\Users\\alist\\OneDrive\\Development\\IoTa\\embedded\\IoTaLibEmbedded\\IoTaLibEmbedded\\DataCapsule.cpp" comment="">
+      <function name="DataCapsule::copyDataOut(unsigned char *)" comment="" line="58" main_generator_called="MAIN_GENERATOR">
+         <scalar name="return" comment="" line="58" base_type="int32" complete_type="int32" init_mode="disabled" init_range="disabled" global_assert="unsupported" assert_range="unsupported"/>
+      </function>
+      <function name="DataCapsule::createTcpPacket(unsigned char *)" comment="" line="88" main_generator_called="MAIN_GENERATOR">
+         <scalar name="return" comment="" line="88" base_type="int32" complete_type="int32" init_mode="disabled" init_range="disabled" global_assert="unsupported" assert_range="unsupported"/>
+      </function>
+      <function name="DataCapsule::getDataSize()" comment="" line="79" main_generator_called="MAIN_GENERATOR">
+         <scalar name="return" comment="" line="79" base_type="int32" complete_type="int32" init_mode="disabled" init_range="disabled" global_assert="unsupported" assert_range="unsupported"/>
+      </function>
+      <function name="DataCapsule::getDestFunc()" comment="" line="64" main_generator_called="MAIN_GENERATOR">
+         <scalar name="return" comment="" line="64" base_type="int16" complete_type="int16" init_mode="disabled" init_range="disabled" global_assert="unsupported" assert_range="unsupported"/>
+      </function>
+      <function name="DataCapsule::getDestination()" comment="" line="48" main_generator_called="MAIN_GENERATOR">
+         <scalar name="return" comment="" line="48" base_type="int32" complete_type="int32" init_mode="disabled" init_range="disabled" global_assert="unsupported" assert_range="unsupported"/>
+      </function>
+      <function name="DataCapsule::getFuncId()" comment="" line="53" main_generator_called="MAIN_GENERATOR">
+         <scalar name="return" comment="" line="53" base_type="int16" complete_type="int16" init_mode="disabled" init_range="disabled" global_assert="unsupported" assert_range="unsupported"/>
+      </function>
+      <function name="DataCapsule::getSource()" comment="" line="34" main_generator_called="MAIN_GENERATOR">
+         <scalar name="return" comment="" line="34" base_type="int32" complete_type="int32" init_mode="disabled" init_range="disabled" global_assert="unsupported" assert_range="unsupported"/>
+      </function>
+      <function name="DataCapsule::getTcpPacketLength()" comment="" line="83" main_generator_called="MAIN_GENERATOR">
+         <scalar name="return" comment="" line="83" base_type="int16" complete_type="int16" init_mode="disabled" init_range="disabled" global_assert="unsupported" assert_range="unsupported"/>
+      </function>
+      <function name="DataCapsule::updateData(int, unsigned char *)" comment="" line="69" main_generator_called="MAIN_GENERATOR">
+         <scalar name="arg2" comment="" line="69" base_type="int32" complete_type="int32" init_mode="MAIN_GENERATOR" init_modes_allowed="10" init_range="" global_assert="unsupported" assert_range="unsupported"/>
+         <scalar name="return" comment="" line="69" base_type="int32" complete_type="int32" init_mode="disabled" init_range="disabled" global_assert="unsupported" assert_range="unsupported"/>
+      </function>
+   </file>
+   <file name="C:\\Users\\alist\\OneDrive\\Development\\IoTa\\embedded\\IoTaLibEmbedded\\IoTaLibEmbedded\\DummyBroadcaster.cpp" comment="">
+      <function name="DummyBroadcaster::getFuncId()" comment="" line="19" main_generator_called="MAIN_GENERATOR">
+         <scalar name="return" comment="" line="19" base_type="int16" complete_type="int16" init_mode="disabled" init_range="disabled" global_assert="unsupported" assert_range="unsupported"/>
+      </function>
+      <function name="DummyBroadcaster::getNextMsgDest()" comment="" line="38" main_generator_called="MAIN_GENERATOR">
+         <scalar name="return" comment="" line="38" base_type="int32" complete_type="int32" init_mode="disabled" init_range="disabled" global_assert="unsupported" assert_range="unsupported"/>
+      </function>
+      <function name="DummyBroadcaster::getReponsesRemaining()" comment="" line="33" main_generator_called="MAIN_GENERATOR">
+         <scalar name="return" comment="" line="33" base_type="int32" complete_type="int32" init_mode="disabled" init_range="disabled" global_assert="unsupported" assert_range="unsupported"/>
+      </function>
+      <function name="DummyBroadcaster::getStateBufLen()" comment="" line="43" main_generator_called="MAIN_GENERATOR">
+         <scalar name="return" comment="" line="43" base_type="int32" complete_type="int32" init_mode="disabled" init_range="disabled" global_assert="unsupported" assert_range="unsupported"/>
+      </function>
+      <function name="DummyBroadcaster::getStateBuffer(unsigned char *)" comment="" line="48" main_generator_called="MAIN_GENERATOR">
+         <scalar name="return" comment="" line="48" base_type="int32" complete_type="int32" init_mode="disabled" init_range="disabled" global_assert="unsupported" assert_range="unsupported"/>
+      </function>
+   </file>
+   <file name="C:\\Users\\alist\\OneDrive\\Development\\IoTa\\embedded\\IoTaLibEmbedded\\IoTaLibEmbedded\\HubInternalFunc.cpp" comment="">
+      <function name="HubInternalFunc::addFuncId(unsigned char)" comment="" line="54" main_generator_called="MAIN_GENERATOR">
+         <scalar name="arg2" comment="" line="54" base_type="uint8" complete_type="uint8" init_mode="MAIN_GENERATOR" init_modes_allowed="10" init_range="" global_assert="unsupported" assert_range="unsupported"/>
+      </function>
+      <function name="HubInternalFunc::getFuncId()" comment="" line="14" main_generator_called="MAIN_GENERATOR">
+         <scalar name="return" comment="" line="14" base_type="int16" complete_type="int16" init_mode="disabled" init_range="disabled" global_assert="unsupported" assert_range="unsupported"/>
+      </function>
+      <function name="HubInternalFunc::getNextMsgDest()" comment="" line="39" main_generator_called="MAIN_GENERATOR">
+         <scalar name="return" comment="" line="39" base_type="int32" complete_type="int32" init_mode="disabled" init_range="disabled" global_assert="unsupported" assert_range="unsupported"/>
+      </function>
+      <function name="HubInternalFunc::getReponsesRemaining()" comment="" line="34" main_generator_called="MAIN_GENERATOR">
+         <scalar name="return" comment="" line="34" base_type="int32" complete_type="int32" init_mode="disabled" init_range="disabled" global_assert="unsupported" assert_range="unsupported"/>
+      </function>
+      <function name="HubInternalFunc::getStateBufLen()" comment="" line="44" main_generator_called="MAIN_GENERATOR">
+         <scalar name="return" comment="" line="44" base_type="int32" complete_type="int32" init_mode="disabled" init_range="disabled" global_assert="unsupported" assert_range="unsupported"/>
+      </function>
+      <function name="HubInternalFunc::getStateBuffer(unsigned char *)" comment="" line="49" main_generator_called="MAIN_GENERATOR">
+         <scalar name="return" comment="" line="49" base_type="int32" complete_type="int32" init_mode="disabled" init_range="disabled" global_assert="unsupported" assert_range="unsupported"/>
+      </function>
+   </file>
+   <file name="C:\\Users\\alist\\OneDrive\\Development\\IoTa\\embedded\\IoTaLibEmbedded\\IoTaLibEmbedded\\IoTaDeviceHub.cpp" comment="">
+      <function name="IoTaDeviceHub::addFunc(IoTaFuncBase *)" comment="" line="73" main_generator_called="MAIN_GENERATOR">
+         <scalar name="return" comment="" line="73" base_type="int32" complete_type="int32" init_mode="disabled" init_range="disabled" global_assert="unsupported" assert_range="unsupported"/>
+      </function>
+      <function name="IoTaDeviceHub::getNextOutputCapsule(DataCapsule **)" comment="" line="105" main_generator_called="MAIN_GENERATOR">
+         <scalar name="return" comment="" line="105" base_type="int32" complete_type="int32" init_mode="disabled" init_range="disabled" global_assert="unsupported" assert_range="unsupported"/>
+      </function>
+      <function name="IoTaDeviceHub::getNumFuncs()" comment="" line="66" main_generator_called="MAIN_GENERATOR">
+         <scalar name="return" comment="" line="66" base_type="int32" complete_type="int32" init_mode="disabled" init_range="disabled" global_assert="unsupported" assert_range="unsupported"/>
+      </function>
+      <function name="IoTaDeviceHub::numCapsulesRemaining()" comment="" line="100" main_generator_called="MAIN_GENERATOR">
+         <scalar name="return" comment="" line="100" base_type="int32" complete_type="int32" init_mode="disabled" init_range="disabled" global_assert="unsupported" assert_range="unsupported"/>
+      </function>
+      <function name="IoTaDeviceHub::processMessage(DataCapsule *)" comment="" line="86" main_generator_called="MAIN_GENERATOR">
+         <scalar name="return" comment="" line="86" base_type="int32" complete_type="int32" init_mode="disabled" init_range="disabled" global_assert="unsupported" assert_range="unsupported"/>
+      </function>
+   </file>
+   <file name="C:\\Users\\alist\\OneDrive\\Development\\IoTa\\embedded\\IoTaLibEmbedded\\IoTaLibEmbedded\\IoTaFuncBase.h" comment="">
+      <function name="IoTaFuncBase::getFuncId()" comment="" line="12" main_generator_called="disabled" attributes="extern">
+         <scalar name="return" comment="" line="12" base_type="int16" complete_type="int16" init_mode="PERMANENT" init_modes_allowed="4" init_range="min..max" global_assert="unsupported" assert_range="unsupported"/>
+      </function>
+      <function name="IoTaFuncBase::getNextMsgDest()" comment="" line="20" main_generator_called="disabled" attributes="extern">
+         <scalar name="return" comment="" line="20" base_type="int32" complete_type="int32" init_mode="PERMANENT" init_modes_allowed="4" init_range="min..max" global_assert="unsupported" assert_range="unsupported"/>
+      </function>
+      <function name="IoTaFuncBase::getReponsesRemaining()" comment="" line="19" main_generator_called="disabled" attributes="extern">
+         <scalar name="return" comment="" line="19" base_type="int32" complete_type="int32" init_mode="PERMANENT" init_modes_allowed="4" init_range="min..max" global_assert="unsupported" assert_range="unsupported"/>
+      </function>
+      <function name="IoTaFuncBase::getStateBufLen()" comment="" line="22" main_generator_called="disabled" attributes="extern">
+         <scalar name="return" comment="" line="22" base_type="int32" complete_type="int32" init_mode="PERMANENT" init_modes_allowed="4" init_range="min..max" global_assert="unsupported" assert_range="unsupported"/>
+      </function>
+      <function name="IoTaFuncBase::getStateBuffer(unsigned char *)" comment="" line="23" main_generator_called="disabled" attributes="extern">
+         <scalar name="return" comment="" line="23" base_type="int32" complete_type="int32" init_mode="PERMANENT" init_modes_allowed="4" init_range="min..max" global_assert="unsupported" assert_range="unsupported"/>
+      </function>
+   </file>
+   <file name="C:\\Users\\alist\\OneDrive\\Development\\IoTa\\embedded\\IoTaLibEmbedded\\IoTaLibEmbedded\\heartbeat.cpp" comment="">
+      <function name="Heartbeat::getFuncId()" comment="" line="19" main_generator_called="MAIN_GENERATOR">
+         <scalar name="return" comment="" line="19" base_type="int16" complete_type="int16" init_mode="disabled" init_range="disabled" global_assert="unsupported" assert_range="unsupported"/>
+      </function>
+      <function name="Heartbeat::getNextMsgDest()" comment="" line="45" main_generator_called="MAIN_GENERATOR">
+         <scalar name="return" comment="" line="45" base_type="int32" complete_type="int32" init_mode="disabled" init_range="disabled" global_assert="unsupported" assert_range="unsupported"/>
+      </function>
+      <function name="Heartbeat::getReponsesRemaining()" comment="" line="40" main_generator_called="MAIN_GENERATOR">
+         <scalar name="return" comment="" line="40" base_type="int32" complete_type="int32" init_mode="disabled" init_range="disabled" global_assert="unsupported" assert_range="unsupported"/>
+      </function>
+      <function name="Heartbeat::getStateBufLen()" comment="" line="50" main_generator_called="MAIN_GENERATOR">
+         <scalar name="return" comment="" line="50" base_type="int32" complete_type="int32" init_mode="disabled" init_range="disabled" global_assert="unsupported" assert_range="unsupported"/>
+      </function>
+      <function name="Heartbeat::getStateBuffer(unsigned char *)" comment="" line="55" main_generator_called="MAIN_GENERATOR">
+         <scalar name="return" comment="" line="55" base_type="int32" complete_type="int32" init_mode="disabled" init_range="disabled" global_assert="unsupported" assert_range="unsupported"/>
+      </function>
+   </file>
+   <file name="D:\\Programs\\Matlab r2018a\\polyspace\\verifier\\cxx\\include\\include-libc\\string.h" comment="">
+      <function name="memcpy" comment="" line="42" main_generator_called="disabled" attributes="extern">
+         <scalar name="arg3" comment="" line="42" base_type="uint32" complete_type="uint32" init_mode="disabled" init_range="disabled" global_assert="unsupported" assert_range="unsupported"/>
+      </function>
+   </file>
+</global>
