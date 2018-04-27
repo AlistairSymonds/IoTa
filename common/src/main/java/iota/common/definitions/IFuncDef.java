@@ -16,6 +16,7 @@ public interface IFuncDef {
 
     int updateStateBuffer(byte[] recievedState);
 
-    public List<IStateItem> getStateItems();
+    List<IStateItem> getStateItems();
+
 
 }

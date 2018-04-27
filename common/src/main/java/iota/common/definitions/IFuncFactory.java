@@ -1,12 +1,14 @@
 package iota.common.definitions;
 
+import iota.common.Constants;
+
 public class IFuncFactory {
     public static IFuncDef getInstanceById(short funcId){
 
 
-        if(funcId == 1){
+        if (funcId == Constants.FID_HEARTBEAT) {
             return new Heartbeat();
-        } else if (funcId == 2) {
+        } else if (funcId == Constants.FID_LEDS) {
             return new Lighting();
         }
 

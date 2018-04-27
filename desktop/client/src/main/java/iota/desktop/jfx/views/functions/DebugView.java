@@ -30,7 +30,7 @@ public class DebugView extends VBox implements UpdateAbleView {
             @Override
             public void handle(ActionEvent e) {
                 try {
-                    device.submitMessage(IoTaUtil.hexStringToByteArray(textField.getCharacters().toString()));
+                    //device.submitMessage(IoTaUtil.hexStringToByteArray(textField.getCharacters().toString()));
                 } catch (IllegalArgumentException e1) {
                     e1.printStackTrace();
                 }
