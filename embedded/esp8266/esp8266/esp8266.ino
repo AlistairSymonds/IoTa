@@ -140,7 +140,7 @@ void loop() {
 				DataCapsule cap = createDataPacket(&newClient);
 				if (cap.getFuncId() == FID_HUB && cap.getDataSize() == 0) {
 					//client is now connected!
-					clientMap->put(cap.getSource, &newClient);
+					clientMap->put(cap.getSource(), &newClient);
 				}
 			}
 

@@ -22,7 +22,8 @@ Functionality
 	
 
 Supported protocol conversions
-+ TCP to follwing layout
++ TCP to following layout
++ All transmitted MSB first
 	+------------------------------+--------+-------------+------------+-------------------+------+
 	|            0 to 1            | 2 to 9 |  10 to 17   |  18 to 19  |     20 to 21      | 22+  |
 	+------------------------------+--------+-------------+------------+-------------------+------+

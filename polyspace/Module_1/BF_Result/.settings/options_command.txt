@@ -1,0 +1,22 @@
+# Options file
+-prog iota_polyspace
+-verif-version 1.0
+-author alist
+-sources-list-file C:\Users\alist\OneDrive\Development\IoTa\polyspace\Module_1\BF_Result\.settings\source_command.txt
+-lang CPP
+-target i386
+-compiler generic
+-dos
+-main-generator-writes-variables uninit
+-main-generator-calls unused
+-class-analyzer all
+-class-analyzer-calls unused
+-float-rounding-mode to-nearest
+-scalar-overflows-checks signed
+-scalar-overflows-behavior truncate-on-error
+-uncalled-function-checks none
+-check-subnormal allow
+-O2
+-to Software Safety Analysis level 2
+-import-comments C:\Users\alist\OneDrive\Development\IoTa\polyspace\Module_1\BF_Result
+
