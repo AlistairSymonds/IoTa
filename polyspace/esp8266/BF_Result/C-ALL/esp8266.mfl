@@ -27,7 +27,6 @@ C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-g
 C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\sys\reent.h 190 MacroFunction
 C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\sys\reent.h 597 MacroFunction
 C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\sys\reent.h 821 MacroFunction
-C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\alloca.h 18 MacroFunction
 C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\stdlib.h 59 MacroFunction
 C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\stdlib.h 63 MacroFunction
 C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\stdlib.h 64 MacroFunction
@@ -186,7 +185,7 @@ C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-g
 C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\string.h 71 MacroFunction
 C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\string.h 74 MacroFunction
 C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\string.h 77 MacroFunction
-C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\string.h 88 MacroFunction
+C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\string.h 83 MacroFunction
 C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\string.h 92 MacroFunction
 C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\string.h 93 MacroFunction
 C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\string.h 94 MacroFunction
@@ -475,6 +474,7 @@ C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-g
 C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\stdio.h 571 MacroFunction
 C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\stdio.h 573 MacroFunction
 C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\2.3.0\libraries\ESP8266WiFi\src\ESP8266WiFiType.h 152 MacroFunction
+C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\bits\exception_ptr.h 177 MacroFunction
 C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\bits\move.h 173 MacroFunction
 C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\bits\move.h 175 MacroFunction
 C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\bits\move.h 176 MacroFunction
@@ -669,7 +669,6 @@ C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-g
 C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\bits\shared_ptr_base.h 889 MacroFunction
 C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\bits\shared_ptr_base.h 907 MacroFunction
 C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\bits\shared_ptr_base.h 914 MacroFunction
-C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\bits\shared_ptr_base.h 994 MacroFunction
 C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\math.h 37 MacroFunction
 C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\math.h 108 MacroFunction
 C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\math.h 109 MacroFunction
@@ -873,6 +872,9 @@ C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\2.3.0\c
 C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\2.3.0\cores\esp8266\WCharacter.h 120 MacroFunction
 C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\inttypes.h 23 MacroFunction
 C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\inttypes.h 255 MacroFunction
+C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\2.3.0\tools\sdk\include\user_interface.h 168 MacroFunction
+C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\2.3.0\tools\sdk\include\user_interface.h 183 MacroFunction
+C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\2.3.0\tools\sdk\include\user_interface.h 278 MacroFunction
 C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\lib\gcc\xtensa-lx106-elf\4.8.2\include\stddef.h 27 MacroContextual
 C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\lib\gcc\xtensa-lx106-elf\4.8.2\include\stddef.h 36 MacroContextual
 C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\lib\gcc\xtensa-lx106-elf\4.8.2\include\stddef.h 108 MacroContextual
@@ -909,6 +911,7 @@ C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-g
 C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\lib\gcc\xtensa-lx106-elf\4.8.2\include\stddef.h 166 MacroContextual
 C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\lib\gcc\xtensa-lx106-elf\4.8.2\include\stddef.h 245 MacroContextual
 C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\lib\gcc\xtensa-lx106-elf\4.8.2\include\stddef.h 396 MacroContextual
+C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\lib\gcc\xtensa-lx106-elf\4.8.2\include\stddef.h 27 MacroContextual
 C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\lib\gcc\xtensa-lx106-elf\4.8.2\include\stddef.h 27 MacroContextual
 C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\lib\gcc\xtensa-lx106-elf\4.8.2\include\stddef.h 27 MacroContextual
 C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\lib\gcc\xtensa-lx106-elf\4.8.2\include\stddef.h 27 MacroContextual

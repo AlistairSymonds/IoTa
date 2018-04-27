@@ -7,9 +7,7 @@
 
 
 //to make polyspace happy since these aren't explicitly included outside of the arduino environment
-#include <bits\c++config.h>
-#include <bits\c++allocator.h>
-#include <bits\c++io.h>
+
 
 #include <ESP8266WiFi.h>          //https://github.com/esp8266/Arduino
 
@@ -27,8 +25,8 @@
 #include "LedSerialMaster.h"
 #include "DataCapsule.h"
 
-#define MAX_CLIENTS 3
-
+#define MAX_CLIENTS 10
+#define MAX_UNAUTH_CLIENTS 3
 #include "Map.h"
 
 WiFiServer server(2812);
@@ -37,6 +35,7 @@ Heartbeat hb;
 LedSerialMaster led(&Serial, MAX_CLIENTS);
 
 
+std::pair<int, WiFiClient*> *unAuthClients;
 
 int nextFreeSpot = 0;
 
@@ -47,6 +46,7 @@ static const size_t bufferSize = 1024;
 static uint8_t sbuf[bufferSize];
 
 std::pair<int, int> tMarkers;
+
 
 void setup() {
 	Serial.begin(9600);
@@ -69,6 +69,11 @@ void setup() {
 	hub->addFunc(&hb);
 	hub->addFunc(&led);
 	
+	unAuthClients = new std::pair<int, WiFiClient*>[MAX_UNAUTH_CLIENTS];
+	for (int i = 0; i < MAX_UNAUTH_CLIENTS; i++) {
+		unAuthClients[i].first = -1;
+	}
+
 	clientMap = new iota::Map<long, WiFiClient*>(10);
 
 	Serial.println("Starting TCP server on 2812");
@@ -84,6 +89,7 @@ DataCapsule createDataPacket(WiFiClient *c) {
 	//max length of each message is 2^16 bytes
 	if (c->available() > 0)
 	{
+		
 		
 		//uint8_t msgBuffer[256];
 		sbuf[0] = c->read();
@@ -101,7 +107,8 @@ DataCapsule createDataPacket(WiFiClient *c) {
 
 		//data is now stored inside DataCapsule, data can be freed
 		DataCapsule capsule(source, dest, func, size, data);
-		
+		Serial.print("MEssage recieved from ");
+		Serial.println(capsule.getSource());
 
 		delete data;
 		return capsule;
@@ -112,6 +119,9 @@ DataCapsule createDataPacket(WiFiClient *c) {
 void printDebug() {
 	Serial.print("Free heap: ");
 	Serial.println(ESP.getFreeHeap());
+
+	Serial.print("Clients connected: ");
+	Serial.println(clientMap->size());
 }
 
 void loop() {
@@ -131,25 +141,49 @@ void loop() {
 		7. enjoy your fancy new connected client!
 	*/
 
-	if (newClient.connected()) {
-		byte firstContact = newClient.read();
-		if (firstContact == MAGIC_BYTE) {
-			newClient.write(MAGIC_BYTE + 1);
-			
-			int timeoutStart = micros();
-			while (timeoutStart - micros() < 50000 && newClient.available() < 0) {
-				//keep the esp happy wifi wise
-				yield();
+	if (newClient) {
+		for (int i = 0; i < MAX_UNAUTH_CLIENTS; i++) {
+			if (unAuthClients[i].first < 0)
+			{
+				Serial.print("New unauth client at ");
+				Serial.print(i);
+				int now = millis();
+				Serial.print(" t = ");
+				Serial.println(now);
+				unAuthClients[i].first = now;
+				unAuthClients[i].second = &newClient;
+				i = MAX_UNAUTH_CLIENTS;
 			}
+		}
+		
+		
+	}
+	
+	int tnow = millis();
+	int timeout_ms = 4000;
+	for (int i = 0; i < MAX_UNAUTH_CLIENTS; i++) {
+		if (tnow - unAuthClients[i].first > timeout_ms && unAuthClients[i].first > 0) {
+			//remove due to lack of connections
+			Serial.print("Removing client timeout ");
+			Serial.println(i);
+			unAuthClients[i].first = -1;
+		}
+		else if(unAuthClients[i].first > 0)
+		{	
+			//Serial.print("Checking ");
+			//Serial.println(i);
+			//try to handshake
+			if (unAuthClients[i].second->available() > 0 && unAuthClients[i].second->connected()) {
+				uint8_t firstContact = unAuthClients[i].second->read();
+				Serial.print("Unauth sent: ");
+				Serial.println(firstContact);
 
-			if (newClient.available() > 0) {
-				DataCapsule cap = createDataPacket(&newClient);
-				if (cap.getFuncId() == FID_HUB && cap.getDataSize() == 0) {
-					//client is now connected!
-					clientMap->put(cap.getSource(), &newClient);
+				if (firstContact == MAGIC_BYTE) {
+					Serial.println("Got first part of handshake, responding");
+					unAuthClients[i].second->write(MAGIC_BYTE + 1);
 				}
 			}
-
+			
 		}
 	}
 	

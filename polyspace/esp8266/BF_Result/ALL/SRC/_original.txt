@@ -9,14 +9,14 @@
 <PSTNAME name="IPAddress.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\2.3.0\cores\esp8266\IPAddress.h</ORIGINALLY>
 </PSTNAME>
+<PSTNAME name="ctype.h">
+<ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\ctype.h</ORIGINALLY>
+</PSTNAME>
 <PSTNAME name="typeinfo">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\typeinfo</ORIGINALLY>
 </PSTNAME>
 <PSTNAME name="twi.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\2.3.0\cores\esp8266\twi.h</ORIGINALLY>
-</PSTNAME>
-<PSTNAME name="ctype.h">
-<ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\ctype.h</ORIGINALLY>
 </PSTNAME>
 <PSTNAME name="IoTaDeviceHub.h">
 <ORIGINALLY>C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded\IoTaDeviceHub.h</ORIGINALLY>
@@ -36,20 +36,26 @@
 <PSTNAME name="ESP8266WiFi.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\2.3.0\libraries\ESP8266WiFi\src\ESP8266WiFi.h</ORIGINALLY>
 </PSTNAME>
+<PSTNAME name="Map.h">
+<ORIGINALLY>C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded\Map.h</ORIGINALLY>
+</PSTNAME>
 <PSTNAME name="Print.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\2.3.0\cores\esp8266\Print.h</ORIGINALLY>
 </PSTNAME>
 <PSTNAME name="numeric_traits.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\ext\numeric_traits.h</ORIGINALLY>
 </PSTNAME>
-<PSTNAME name="Map.h">
-<ORIGINALLY>C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded\Map.h</ORIGINALLY>
-</PSTNAME>
 <PSTNAME name="stdlib_noniso.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\2.3.0\cores\esp8266\stdlib_noniso.h</ORIGINALLY>
 </PSTNAME>
+<PSTNAME name="spi_flash.h">
+<ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\2.3.0\tools\sdk\include\spi_flash.h</ORIGINALLY>
+</PSTNAME>
 <PSTNAME name="char_traits.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\bits\char_traits.h</ORIGINALLY>
+</PSTNAME>
+<PSTNAME name="memoryfwd.h">
+<ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\bits\memoryfwd.h</ORIGINALLY>
 </PSTNAME>
 <PSTNAME name="newlib.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\newlib.h</ORIGINALLY>
@@ -57,14 +63,14 @@
 <PSTNAME name="RequestHandler.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\2.3.0\libraries\ESP8266WebServer\src\detail\RequestHandler.h</ORIGINALLY>
 </PSTNAME>
-<PSTNAME name="memoryfwd.h">
-<ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\bits\memoryfwd.h</ORIGINALLY>
+<PSTNAME name="functional_hash.h">
+<ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\bits\functional_hash.h</ORIGINALLY>
+</PSTNAME>
+<PSTNAME name="__polyspace__gcc.h">
+<ORIGINALLY>D:\Programs\Matlab r2018a\polyspace\verifier\extensions\old_compiler\__polyspace__gcc.h</ORIGINALLY>
 </PSTNAME>
 <PSTNAME name="core_esp8266_features.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\2.3.0\cores\esp8266\core_esp8266_features.h</ORIGINALLY>
-</PSTNAME>
-<PSTNAME name="functional_hash.h">
-<ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\bits\functional_hash.h</ORIGINALLY>
 </PSTNAME>
 <PSTNAME name="alloc_traits.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\ext\alloc_traits.h</ORIGINALLY>
@@ -77,6 +83,9 @@
 </PSTNAME>
 <PSTNAME name="cctype">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\cctype</ORIGINALLY>
+</PSTNAME>
+<PSTNAME name="__pstf11.cpp">
+<ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\debug\debug.h</ORIGINALLY>
 </PSTNAME>
 <PSTNAME name="common.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\2.3.0\variants\generic\common.h</ORIGINALLY>
@@ -98,6 +107,9 @@
 </PSTNAME>
 <PSTNAME name="stl_iterator_base_funcs.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\bits\stl_iterator_base_funcs.h</ORIGINALLY>
+</PSTNAME>
+<PSTNAME name="cstdbool">
+<ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\tr1\cstdbool</ORIGINALLY>
 </PSTNAME>
 <PSTNAME name="ostream_insert.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\bits\ostream_insert.h</ORIGINALLY>
@@ -132,11 +144,20 @@
 <PSTNAME name="range_access.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\bits\range_access.h</ORIGINALLY>
 </PSTNAME>
+<PSTNAME name="ip_addr.h">
+<ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\2.3.0\tools\sdk\include\ip_addr.h</ORIGINALLY>
+</PSTNAME>
+<PSTNAME name="climits">
+<ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\climits</ORIGINALLY>
+</PSTNAME>
 <PSTNAME name="utility">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\utility</ORIGINALLY>
 </PSTNAME>
 <PSTNAME name="unique_ptr.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\bits\unique_ptr.h</ORIGINALLY>
+</PSTNAME>
+<PSTNAME name="pins_arduino.h">
+<ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\2.3.0\variants\nodemcu\pins_arduino.h</ORIGINALLY>
 </PSTNAME>
 <PSTNAME name="WCharacter.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\2.3.0\cores\esp8266\WCharacter.h</ORIGINALLY>
@@ -144,14 +165,17 @@
 <PSTNAME name="allocator.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\bits\allocator.h</ORIGINALLY>
 </PSTNAME>
-<PSTNAME name="pins_arduino.h">
-<ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\2.3.0\variants\adafruit\pins_arduino.h</ORIGINALLY>
-</PSTNAME>
 <PSTNAME name="esp8266.ino">
 <ORIGINALLY>C:\Users\alist\OneDrive\Development\IoTa\embedded\esp8266\esp8266\esp8266.ino</ORIGINALLY>
 </PSTNAME>
 <PSTNAME name="__pstf2.cpp">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\string</ORIGINALLY>
+</PSTNAME>
+<PSTNAME name="nested_exception.h">
+<ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\bits\nested_exception.h</ORIGINALLY>
+</PSTNAME>
+<PSTNAME name="os_type.h">
+<ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\2.3.0\tools\sdk\include\os_type.h</ORIGINALLY>
 </PSTNAME>
 <PSTNAME name="stringfwd.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\bits\stringfwd.h</ORIGINALLY>
@@ -189,11 +213,17 @@
 <PSTNAME name="LedSerialMaster.h">
 <ORIGINALLY>C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded\LedSerialMaster.h</ORIGINALLY>
 </PSTNAME>
+<PSTNAME name="ets_sys.h">
+<ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\2.3.0\tools\sdk\include\ets_sys.h</ORIGINALLY>
+</PSTNAME>
 <PSTNAME name="lock.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\sys\lock.h</ORIGINALLY>
 </PSTNAME>
 <PSTNAME name="Esp.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\2.3.0\cores\esp8266\Esp.h</ORIGINALLY>
+</PSTNAME>
+<PSTNAME name="__pstf10.cpp">
+<ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\tr1\limits.h</ORIGINALLY>
 </PSTNAME>
 <PSTNAME name="DNSServer.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\2.3.0\libraries\DNSServer\src\DNSServer.h</ORIGINALLY>
@@ -207,17 +237,14 @@
 <PSTNAME name="binary.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\2.3.0\cores\esp8266\binary.h</ORIGINALLY>
 </PSTNAME>
-<PSTNAME name="__pstf10.cpp">
-<ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\sys\stdio.h</ORIGINALLY>
+<PSTNAME name="pgmspace.h">
+<ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\2.3.0\cores\esp8266\pgmspace.h</ORIGINALLY>
 </PSTNAME>
 <PSTNAME name="config.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\sys\config.h</ORIGINALLY>
 </PSTNAME>
 <PSTNAME name="cwchar">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\cwchar</ORIGINALLY>
-</PSTNAME>
-<PSTNAME name="pgmspace.h">
-<ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\2.3.0\cores\esp8266\pgmspace.h</ORIGINALLY>
 </PSTNAME>
 <PSTNAME name="stdlib.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\machine\stdlib.h</ORIGINALLY>
@@ -237,20 +264,23 @@
 <PSTNAME name="ESP8266WiFiAP.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\2.3.0\libraries\ESP8266WiFi\src\ESP8266WiFiAP.h</ORIGINALLY>
 </PSTNAME>
+<PSTNAME name="LedPropEnum.h">
+<ORIGINALLY>C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded\LedPropEnum.h</ORIGINALLY>
+</PSTNAME>
 <PSTNAME name="move.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\bits\move.h</ORIGINALLY>
 </PSTNAME>
 <PSTNAME name="__pstf5.cpp">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\bits\alloc_traits.h</ORIGINALLY>
 </PSTNAME>
+<PSTNAME name="shared_ptr.h">
+<ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\bits\shared_ptr.h</ORIGINALLY>
+</PSTNAME>
 <PSTNAME name="stl_relops.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\bits\stl_relops.h</ORIGINALLY>
 </PSTNAME>
 <PSTNAME name="WiFiServer.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\2.3.0\libraries\ESP8266WiFi\src\WiFiServer.h</ORIGINALLY>
-</PSTNAME>
-<PSTNAME name="shared_ptr.h">
-<ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\bits\shared_ptr.h</ORIGINALLY>
 </PSTNAME>
 <PSTNAME name="wl_definitions.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\2.3.0\libraries\ESP8266WiFi\src\include\wl_definitions.h</ORIGINALLY>
@@ -267,11 +297,14 @@
 <PSTNAME name="functional">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\functional</ORIGINALLY>
 </PSTNAME>
-<PSTNAME name="Server.h">
-<ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\2.3.0\cores\esp8266\Server.h</ORIGINALLY>
+<PSTNAME name="user_interface.h">
+<ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\2.3.0\tools\sdk\include\user_interface.h</ORIGINALLY>
 </PSTNAME>
 <PSTNAME name="Printable.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\2.3.0\cores\esp8266\Printable.h</ORIGINALLY>
+</PSTNAME>
+<PSTNAME name="Server.h">
+<ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\2.3.0\cores\esp8266\Server.h</ORIGINALLY>
 </PSTNAME>
 <PSTNAME name="slist.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\2.3.0\libraries\ESP8266WiFi\src\include\slist.h</ORIGINALLY>
@@ -297,17 +330,23 @@
 <PSTNAME name="math.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\math.h</ORIGINALLY>
 </PSTNAME>
+<PSTNAME name="ptr_traits.h">
+<ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\bits\ptr_traits.h</ORIGINALLY>
+</PSTNAME>
 <PSTNAME name="stdio.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\stdio.h</ORIGINALLY>
 </PSTNAME>
 <PSTNAME name="cpp_type_traits.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\bits\cpp_type_traits.h</ORIGINALLY>
 </PSTNAME>
-<PSTNAME name="ptr_traits.h">
-<ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\bits\ptr_traits.h</ORIGINALLY>
+<PSTNAME name="exception_ptr.h">
+<ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\bits\exception_ptr.h</ORIGINALLY>
 </PSTNAME>
 <PSTNAME name="cdefs.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\sys\cdefs.h</ORIGINALLY>
+</PSTNAME>
+<PSTNAME name="WiFiManager.h">
+<ORIGINALLY>C:\Users\alist\OneDrive\Documents\Arduino\libraries\WiFiManager\WiFiManager.h</ORIGINALLY>
 </PSTNAME>
 <PSTNAME name="ieeefp.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\machine\ieeefp.h</ORIGINALLY>
@@ -336,8 +375,14 @@
 <PSTNAME name="alloca.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\alloca.h</ORIGINALLY>
 </PSTNAME>
+<PSTNAME name="__pstf12.cpp">
+<ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\sys\stdio.h</ORIGINALLY>
+</PSTNAME>
+<PSTNAME name="core-isa.h">
+<ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\2.3.0\libraries\GDBStub\src\xtensa\config\core-isa.h</ORIGINALLY>
+</PSTNAME>
 <PSTNAME name="stdbool.h">
-<ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\lib\gcc\xtensa-lx106-elf\4.8.2\include\stdbool.h</ORIGINALLY>
+<ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\tr1\stdbool.h</ORIGINALLY>
 </PSTNAME>
 <PSTNAME name="WiFiClientSecure.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\2.3.0\libraries\ESP8266WiFi\src\WiFiClientSecure.h</ORIGINALLY>
@@ -350,6 +395,9 @@
 </PSTNAME>
 <PSTNAME name="stl_pair.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\bits\stl_pair.h</ORIGINALLY>
+</PSTNAME>
+<PSTNAME name="eagle_soc.h">
+<ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\2.3.0\tools\sdk\include\eagle_soc.h</ORIGINALLY>
 </PSTNAME>
 <PSTNAME name="stl_iterator_base_types.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\bits\stl_iterator_base_types.h</ORIGINALLY>
@@ -372,14 +420,17 @@
 <PSTNAME name="WiFiClient.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\2.3.0\libraries\ESP8266WiFi\src\WiFiClient.h</ORIGINALLY>
 </PSTNAME>
+<PSTNAME name="stddef.h">
+<ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\lib\gcc\xtensa-lx106-elf\4.8.2\include\stddef.h</ORIGINALLY>
+</PSTNAME>
 <PSTNAME name="functexcept.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\bits\functexcept.h</ORIGINALLY>
 </PSTNAME>
 <PSTNAME name="stl_uninitialized.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\bits\stl_uninitialized.h</ORIGINALLY>
 </PSTNAME>
-<PSTNAME name="stddef.h">
-<ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\lib\gcc\xtensa-lx106-elf\4.8.2\include\stddef.h</ORIGINALLY>
+<PSTNAME name="user_config.h">
+<ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\2.3.0\cores\esp8266\user_config.h</ORIGINALLY>
 </PSTNAME>
 <PSTNAME name="initializer_list">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\initializer_list</ORIGINALLY>
@@ -412,7 +463,7 @@
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\bits\shared_ptr_base.h</ORIGINALLY>
 </PSTNAME>
 <PSTNAME name="__pstf9.cpp">
-<ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\debug\debug.h</ORIGINALLY>
+<ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\tr1\climits</ORIGINALLY>
 </PSTNAME>
 <PSTNAME name="esp8266_peri.h">
 <ORIGINALLY>C:\Users\alist\AppData\Local\Arduino15\packages\esp8266\hardware\esp8266\2.3.0\cores\esp8266\esp8266_peri.h</ORIGINALLY>
