@@ -1,4 +1,3 @@
-C:\Users\alist\OneDrive\Development\IoTa\embedded\esp8266\esp8266\WifiConnectionStore.cpp
 C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded\DataCapsule.cpp
 C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded\DummyBroadcaster.cpp
 C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded\Esp32Oscilloscope.cpp
@@ -6,6 +5,3 @@ C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedde
 C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded\HubInternalFunc.cpp
 C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded\IoTaDeviceHub.cpp
 C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded\LedSerialMaster.cpp
-C:\Users\alist\OneDrive\Development\IoTa\embedded\LedSerialSlave_octo_teensy\LedSerialSlave_octo_teensy\Glitter.cpp
-C:\Users\alist\OneDrive\Development\IoTa\embedded\LedSerialSlave_octo_teensy\LedSerialSlave_octo_teensy\RainbowAnim.cpp
-C:\Users\alist\OneDrive\Development\IoTa\embedded\LedSerialSlave_octo_teensy\LedSerialSlave_octo_teensy\SolidColour.cpp
