@@ -5,6 +5,12 @@
 */
 #include <limits.h>
 
+
+//to make polyspace happy since these aren't explicitly included outside of the arduino environment
+#include <bits\c++config.h>
+#include <bits\c++allocator.h>
+#include <bits\c++io.h>
+
 #include <ESP8266WiFi.h>          //https://github.com/esp8266/Arduino
 
 //needed for library

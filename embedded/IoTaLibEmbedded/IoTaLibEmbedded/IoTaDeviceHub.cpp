@@ -73,7 +73,7 @@ int IoTaDeviceHub::getNumFuncs()
 int IoTaDeviceHub::addFunc(IoTaFuncBase * newFunc)
 {
 	internalHandler->addFuncId(newFunc->getFuncId());
-	if (numFuncs < maxFuncs) {
+	if (numFuncs < maxFuncs-1) {
 		funcs[numFuncs] = newFunc;
 		numFuncs++;
 		return numFuncs;

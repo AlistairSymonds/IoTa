@@ -29,7 +29,7 @@ void Heartbeat::processCommand(DataCapsule *capsule)
 	if (data[0] == FID_HEARTBEAT) {
 		responseMap->add(capsule->getSource());
 	}
-	delete data;
+	delete [] data;
 }
 
 void Heartbeat::tick()

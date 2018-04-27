@@ -24,7 +24,7 @@ void HubInternalFunc::processCommand(DataCapsule *capsule)
 	if (data[0] == 60) {
 		map->add(capsule->getSource());
 	}
-	delete data;
+	delete [] data;
 }
 
 void HubInternalFunc::tick()
