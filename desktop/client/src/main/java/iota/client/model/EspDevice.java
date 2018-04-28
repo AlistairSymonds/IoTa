@@ -1,6 +1,8 @@
 package iota.client.model;
 
+import iota.client.network.ConcurrentConnectionStatus;
 import iota.client.network.DataCapsule;
+import iota.client.network.ConnectionStatus;
 import iota.common.Constants;
 import iota.common.IoTaUtil;
 import iota.common.definitions.DefinitionStore;
@@ -15,6 +17,7 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Observable;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -25,8 +28,8 @@ public class EspDevice extends Observable {
     private Socket socket;
     private List<IFuncDef> defs;
     private long deviceId;
-    private boolean connected;
-    private boolean authenticated = false;
+    private volatile ConcurrentConnectionStatus status;
+
 
     private DefinitionStore defStore;
 
@@ -41,6 +44,7 @@ public class EspDevice extends Observable {
         this.deviceId = 0;
         this.address = address;
         this.defStore = defStoreIn;
+        status = new ConcurrentConnectionStatus(ConnectionStatus.NOT_CONNECTED);
         defs = new ArrayList<>();
     }
 
@@ -56,37 +60,26 @@ public class EspDevice extends Observable {
         return defs;
     }
 
-    public synchronized boolean getAuthenticated() {
-        return authenticated;
+    public synchronized ConnectionStatus getStatus() {
+        return status.getStatus();
     }
 
     public void start() throws IOException {
 
-        connected = true;
+
         socket = new Socket();
         System.out.println("Connecting to socket...");
         socket.connect(new InetSocketAddress(address, 2812));
-
+        status.setStatus(ConnectionStatus.FIRST_CONNECT);
 
         senderThread = new SenderThread();
         receiverThread = new ReceiverThread();
 
+        //this begins the authentication process before
+        //settling into general handling of messages
         receiverThread.start();
         senderThread.start();
 
-        System.out.println("Sending magic byte");
-        byte[] magic = new byte[1];
-        magic[0] = 0x41;
-        this.senderThread.sendMessage(magic);
-
-
-        //manually crafting an empty capsule to send id
-        DataCapsule capsule = new DataCapsule(new HubInternal(), new ArrayList<Byte>());
-
-        //this.submitMessage(capsule);
-
-
-        //senderThread.sendMessage(getFuncs);
     }
 
 
@@ -176,7 +169,57 @@ public class EspDevice extends Observable {
         @Override
         public synchronized void run() {
             System.out.println("Running " + this.toString());
-            while (connected) {
+
+            // add in sending states too
+            //also follow diagram you muppet
+            synchronized (status) {
+                while (status.getStatus() != ConnectionStatus.FIRST_CONNECT) {
+                    try {
+                        status.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                try {
+                    dataOut.write(Constants.MAGIC_BYTE);
+                    status.setStatus(ConnectionStatus.WAITING_FOR_MAGIC_BYTE_PLUS_ONE);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            synchronized (status) {
+                while (status.getStatus() != ConnectionStatus.WAITING_FOR_EMPTY_CAPSULE) {
+                    try {
+                        status.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                DataCapsule initCap = new DataCapsule(new HubInternal(), new ArrayList<Byte>());
+                submitMessage(initCap);
+                byte[] initBytes = queue.poll();
+                try {
+                    dataOut.write(initBytes);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                status.setStatus(ConnectionStatus.WAITING_FOR_EMPTY_CAPSULE);
+            }
+
+
+            synchronized (status) {
+                try {
+                    this.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+            while (status.getStatus() == ConnectionStatus.CONNECTED) {
                 while (!queue.isEmpty()) {
                     try {
                         byte[] valsOut = queue.poll();
@@ -200,6 +243,7 @@ public class EspDevice extends Observable {
                     System.out.println(toString() + " has completed work, sleeping");
                     this.wait();
                 } catch (Exception e) {
+
                     e.printStackTrace();
                 }
             }
@@ -222,8 +266,55 @@ public class EspDevice extends Observable {
 
         @Override
         public synchronized void run() {
+
             System.out.println("Running " + this.toString());
-            while (connected) {
+            synchronized (status) {
+                while (status.getStatus() != ConnectionStatus.WAITING_FOR_MAGIC_BYTE_PLUS_ONE) {
+                    try {
+                        status.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                try {
+                    System.out.println("Waiting for de_byte");
+                    byte val = dataIn.readByte();
+                    if (val == Constants.MAGIC_BYTE + 1) {
+
+                        status.setStatus(ConnectionStatus.SENDING_EMPTY_CAPSULE);
+                    } else {
+                        status.setStatus(ConnectionStatus.ERROR);
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            synchronized (status) {
+                while (status.getStatus() != ConnectionStatus.WAITING_FOR_EMPTY_CAPSULE) {
+                    try {
+                        status.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                try {
+                    byte[] emptyCapsule = new byte[23];
+                    dataIn.read(emptyCapsule, 0, 22);
+                    if (emptyCapsule[20] == 0 && emptyCapsule[21] == 0) {
+                        deviceId = IoTaUtil.bytes2Long(Arrays.copyOfRange(emptyCapsule, 2, 9));
+                        status.setStatus(ConnectionStatus.CONNECTED);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+            while (status.getStatus() == ConnectionStatus.CONNECTED) {
                 int messageLength = 0;
                 byte[] msg;
 
@@ -241,7 +332,8 @@ public class EspDevice extends Observable {
                     handleReturnedMessage(msg);
 
                 } catch (IOException e) {
-                    //e.printStackTrace();
+                    status.setStatus(ConnectionStatus.ERROR);
+                    e.printStackTrace();
                 }
             }
         }

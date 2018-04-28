@@ -1,5 +1,6 @@
 package iota.client.model;
 
+import iota.client.network.ConnectionStatus;
 import iota.client.network.NetworkScanner;
 import iota.client.network.ScanResult;
 import iota.common.definitions.DefinitionStore;
@@ -67,11 +68,7 @@ public class EspManager extends Observable implements Runnable {
                 }
             }
         }
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
         for (EspDevice d : staging) {
             try {
                 d.start();
@@ -81,10 +78,16 @@ public class EspManager extends Observable implements Runnable {
             }
         }
 
-        for (EspDevice d : staging) {
-            if (d.getAuthenticated()) {
-                devices.put(d.getInetAddress(), d);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
+
+        for (EspDevice d : staging) {
+            if (d.getStatus() == ConnectionStatus.CONNECTED) {
+                devices.put(d.getInetAddress(), d);
             }
         }
 
