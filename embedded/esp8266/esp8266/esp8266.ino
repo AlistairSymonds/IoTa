@@ -19,7 +19,6 @@
 
 #define HUB_SIZE 4
 #include <IoTaDeviceHub.h>
-
 #include "iota_defines.h"
 #include "heartbeat.h"
 #include "LedSerialMaster.h"
@@ -34,8 +33,31 @@ IoTaDeviceHub *hub;
 Heartbeat hb;
 LedSerialMaster led(&Serial, MAX_CLIENTS);
 
+long uuid;
 
-std::pair<int, WiFiClient> *unAuthClients;
+
+
+//enum for what an authednticated client is waiting to recieve next
+enum connStatusEnum
+{
+	NOT_CONNECTED,
+	FIRST_CONNECT,
+	MAGIC_BYTE_RX,
+	CLIENT_ID_RX,
+	CONNECTED
+};
+
+enum unAuthEnum
+{
+	timeIn,
+	authProg,
+	unAuthClient
+};
+//Tracking unauthenticated connections,
+//@1st, int = time connected in micros
+//@2nd, connStatusEnum = what stage in connection the unAuthClient is in
+//@3rd, WiFIClient = unAuthClient in question
+std::tuple<uint, connStatusEnum, WiFiClient> *unAuthClients;
 
 int nextFreeSpot = 0;
 
@@ -43,9 +65,12 @@ int nextFreeSpot = 0;
 iota::Map<long, WiFiClient*> *clientMap;
 
 static const size_t bufferSize = 1024;
-static uint8_t sbuf[bufferSize];
+static uint8_t rxBuf[bufferSize];
+static uint8_t txBuf[bufferSize];
 
 std::pair<int, int> tMarkers;
+
+
 
 
 void setup() {
@@ -61,17 +86,17 @@ void setup() {
 	byte mac[6];
 	WiFi.macAddress(mac);
 	Serial.printf("Mac address: %h %h %h %h %h %h \n", mac[0], mac[1],mac[2],mac[3],mac[4],mac[5]);
-	Serial.printf("Chip id: %d", ESP.getChipId());
-	long uuid = (ESP.getChipId() << 32 | mac[0] << 24 | mac[1] << 16 | mac[2] << 9 | mac[3]);
+	Serial.printf("Chip id: %d\n", ESP.getChipId());
+	uuid = (ESP.getChipId() << 32 | mac[0] << 24 | mac[1] << 16 | mac[2] << 9 | mac[3]);
 	Serial.printf("UUID : %l", uuid);
 	
 	hub = new IoTaDeviceHub(uuid);
 	hub->addFunc(&hb);
 	hub->addFunc(&led);
 	
-	unAuthClients = new std::pair<int, WiFiClient>[MAX_UNAUTH_CLIENTS];
+	unAuthClients = new std::tuple<uint, connStatusEnum, WiFiClient>[MAX_UNAUTH_CLIENTS];
 	for (int i = 0; i < MAX_UNAUTH_CLIENTS; i++) {
-		unAuthClients[i].first = -1;
+		std::get<authProg>(unAuthClients[i]) = NOT_CONNECTED;
 	}
 
 	clientMap = new iota::Map<long, WiFiClient*>(10);
@@ -92,22 +117,22 @@ DataCapsule createDataPacket(WiFiClient *c) {
 		
 		
 		//uint8_t msgBuffer[256];
-		sbuf[0] = c->read();
-		sbuf[1] = c->read();
-		short msgLen = (sbuf[0] << 8 |sbuf[1]);
+		rxBuf[0] = c->read();
+		rxBuf[1] = c->read();
+		short msgLen = (rxBuf[0] << 8 |rxBuf[1]);
 		//Fixed read in length here, huge speed increase due to fixing timeout!
-		c->readBytes(&sbuf[2], msgLen);
+		c->readBytes(&rxBuf[2], msgLen);
 
-		long source = (sbuf[2] << 56 | sbuf[3] << 48 | sbuf[4] << 40 | sbuf[5] << 32 | sbuf[6] << 24 | sbuf[7] << 16 | sbuf[8] << 8 | sbuf[9]);
-		long dest = (sbuf[10] << 56 | sbuf[11] << 48 | sbuf[12] << 40 | sbuf[13] << 32 | sbuf[14] << 24 | sbuf[15] << 16 | sbuf[16] << 8 | sbuf[17]);
-		short func = (sbuf[18] << 8 | sbuf[19]);
-		short size = (sbuf[20] << 8 | sbuf[21]);
+		long source = (rxBuf[2] << 56 | rxBuf[3] << 48 | rxBuf[4] << 40 | rxBuf[5] << 32 | rxBuf[6] << 24 | rxBuf[7] << 16 | rxBuf[8] << 8 | rxBuf[9]);
+		long dest = (rxBuf[10] << 56 | rxBuf[11] << 48 | rxBuf[12] << 40 | rxBuf[13] << 32 | rxBuf[14] << 24 | rxBuf[15] << 16 | rxBuf[16] << 8 | rxBuf[17]);
+		short func = (rxBuf[18] << 8 | rxBuf[19]);
+		short size = (rxBuf[20] << 8 | rxBuf[21]);
 		uint8_t * data = new uint8_t[size];
-		memcpy(data, &sbuf[22], size);
+		memcpy(data, &rxBuf[22], size);
 
 		//data is now stored inside DataCapsule, data can be freed
 		DataCapsule capsule(source, dest, func, size, data);
-		Serial.print("MEssage recieved from ");
+		Serial.print("Message recieved from ");
 		Serial.println(capsule.getSource());
 
 		delete data;
@@ -126,63 +151,117 @@ void printDebug() {
 
 void loop() {
 	
-	// Check if a new client has connected
+	// Check if a new unAuthClient has connected
 	WiFiClient newClient = server.available();
 	
 
 	/*
 	Connection process:
-		1. client appears at wifi server
-		2. read first byte transmitted by client connecting
-		3. if client sent MAGIC_BYTE (65) continue
+		1. unAuthClient appears at wifi server
+		2. read first byte transmitted by unAuthClient connecting
+		3. if unAuthClient sent MAGIC_BYTE (65) continue
 		4. send back magic byte+1
-		5. wait for client to send an empty data packet addressed for FID
+		5. wait for unAuthClient to send an empty data packet addressed for FID
 		6. add clientId to clientMap
-		7. enjoy your fancy new connected client!
+		7. enjoy your fancy new connected unAuthClient!
 	*/
 
+
+
+	//New unAuthClient, looop through unath waiting zone to find first empty
+	//spot and begin auth protocol
 	if (newClient) {
 		for (int i = 0; i < MAX_UNAUTH_CLIENTS; i++) {
-			if (unAuthClients[i].first < 0)
+			if (std::get<authProg>(unAuthClients[i]) == NOT_CONNECTED)
 			{
 				Serial.print("New unauth client at ");
 				Serial.print(i);
 				int now = micros();
 				Serial.print(" t = ");
 				Serial.println(now);
-				unAuthClients[i].first = now;
-				unAuthClients[i].second = newClient;
+				std::get<timeIn>(unAuthClients[i]) = now;
+				std::get<authProg>(unAuthClients[i]) = FIRST_CONNECT;
+				std::get<unAuthClient>(unAuthClients[i]) = newClient;
 				i = MAX_UNAUTH_CLIENTS;
 			}
 		}	
 	}
 	
-	int tnow = micros();
-	int timeout_us = 4000000;
+	uint tnow = micros();
+	uint timeout_us = 2000000;
 	for (int i = 0; i < MAX_UNAUTH_CLIENTS; i++) {
 		yield();
-		if (tnow - unAuthClients[i].first > timeout_us && unAuthClients[i].first > 0) {
-			//remove due to lack of connections
-			Serial.print("Removing client timeout ");
-			Serial.println(i);
-			unAuthClients[i].first = -1;
-		}
-		else if(unAuthClients[i].first > 0)
-		{	
-			//Serial.print("Checking ");
-			//Serial.println(i);
-			//try to handshake
-			if (unAuthClients[i].second.available() > 0) {
-				uint8_t firstContact = unAuthClients[i].second.read();
-				Serial.print("Unauth sent: ");
-				Serial.println(firstContact);
-
-				if (firstContact == MAGIC_BYTE) {
-					Serial.println("Got first part of handshake, responding");
-					unAuthClients[i].second.write(MAGIC_BYTE + 1);
-				}
-			}
+		if (tnow - std::get<timeIn>(unAuthClients[i]) > timeout_us && std::get<authProg>(unAuthClients[i]) != NOT_CONNECTED) {
 			
+			
+			//remove due to lack of connections
+			Serial.print("timeout ");
+			Serial.println(i);
+			std::get<timeIn>(unAuthClients[i]) = 0;
+			std::get<authProg>(unAuthClients[i]) = NOT_CONNECTED;
+			std::get<unAuthClient>(unAuthClients[i]).stop();
+		}
+		else if(std::get<authProg>(unAuthClients[i]) != NOT_CONNECTED)
+		{	
+			switch (std::get<authProg>(unAuthClients[i]))
+			{
+			case(FIRST_CONNECT):
+				
+				if (std::get<unAuthClient>(unAuthClients[i]).available() > 0) {
+					Serial.print(i);
+					Serial.println(" sent something");
+					uint8_t firstContact = std::get<unAuthClient>(unAuthClients[i]).read();
+					Serial.print("Unauth sent: ");
+					Serial.println(firstContact);
+
+					if (firstContact == MAGIC_BYTE) {
+						std::get<authProg>(unAuthClients[i]) = MAGIC_BYTE_RX;
+					}
+				}
+				break;
+
+			case(MAGIC_BYTE_RX):
+				Serial.println("sending back magic byte + 1");
+				std::get<unAuthClient>(unAuthClients[i]).write(MAGIC_BYTE + 1);
+				std::get<authProg>(unAuthClients[i]) = CLIENT_ID_RX;
+
+				break;
+
+			case(CLIENT_ID_RX):
+				if (std::get<unAuthClient>(unAuthClients[i]).available() > 0) {
+					DataCapsule cap = createDataPacket(&std::get<unAuthClient>(unAuthClients[i]));
+					Serial.print("Connected to id ");
+					Serial.println(cap.getSource());
+
+					clientMap->put(cap.getSource(), &std::get<unAuthClient>(unAuthClients[i]));
+					std::get<authProg>(unAuthClients[i]) = CONNECTED;
+
+					DataCapsule outCap(uuid,cap.getSource(),FID_HUB,0,NULL);
+					size_t pLen = cap.getTcpPacketLength();
+					uint8_t bytes[pLen];
+					
+					cap.createTcpPacket(bytes);
+					for (int i = 0; i < pLen; i++) {
+						Serial.print(" ");
+						Serial.print(bytes[i]);
+					}
+					Serial.println("<- empty capsule");
+					std::get<unAuthClient>(unAuthClients[i]).write(&bytes[0],pLen);
+					
+				}
+				
+				break;
+
+			case(CONNECTED): //client has been authenticated and moved to clientMap, time to clean up its spot
+				std::get<timeIn>(unAuthClients[i]) = 0;
+				std::get<authProg>(unAuthClients[i]) = NOT_CONNECTED;
+				Serial.print(i);
+				Serial.println(" has been cleaned");
+				break;
+			default:
+				break;
+			}
+						
 		}
 	}
 	
@@ -193,7 +272,7 @@ void loop() {
 
 	//get and broadcast state updates
 	//while broadcasts waiting
-	//tx to each attached client
+	//tx to each attached unAuthClient
 	
 	while (hub->numCapsulesRemaining() > 0)
 	{
