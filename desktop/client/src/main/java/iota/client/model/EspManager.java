@@ -63,8 +63,6 @@ public class EspManager extends Observable implements Runnable {
                 if (!devices.containsKey(r.getHost())) {
                     EspDevice device = new EspDevice(r.getHost(), definitionStore);
                     staging.add(device);
-
-
                 }
             }
         }
@@ -79,7 +77,8 @@ public class EspManager extends Observable implements Runnable {
         }
 
         try {
-            Thread.sleep(1000);
+            //timeout length
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -87,7 +86,10 @@ public class EspManager extends Observable implements Runnable {
 
         for (EspDevice d : staging) {
             if (d.getStatus() == ConnectionStatus.CONNECTED) {
+                System.out.println("Client at " + d.getInetAddress() + " has been authenticated, adding to store");
                 devices.put(d.getInetAddress(), d);
+            } else {
+                System.out.println(d.getInetAddress() + " timeout while attempting to connect");
             }
         }
 

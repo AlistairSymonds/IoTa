@@ -7,14 +7,14 @@ public class ConcurrentConnectionStatus {
         this.status = status;
     }
 
-    public synchronized ConnectionStatus getStatus() {
+    public ConnectionStatus getStatus() {
         return status;
     }
 
     public synchronized ConnectionStatus setStatus(ConnectionStatus newStatus) {
         ConnectionStatus oldStatus = status;
         status = newStatus;
-        System.out.println("New status: " + status);
+        //System.out.println("New status: " + status);
         this.notifyAll();
         return oldStatus;
     }
