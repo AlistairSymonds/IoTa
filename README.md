@@ -7,3 +7,10 @@ Currently working functions
 + internal diagnostics about esp8266
 + serial -> teensy 3.2 -> ws2812b led display
 + network ping
+
+
+If anyone cares, I'll be keeping an album of things I've recording about the project here, it's mostly just going to be demos and other fluff but it will all be here
+https://photos.app.goo.gl/47WBGpqVN4JXLkwDA
+
+Additionally if you hate well written code and good demos you can check out a quick demo of the precursor to this, my WiFI WS2818
+https://www.youtube.com/watch?v=Iv1DlcE2AxI
