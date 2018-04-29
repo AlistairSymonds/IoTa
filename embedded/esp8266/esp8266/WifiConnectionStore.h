@@ -2,12 +2,12 @@
 #include <ESP8266WiFi.h>
 
 #include "Map.h"
-//insert wifi client and forget about it!
+//insert wifi unAuthClient and forget about it!
 class WifiConnectionStore
 {
 public:
 	WifiConnectionStore(int maxClients);
-	//add client to store, will perform any handshaking if specified,
+	//add unAuthClient to store, will perform any handshaking if specified,
 	int addClient(WiFiClient *c);
 	WiFiClient * getAssociatedWifiConnection(long clientId);
 	WiFiClient * removeWifiConnection(long clientId);

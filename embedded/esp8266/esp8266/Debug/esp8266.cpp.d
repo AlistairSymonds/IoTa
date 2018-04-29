@@ -1,6 +1,6 @@
 C:\Users\alist\AppData\Local\Temp\VMBuilds\esp8266\esp8266_nodemcuv2\Debug\esp8266.cpp.o: \
  C:\Users\alist\AppData\Local\Temp\VMBuilds\esp8266\esp8266_nodemcuv2\Debug\esp8266.cpp \
- C:\Users\alist\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\cores\esp8266/Arduino.h \
+ C:\Users\alist\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\cores\esp8266/arduino.h \
  C:\Users\alist\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\cores\esp8266/stdlib_noniso.h \
  C:\Users\alist\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\cores\esp8266/binary.h \
  C:\Users\alist\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\cores\esp8266/esp8266_peri.h \
@@ -23,6 +23,7 @@ C:\Users\alist\AppData\Local\Temp\VMBuilds\esp8266\esp8266_nodemcuv2\Debug\esp82
  C:\Users\alist\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\cores\esp8266/Printable.h \
  C:\Users\alist\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\cores\esp8266/uart.h \
  C:\Users\alist\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\cores\esp8266/Esp.h \
+ C:\Users\alist\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\cores\esp8266/Arduino.h \
  C:\Users\alist\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\cores\esp8266/Updater.h \
  C:\Users\alist\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\cores\esp8266/flash_utils.h \
  C:\Users\alist\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\cores\esp8266/MD5Builder.h \
@@ -58,7 +59,7 @@ C:\Users\alist\AppData\Local\Temp\VMBuilds\esp8266\esp8266_nodemcuv2\Debug\esp82
  C:\Users\alist\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\libraries\ESP8266WiFi\src/include/slist.h \
  C:\Users\alist\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\libraries\ESP8266WebServer\src/ESP8266WebServer.h \
  C:\Users\alist\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\libraries\ESP8266WebServer\src/detail/RequestHandler.h \
- C:\Users\alist\OneDrive\Documents\Arduino\libraries\WiFiManager/WiFiManager.h \
+ C:\Users\alist\Documents\Arduino\libraries\WiFiManager/WiFiManager.h \
  C:\Users\alist\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0/tools/sdk/include/user_interface.h \
  C:\Users\alist\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0/tools/sdk/include/os_type.h \
  C:\Users\alist\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0/tools/sdk/include/ets_sys.h \
@@ -82,7 +83,7 @@ C:\Users\alist\AppData\Local\Temp\VMBuilds\esp8266\esp8266_nodemcuv2\Debug\esp82
  C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded/LedSerialMaster.h \
  C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded/LedPropEnum.h \
  C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded/Map.h \
- C:\Program\ Files\ (x86)\Microsoft\ Visual\ Studio\2017\Community\Common7\IDE\Extensions\pbd1usl1.2ll\Micro\ Platforms\default\debuggers\VM_DBG/VM_DBG.h \
- C:\Program\ Files\ (x86)\Microsoft\ Visual\ Studio\2017\Community\Common7\IDE\Extensions\pbd1usl1.2ll\Micro\ Platforms\default\debuggers\VM_DBG/VM_Boards.h \
- C:\Program\ Files\ (x86)\Microsoft\ Visual\ Studio\2017\Community\Common7\IDE\Extensions\pbd1usl1.2ll\Micro\ Platforms\default\debuggers\VM_DBG/VM_mem_check.h \
- C:\Program\ Files\ (x86)\Microsoft\ Visual\ Studio\2017\Community\Common7\IDE\Extensions\pbd1usl1.2ll\Micro\ Platforms\default\debuggers\VM_DBG/VM_mem_check.h
+ C:\Program\ Files\ (x86)\Microsoft\ Visual\ Studio\2017\Community\Common7\IDE\Extensions\kuedxvg2.nmj\Micro\ Platforms\default\debuggers\VM_DBG/VM_DBG.h \
+ C:\Program\ Files\ (x86)\Microsoft\ Visual\ Studio\2017\Community\Common7\IDE\Extensions\kuedxvg2.nmj\Micro\ Platforms\default\debuggers\VM_DBG/VM_Boards.h \
+ C:\Program\ Files\ (x86)\Microsoft\ Visual\ Studio\2017\Community\Common7\IDE\Extensions\kuedxvg2.nmj\Micro\ Platforms\default\debuggers\VM_DBG/VM_mem_check.h \
+ C:\Program\ Files\ (x86)\Microsoft\ Visual\ Studio\2017\Community\Common7\IDE\Extensions\kuedxvg2.nmj\Micro\ Platforms\default\debuggers\VM_DBG/VM_mem_check.h
