@@ -20,6 +20,9 @@ public class IoTaUtil {
     }
 
     public static long bytes2Long(byte bytes[]) {
+        if (bytes.length != 8) {
+            throw new IllegalArgumentException("Array of bytes must be 8 long, recieved len = " + bytes.length);
+        }
         long val = 0;
         for (int i = 0; i < 8; i++) {
             int shiftnum = (7 - i) * 8;
@@ -119,6 +122,6 @@ public class IoTaUtil {
     }
 
     public static long getHostId() {
-        return 123456;
+        return 48;
     }
 }
