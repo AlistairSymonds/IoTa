@@ -308,3 +308,15 @@ embedded/LedSerialSlave_octo_teensy/Debug/**
 embedded/LedSerialSlave_octo_teensy/Release/**
 embedded/LedSerialSlave_octo_teensy/LedSerialSlave_octo_teensy/Debug/**
 embedded/LedSerialSlave_octo_teensy/LedSerialSlave_octo_teensy/Release/**
+
+
+## binary output files
+*.buildinfo
+*.a
+*.bin
+*.ccp.o
+*.elf
+*.ino.bin
+*.ino.elf
+
+
