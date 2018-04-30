@@ -319,9 +319,4 @@ embedded/LedSerialSlave_octo_teensy/LedSerialSlave_octo_teensy/Release/**
 *.ino.bin
 *.ino.elf
 
-__vm/
-*.sln
-*.vcxproj
-*.filters
-*.xlsx
-*.log
+

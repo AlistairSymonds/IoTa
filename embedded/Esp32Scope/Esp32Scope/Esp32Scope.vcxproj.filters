@@ -17,5 +17,9 @@
   <ItemGroup>
     <None Include="Esp32Scope.ino" />
   </ItemGroup>
- 
+  <ItemGroup>
+    <ClInclude Include="__vm\.Esp32Scope.vsarduino.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>

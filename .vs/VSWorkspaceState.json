@@ -2,10 +2,12 @@
   "ExpandedNodes": [
     "",
     "\\embedded",
+    "\\embedded\\esp8266",
+    "\\embedded\\esp8266\\esp8266",
     "\\embedded\\IoTaLibEmbedded",
     "\\embedded\\IoTaLibEmbedded\\IoTaHubTest",
     "\\embedded\\IoTaLibEmbedded\\IoTaLibEmbedded"
   ],
-  "SelectedNode": "\\embedded\\IoTaLibEmbedded\\IoTaHubTest\\mapTest.cpp",
+  "SelectedNode": "\\embedded\\esp8266\\esp8266.sln",
   "PreviewInSolutionExplorer": false
 }
