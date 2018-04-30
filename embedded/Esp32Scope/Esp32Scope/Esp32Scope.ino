@@ -5,19 +5,29 @@
 */
 #include <SPI.h>
 // the setup function runs once when you press reset or power the board
+
+
+int debugPin = 35;
+int debugPinVal = 1;
+
+hw_timer_t * sampleTimer = NULL; 
 void setup() {
 	Serial.begin(9600);
 	pinMode(5, OUTPUT);
 	digitalWrite(5, HIGH);
 	SPI.begin(14, 12, 13, 5);
+
+	pinMode(debugPin, OUTPUT);
+	sampleTimer = timerBegin(0, 80, true);
+	timerAlarmWrite(sampleTimer, 1000000, true);
+	timerAlarmEnable(sampleTimer);
+	timerAttachInterrupt(sampleTimer, &timerFunction, true);
 }
 
 // the loop function runs over and over again until power down or reset
 void loop() {
-	Serial.println("Sending command");
-	setGain();
-	delay(1);
-	
+	//do nothing
+
 }
 
 void setGain() {
@@ -33,4 +43,18 @@ void setGain() {
 	digitalWrite(5, HIGH);
 
 	SPI.endTransaction();
+}
+
+void IRAM_ATTR timerFunction() {
+	//portENTER_CRITICAL_ISR(&sampleTimer);
+	Serial.println("Interrupt!");
+	digitalWrite(debugPin, debugPinVal);
+	if (debugPinVal == 1) {
+		debugPinVal = 0;
+	}
+	else
+	{
+		debugPinVal = 1;
+	}
+	//portEXIT_CRITICAL_ISR(&sampleTimer);
 }
