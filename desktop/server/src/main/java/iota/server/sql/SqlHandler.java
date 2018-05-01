@@ -1,7 +1,7 @@
 package iota.server.sql;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
-import iota.common.definitions.IFuncDef;
+import iota.common.functions.IFunction;
 import iota.server.IoTaBaseMain;
 
 import java.sql.ResultSet;
@@ -34,7 +34,7 @@ public class SqlHandler implements Runnable {
 
     private boolean initDb() {
         DbInitialiser dbInit = new DbInitialiser(this.dataSource);
-        for (IFuncDef def : IoTaBaseMain.defStore) {
+        for (IFunction def : IoTaBaseMain.defStore) {
             if (!dbInit.hasTable(def)) {
                 dbInit.createTable(def);
             }

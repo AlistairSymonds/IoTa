@@ -1,11 +1,12 @@
-package iota.common.definitions;
+package iota.common.functions;
 
 import iota.common.db.DbCol;
+import iota.common.definitions.IStateItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Heartbeat implements IFuncDef {
+public class Heartbeat implements IFunction {
 
     TimeDelta tDel;
 
@@ -17,6 +18,7 @@ public class Heartbeat implements IFuncDef {
         tDel = new TimeDelta();
         stateItems.add(tDel);
     }
+
     @Override
     public List<DbCol> getCols() {
         return null;
@@ -34,7 +36,7 @@ public class Heartbeat implements IFuncDef {
 
     @Override
     public int submitMessage(byte[] message) {
-        if(message[1] == getFuncId()){
+        if (message[1] == getFuncId()) {
 
         }
         tDel.timeOut = System.currentTimeMillis();
@@ -42,9 +44,9 @@ public class Heartbeat implements IFuncDef {
     }
 
     @Override
-    public int updateStateBuffer(byte[] receivedState) {
+    public int handleReceivedData(List<Byte> receivedData) {
         tDel.timeIn = System.currentTimeMillis();
-        if(receivedState[0] != 60){
+        if (receivedData.get(0) != 60) {
             return -1;
         }
 
@@ -58,9 +60,10 @@ public class Heartbeat implements IFuncDef {
         return stateItems;
     }
 
-    private class TimeDelta implements IStateItem{
+    private class TimeDelta implements IStateItem {
         long timeOut = 0;
         long timeIn = 0;
+
         @Override
         public String getName() {
             return "TimeDelta";

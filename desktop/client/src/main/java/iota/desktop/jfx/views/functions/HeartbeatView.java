@@ -5,8 +5,8 @@ import iota.client.network.DataCapsule;
 import iota.common.Constants;
 import iota.desktop.jfx.views.state.DefaultStateDisp;
 import iota.client.model.EspDevice;
-import iota.common.definitions.Heartbeat;
-import iota.common.definitions.IFuncDef;
+import iota.common.functions.Heartbeat;
+import iota.common.functions.IFunction;
 import iota.common.definitions.IStateItem;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -19,14 +19,14 @@ import java.util.List;
 public class HeartbeatView extends VBox implements UpdateAbleView {
     private final EspDevice device;
     private List<DefaultStateDisp> stateDisps;
-    private IFuncDef funcInstance;
+    private IFunction funcInstance;
 
     protected HeartbeatView(EspDevice deviceIn) {
         super();
         device = deviceIn;
 
         funcInstance = null;
-        for(IFuncDef def : device.getFuncs()){
+        for (IFunction def : device.getFuncs()) {
             if(def.getFuncId() == 1){
                 funcInstance = def;
                 break;
@@ -41,7 +41,7 @@ public class HeartbeatView extends VBox implements UpdateAbleView {
             public void handle(ActionEvent e) {
                 ArrayList<Byte> heartbeatBytes = new ArrayList<>();
                 heartbeatBytes.add((byte) Constants.FID_HEARTBEAT);
-                device.submitMessage(new DataCapsule(funcInstance, heartbeatBytes));
+                device.submitMessage(new DataCapsule(funcInstance.getFuncId(), heartbeatBytes));
             }
         });
 

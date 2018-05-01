@@ -6,10 +6,11 @@ import iota.client.network.ConnectionStatus;
 import iota.common.Constants;
 import iota.common.IoTaUtil;
 import iota.common.definitions.DefinitionStore;
-import iota.common.definitions.HubInternal;
-import iota.common.definitions.IFuncDef;
-import iota.common.definitions.IFuncFactory;
+import iota.common.functions.HubInternal;
+import iota.common.functions.IFunction;
+import iota.common.functions.IFuncFactory;
 
+import javax.swing.plaf.synth.SynthEditorPaneUI;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -26,7 +27,7 @@ public class EspDevice extends Observable {
 
     private InetAddress address;
     private Socket socket;
-    private List<IFuncDef> defs;
+    private List<IFunction> defs;
     private long deviceId;
     private volatile ConcurrentConnectionStatus status;
 
@@ -45,14 +46,22 @@ public class EspDevice extends Observable {
         this.address = address;
         this.defStore = defStoreIn;
         status = new ConcurrentConnectionStatus(ConnectionStatus.NOT_CONNECTED);
-        defs = new ArrayList<>();
+
     }
 
     public synchronized InetAddress getInetAddress() {
         return this.address;
     }
 
-    public synchronized List<IFuncDef> getFuncs() {
+    public synchronized List<IFunction> getFuncs() {
+        //normally using handcafted function packets is bad
+        //however some level of boot strapping is required to
+        //get the first connection
+        if (defs == null) {
+            defs = new ArrayList<>();
+            submitMessage(new DataCapsule(new HubInternal().getFuncId(), IoTaUtil.byteArray2List(IoTaUtil.short2Bytes(Constants.FID_HUB))));
+        }
+
         return defs;
     }
 
@@ -90,17 +99,16 @@ public class EspDevice extends Observable {
         msg[0] = (byte) (msgLen << 8);
         msg[1] = (byte) (msgLen);
 
-        long thisId = capsule.getSourceId();
-        for (int i = 0; i < 8; i++) {
-            msg[10 - i] = (byte) (thisId << 8 * i);
-        }
+        byte[] sourceId = IoTaUtil.long2Bytes(capsule.getSourceId());
+        System.arraycopy(sourceId, 0, msg, 2, 8);
+
         long destId = this.deviceId;
         for (int i = 0; i < 8; i++) {
-            msg[17 - i] = (byte) (thisId << 8 * i);
+            msg[17 - i] = (byte) (destId << 8 * i);
         }
 
         for (int i = 0; i < 1; i++) {
-            msg[19 - i] = (byte) (capsule.getFuncId().getFuncId() << 8 * i);
+            msg[19 - i] = (byte) (capsule.getFuncId() << 8 * i);
         }
 
         List<Byte> data = capsule.getData();
@@ -114,26 +122,23 @@ public class EspDevice extends Observable {
         return msg.length;
     }
 
-    private int handleReturnedMessage(byte[] msg){
+    private int handleReturnedMessage(DataCapsule cap) {
 
         //check if there are any data bytes after length and funcid
-        if(msg.length<2){
-            return -1;
-        }
+
         //check if its an internal message (func id == 0x00FF)
-        if(msg[1] == 0&& msg[2] == -1){
-            for(int i = 4; i < msg.length; i++){
-                IFuncDef f = IFuncFactory.getInstanceById(msg[i]);
+        if (cap.getFuncId() == Constants.FID_HUB) {
+            for (int i = 0; i < cap.getData().size(); i = i + 2) {
+                IFunction f = IFuncFactory.getInstanceById((short) (cap.getData().get(i) << 8 | cap.getData().get(i + 1)));
                 defs.add(f);
                 System.out.println("Added func " + f.getFuncId() + " name " + f.getTableName());
             }
         }
 
-        for (IFuncDef d : defs){
-            if(d.getFuncId() == msg[2]){
-                byte[] stateBuf = new byte[msg.length-3];
-                System.arraycopy(msg,3,stateBuf,0,stateBuf.length);
-                d.updateStateBuffer(stateBuf);
+
+        for (IFunction d : defs) {
+            if (d.getFuncId() == cap.getFuncId()) {
+                d.handleReceivedData(cap.getData());
             }
         }
 
@@ -159,19 +164,15 @@ public class EspDevice extends Observable {
 
         synchronized void sendMessage(byte[] msg) {
             queue.add(msg);
-            this.notify();
+            this.notifyAll();
         }
 
         @Override
         public synchronized void run() {
             System.out.println("Running " + this.toString());
 
-            // add in sending states too
-            //also follow diagram you muppet
-
             //while not in an error state handle various states and requirements
             while (status.getStatus() != ConnectionStatus.NOT_CONNECTED || status.getStatus() != ConnectionStatus.ERROR) {
-                synchronized (status) {
                     switch (status.getStatus()) {
                         case FIRST_CONNECT:
                             status.setStatus(ConnectionStatus.SENDING_MAGIC_BYTE);
@@ -179,7 +180,6 @@ public class EspDevice extends Observable {
 
                         case SENDING_MAGIC_BYTE:
                             try {
-                                System.out.println("sending magic byte in a sec");
                                 dataOut.write(Constants.MAGIC_BYTE);
                                 status.setStatus(ConnectionStatus.WAITING_FOR_MAGIC_BYTE_PLUS_ONE);
                             } catch (IOException e) {
@@ -188,15 +188,17 @@ public class EspDevice extends Observable {
                             break;
 
                         case SENDING_EMPTY_CAPSULE:
-                            DataCapsule initCap = new DataCapsule(new HubInternal(), new ArrayList<>());
+                            DataCapsule initCap = new DataCapsule(Constants.FID_HUB, new ArrayList<>());
                             submitMessage(initCap);
                             byte[] initBytes = queue.poll();
-                            System.out.println(Arrays.toString(initBytes));
+
+
                             try {
                                 dataOut.write(initBytes);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
+                            System.out.println("Sent emppty capsule " + IoTaUtil.byteArr2HexStr(initBytes));
                             status.setStatus(ConnectionStatus.WAITING_FOR_EMPTY_CAPSULE);
                             break;
 
@@ -204,12 +206,8 @@ public class EspDevice extends Observable {
                             while (!queue.isEmpty()) {
                                 try {
                                     byte[] valsOut = queue.poll();
-                                    StringBuilder byteStr = new StringBuilder("");
-                                    for (int i = 0; i < valsOut.length; i++) {
-                                        byteStr.append("0x");
-                                        byteStr.append(String.format("%02x ", valsOut[i]));
-                                    }
-                                    System.out.println("Sent message: " + byteStr);
+
+                                    System.out.println("Sent message: " + IoTaUtil.byteArr2HexStr(valsOut));
                                     dataOut.write(valsOut);
                                     setChanged();
                                     notifyObservers();
@@ -227,7 +225,7 @@ public class EspDevice extends Observable {
                     }
 
 
-                }
+
             }
 
             System.out.println("Sender for EspDevice @" + address.toString() + " shutting down");
@@ -273,11 +271,12 @@ public class EspDevice extends Observable {
                             try {
                                 byte[] emptyCapsule = new byte[23];
                                 dataIn.read(emptyCapsule, 0, 22);
-                                if (emptyCapsule[20] == 0 && emptyCapsule[21] == 0) {
+                                if (emptyCapsule[21] == 0 && emptyCapsule[22] == 0) {
                                     deviceId = IoTaUtil.bytes2Long(Arrays.copyOfRange(emptyCapsule, 2, 10));
-                                    System.out.println("Connected to id" + deviceId);
+
                                     status.setStatus(ConnectionStatus.CONNECTED);
                                 }
+                                System.out.println("Empty capsule was: " + IoTaUtil.byteArr2HexStr(emptyCapsule));
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -291,14 +290,15 @@ public class EspDevice extends Observable {
                                 messageLength = (int) dataIn.readByte();
                                 msg = new byte[messageLength];
                                 msg[0] = (byte) messageLength;
-                                dataIn.read(msg, 1, messageLength - 1);
+                                dataIn.read(msg, 2, messageLength - 2);
 
                                 StringBuilder byteStr = new StringBuilder("");
                                 for (int i = 0; i < msg.length; i++) {
                                     byteStr.append(String.format("%02x ", msg[i]));
                                 }
                                 System.out.println("Got message: " + byteStr);
-                                handleReturnedMessage(msg);
+
+                                //handleReturnedMessage(msg);
 
                             } catch (IOException e) {
                                 status.setStatus(ConnectionStatus.ERROR);

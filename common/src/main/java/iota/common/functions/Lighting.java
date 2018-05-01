@@ -1,11 +1,12 @@
-package iota.common.definitions;
+package iota.common.functions;
 
 import iota.common.db.DbCol;
+import iota.common.definitions.IStateItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
-class Lighting implements IFuncDef {
+class Lighting implements IFunction {
     private List<ByteState> stateItems;
 
     protected Lighting() {
@@ -48,14 +49,14 @@ class Lighting implements IFuncDef {
     }
 
     @Override
-    public int updateStateBuffer(byte[] recievedState) {
+    public int handleReceivedData(List<Byte> receivedData) {
         stateItems.clear();
-        for (int i = 0; i < recievedState.length; i++) {
-            ByteState bs = new ByteState("State " + i);
-            bs.setVal(recievedState[i]);
+        int num = 0;
+        for (Byte b : receivedData) {
+            ByteState bs = new ByteState("State " + num);
+            bs.setVal(b);
             stateItems.add(bs);
-
-
+            num++;
         }
 
         return 0;

@@ -1,6 +1,6 @@
 package iota.server.sql;
 
-import iota.common.definitions.IFuncDef;
+import iota.common.functions.IFunction;
 import iota.common.db.DbCol;
 
 
@@ -10,7 +10,7 @@ import iota.common.db.DbCol;
 class SqlQueries {
     //private String schemaName;
 
-    public static String getCreateTableStatement(IFuncDef definition, String schemaName) {
+    public static String getCreateTableStatement(IFunction definition, String schemaName) {
         String pk = "";
         StringBuilder stmt = new StringBuilder("CREATE TABLE ");
         stmt.append("'" + schemaName + "'.");
@@ -52,14 +52,14 @@ class SqlQueries {
         return stmt.toString();
     }
 
-    public static String getCheckTableHasColumns(IFuncDef def) {
+    public static String getCheckTableHasColumns(IFunction def) {
         StringBuilder stmt = new StringBuilder("");
 
         return stmt.toString();
     }
 
 
-    public String getInsertDataQuery(IFuncDef def, String schemaName) {
+    public String getInsertDataQuery(IFunction def, String schemaName) {
         return null;
     }
 }

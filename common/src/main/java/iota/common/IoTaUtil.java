@@ -4,8 +4,10 @@ package iota.common;
 
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 public class IoTaUtil {
     private IoTaUtil() {
@@ -49,11 +51,29 @@ public class IoTaUtil {
         return val;
     }
 
-    public static byte[] int2Bytes(long n) {
+    public static byte[] int2Bytes(int n) {
         byte b[] = new byte[4];
         for (int i = 0; i < 4; i++) {
             int shiftnum = (3 - i) * 8;
             b[i + 10] = (byte) (n >> shiftnum);
+        }
+        return b;
+    }
+
+    public static short bytes2Shot(byte bytes[]) {
+        short val = 0;
+        for (int i = 0; i < 2; i++) {
+            short shiftnum = (short) ((1 - i) * 8);
+            val = (short) (val | ((bytes[i] & 0xFF) << shiftnum));
+        }
+        return val;
+    }
+
+    public static byte[] short2Bytes(short n) {
+        byte b[] = new byte[2];
+        for (int i = 0; i < 2; i++) {
+            int shiftnum = (1 - i) * 8;
+            b[i] = (byte) (n >> shiftnum);
         }
         return b;
     }
@@ -121,7 +141,25 @@ public class IoTaUtil {
         return chars;
     }
 
+    public static List<Byte> byteArray2List(byte[] arr) {
+        List<Byte> l = new ArrayList<>();
+        for (int i = 0; i < arr.length; i++) {
+            l.add(arr[i]);
+        }
+        return l;
+    }
+
+
     public static long getHostId() {
         return 48;
+    }
+
+    public static String byteArr2HexStr(byte[] bytes) {
+        StringBuilder ibyteStr = new StringBuilder("");
+        for (int i = 0; i < bytes.length; i++) {
+            ibyteStr.append("0x");
+            ibyteStr.append(String.format("%02x ", bytes[i]));
+        }
+        return ibyteStr.toString();
     }
 }

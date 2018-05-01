@@ -5,11 +5,10 @@ import iota.client.network.DataCapsule;
 import iota.desktop.jfx.views.state.DefaultStateDisp;
 import iota.client.model.EspDevice;
 import iota.common.IoTaUtil;
-import iota.common.definitions.IFuncDef;
+import iota.common.functions.IFunction;
 import iota.common.definitions.IStateItem;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -21,7 +20,7 @@ import java.util.List;
 public class LightingView extends GridPane implements UpdateAbleView {
     private final EspDevice device;
     private List<DefaultStateDisp> stateDisps;
-    private IFuncDef funcInstance;
+    private IFunction funcInstance;
     private Button sendIt;
     private List<TextField> newVals;
 
@@ -31,7 +30,7 @@ public class LightingView extends GridPane implements UpdateAbleView {
         this.device = deviceIn;
 
         funcInstance = null;
-        for (IFuncDef def : device.getFuncs()) {
+        for (IFunction def : device.getFuncs()) {
             if (def.getFuncId() == 2) {
                 funcInstance = def;
                 break;
@@ -78,7 +77,7 @@ public class LightingView extends GridPane implements UpdateAbleView {
                             msg.add(bytes[0]);
 
 
-                            DataCapsule cap = new DataCapsule(funcInstance, msg);
+                            DataCapsule cap = new DataCapsule(funcInstance.getFuncId(), msg);
                             device.submitMessage(cap);
                             newVals.get(i).setPromptText(val);
                             newVals.get(i).clear();

@@ -1,11 +1,23 @@
-package iota.common.definitions;
+package iota.common.functions;
 
 import iota.common.Constants;
+import iota.common.IoTaUtil;
 import iota.common.db.DbCol;
+import iota.common.definitions.IStateItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class HubInternal implements IFuncDef {
+public class HubInternal implements IFunction {
+
+    List<IStateItem> attachedFunctions;
+    List<IStateItem> debugParameters;
+
+
+    public HubInternal() {
+
+    }
+
     @Override
     public List<DbCol> getCols() {
         return null;
@@ -27,7 +39,7 @@ public class HubInternal implements IFuncDef {
     }
 
     @Override
-    public int updateStateBuffer(byte[] recievedState) {
+    public int handleReceivedData(List<Byte> recievedData) {
         return 0;
     }
 
