@@ -74,7 +74,7 @@ std::pair<int, int> tMarkers;
 
 
 void setup() {
-	Serial.begin(9600);
+	Serial.begin(115200);
 	
 	Serial.println("Starting IoTa ESP8266");
 	Serial.println("Wifi Manager init");
@@ -93,6 +93,7 @@ void setup() {
 	hub = new IoTaDeviceHub(uuid);
 	hub->addFunc(&hb);
 	hub->addFunc(&led);
+	
 	
 	unAuthClients = new std::tuple<uint, connStatusEnum, WiFiClient>[MAX_UNAUTH_CLIENTS];
 	for (int i = 0; i < MAX_UNAUTH_CLIENTS; i++) {
@@ -129,11 +130,15 @@ DataCapsule createDataPacket(WiFiClient *c) {
 		short size = (rxBuf[20] << 8 | rxBuf[21]);
 		uint8_t * data = new uint8_t[size];
 		memcpy(data, &rxBuf[22], size);
-
+		for (int i = 0; i < msgLen; i++) {
+			Serial.print(rxBuf[i], HEX);
+			Serial.print(" ");
+			
+		}
+		Serial.println();
 		//data is now stored inside DataCapsule, data can be freed
 		DataCapsule capsule(source, dest, func, size, data);
-		Serial.print("Message recieved from ");
-		Serial.println(capsule.getSource());
+		printCapsuleDetails(&capsule);
 
 		delete data;
 		return capsule;
@@ -208,11 +213,9 @@ void loop() {
 			case(FIRST_CONNECT):
 				
 				if (std::get<unAuthClient>(unAuthClients[i]).available() > 0) {
-					Serial.print(i);
-					Serial.println(" sent something");
+					
 					uint8_t firstContact = std::get<unAuthClient>(unAuthClients[i]).read();
-					Serial.print("Unauth sent: ");
-					Serial.println(firstContact);
+					
 
 					if (firstContact == MAGIC_BYTE) {
 						std::get<authProg>(unAuthClients[i]) = MAGIC_BYTE_RX;
@@ -221,7 +224,6 @@ void loop() {
 				break;
 
 			case(MAGIC_BYTE_RX):
-				Serial.println("sending back magic byte + 1");
 				std::get<unAuthClient>(unAuthClients[i]).write(MAGIC_BYTE + 1);
 				std::get<authProg>(unAuthClients[i]) = CLIENT_ID_RX;
 
@@ -230,23 +232,26 @@ void loop() {
 			case(CLIENT_ID_RX):
 				if (std::get<unAuthClient>(unAuthClients[i]).available() > 0) {
 					DataCapsule cap = createDataPacket(&std::get<unAuthClient>(unAuthClients[i]));
-					Serial.print("Connected to id ");
-					Serial.println(cap.getSource());
-
+					
+					printCapsuleDetails(&cap);
 					clientMap->put(cap.getSource(), &std::get<unAuthClient>(unAuthClients[i]));
 					std::get<authProg>(unAuthClients[i]) = CONNECTED;
 
 					DataCapsule outCap(uuid,cap.getSource(),FID_HUB,0,NULL);
+
+
 					size_t pLen = cap.getTcpPacketLength();
 					uint8_t bytes[pLen];
 					
 					cap.createTcpPacket(bytes);
 					for (int i = 0; i < pLen; i++) {
 						Serial.print(" ");
-						Serial.print(bytes[i]);
+						Serial.print(bytes[i], HEX);
 					}
 					Serial.println("<- empty capsule");
 					std::get<unAuthClient>(unAuthClients[i]).write(&bytes[0],pLen);
+					Serial.println(cap.getSource());
+					clientMap->put(cap.getSource(), &std::get<unAuthClient>(unAuthClients[i]));
 					
 				}
 				
@@ -266,8 +271,36 @@ void loop() {
 	}
 	
 
+	
+	
+
+	
+
+	//iterate through connected clients, if they have any data in buffer
+	//read in a and process it
+	for (int i = 0; i < clientMap->getMaxSize(); i++) {
+		std::pair<long, WiFiClient*> *entries = clientMap->getEntryReference();
+
+		if (entries[i].first != NULL) {
+			if (!entries[i].second->connected()) {
+				Serial.print(entries[i].first);
+				Serial.println(" has disconnected");
+				clientMap->remove(entries[i].first);
+
+			} else if (entries[i].second->available() > 0) {
+				
+				DataCapsule cap = createDataPacket(entries[i].second);
+				printCapsuleDetails(&cap);
+				hub->processMessage(&cap);
+			}
+		}
+		
+	}
+
+	yield();
 	//process internal updates from hub
 	hub->tick();
+	yield();
 
 
 	//get and broadcast state updates
@@ -284,7 +317,7 @@ void loop() {
 		}
 		else
 		{
-
+			
 		}
 	}
 
@@ -297,7 +330,18 @@ void loop() {
 		printDebug();
 		tMarkers.second = micros();
 	}
+	
+}
 
+void printCapsuleDetails(DataCapsule *c) {
+	Serial.print("Source: ");
+	Serial.println(c->getSource());
+	Serial.print("Destination: ");
+	Serial.println(c->getDestination());
+	Serial.print("Func id: ");
+	Serial.println(c->getFuncId());
+	Serial.print("Attached data size: ");
+	Serial.println(c->getDataSize());
 }
 
 
