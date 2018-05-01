@@ -16,9 +16,10 @@ namespace iota{
 			int size();
 			int freeSpace();
 			int clear();
-			
-			//this method is very bad and I should really learn how to use iterators
-			//**entries
+			int getMaxSize();
+			//THIS METHOD IS REALLY REALLY BAD
+			std::pair<K, V>* getEntryReference();
+
 			~Map();
 
 		private:
@@ -40,6 +41,8 @@ namespace iota{
 			entries[i].first = NULL;
 		}
 	}
+
+	
 
 	template<class K, class V>
 	V Map<K,V>::put(K key, V value) {
@@ -84,7 +87,7 @@ namespace iota{
 		V val = NULL;
 		for (int i = 0; i < maxSize; i++) {
 			if (entries[i].first = key) {
-				val = entries[i].first;
+				val = entries[i].second;
 				entries[i].first = NULL;
 				currentSize--;
 			}
@@ -122,6 +125,18 @@ namespace iota{
 			entries[i].first = NULL;
 		}
 		return 0;
+	}
+
+	template<class K, class V>
+	inline int Map<K, V>::getMaxSize()
+	{
+		return maxSize;
+	}
+
+	template<class K, class V>
+	inline std::pair<K, V>* Map<K, V>::getEntryReference()
+	{
+		return entries;
 	}
 
 	template<class K, class V>
