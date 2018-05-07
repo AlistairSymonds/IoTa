@@ -6,7 +6,7 @@ import iota.client.gui.presenter.IoTaPresenter;
 import iota.desktop.jfx.views.functions.DebugView;
 import iota.desktop.jfx.views.functions.FunctionViewFactory;
 import iota.client.model.EspDevice;
-import iota.common.definitions.IFuncDef;
+import iota.common.functions.IFunction;
 import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.layout.FlowPane;
@@ -45,7 +45,7 @@ public class DeviceView extends FlowPane implements UpdateAbleView {
             super.getChildren().clear();
             funcViews.clear();
 
-            for (IFuncDef funcDef : presenter.getSelectedEspDevice().getFuncs()) {
+            for (IFunction funcDef : presenter.getSelectedEspDevice().getFuncs()) {
 
                 super.getChildren().add(FunctionViewFactory.getFunctionView(presenter.getSelectedEspDevice(), funcDef));
             }

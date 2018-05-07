@@ -1,5 +1,7 @@
 package iota.common.definitions;
 
+import iota.common.functions.IFunction;
+
 import java.io.BufferedReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -18,7 +20,7 @@ class TxtParser implements IFuncDefFileParser {
     }
 
     @Override
-    public IFuncDef parseFile() {
+    public IFunction parseFile() {
         return createDef(createLineMap());
     }
 
@@ -45,8 +47,8 @@ class TxtParser implements IFuncDefFileParser {
     }
 
 
-    private IFuncDef createDef(HashMap<String, List<String>> lineMap) {
-        IFuncDef def;
+    private IFunction createDef(HashMap<String, List<String>> lineMap) {
+        IFunction def;
         def = new FileBasedFuncDef(lineMap);
         return def;
     }

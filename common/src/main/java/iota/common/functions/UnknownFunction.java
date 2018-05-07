@@ -1,14 +1,16 @@
-package iota.common.definitions;
+package iota.common.functions;
 
 import iota.common.db.DbCol;
+import iota.common.definitions.IStateItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class UnknownFunction implements IFuncDef {
+public class UnknownFunction implements IFunction {
 
     private short id;
-    UnknownFunction(int id){
+
+    UnknownFunction(int id) {
         this.id = (short) id;
     }
 
@@ -33,7 +35,7 @@ public class UnknownFunction implements IFuncDef {
     }
 
     @Override
-    public int updateStateBuffer(byte[] recievedState) {
+    public int handleReceivedData(List<Byte> receivedData) {
         return 0;
     }
 

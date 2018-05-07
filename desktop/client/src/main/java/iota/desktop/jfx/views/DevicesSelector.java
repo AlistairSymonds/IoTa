@@ -14,7 +14,6 @@ import javafx.scene.layout.VBox;
 
 public class DevicesSelector extends VBox implements UpdateAbleView {
     private ListView<EspDevice> lv;
-    private Button updateButton;
     private IoTaPresenter presenter;
 
     public DevicesSelector(IoTaPresenter presenterIn) {
@@ -23,13 +22,6 @@ public class DevicesSelector extends VBox implements UpdateAbleView {
         presenter.registerUpdateAbleView(this);
         lv = new ListView<>();
 
-        updateButton = new Button("Update List");
-        updateButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) {
-                updateView();
-            }
-        });
 
         lv.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> {
@@ -37,7 +29,6 @@ public class DevicesSelector extends VBox implements UpdateAbleView {
                     presenter.setSelectedEspDevice(newValue);
                 }
         );
-        super.getChildren().add(updateButton);
         super.getChildren().add(lv);
         updateView();
     }

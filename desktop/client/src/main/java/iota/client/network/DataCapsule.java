@@ -1,9 +1,8 @@
 package iota.client.network;
 
 
-import iota.common.Constants;
 import iota.common.IoTaUtil;
-import iota.common.definitions.IFuncDef;
+import iota.common.functions.IFunction;
 
 import java.util.List;
 
@@ -11,14 +10,14 @@ public class DataCapsule {
 
     private long sourceId;
     private long destinationId;
-    private IFuncDef func;
+    private short funcId;
     private List<Byte> data;
 
 
-    public DataCapsule(IFuncDef func, List<Byte> data) {
+    public DataCapsule(short funcId, List<Byte> data) {
 
 
-        this.func = func;
+        this.funcId = funcId;
         this.data = data;
 
     }
@@ -32,8 +31,8 @@ public class DataCapsule {
         return data;
     }
 
-    public IFuncDef getFuncId() {
-        return func;
+    public short getFuncId() {
+        return funcId;
     }
 
 }
