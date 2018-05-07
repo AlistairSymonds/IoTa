@@ -18,7 +18,7 @@
 #define ESP_PLATFORM
 #define HAVE_CONFIG_H
 #define F_CPU 240000000L
-#define ARDUINO 10805
+#define ARDUINO 10609
 #define ARDUINO_LOLIN32
 #define ARDUINO_ARCH_ESP32
 #define ESP32
@@ -90,7 +90,7 @@ typedef long __PTRDIFF_TYPE__;
 
 
 
-#include <arduino.h>
+#include <Arduino.h>
 #include <pins_arduino.h> 
 
 //#include "..\generic\Common.h"
