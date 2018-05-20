@@ -47,5 +47,11 @@
     <ClCompile Include="mapTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HubInternaTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dataConversionTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

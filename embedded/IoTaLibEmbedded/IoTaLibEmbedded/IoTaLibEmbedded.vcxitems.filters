@@ -45,6 +45,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)DummyBroadcaster.cpp">
       <Filter>Source Files\functions</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)iota_util.cpp">
+      <Filter>iota_util</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)iota_defines.h">
@@ -78,6 +81,9 @@
       <Filter>iota_util</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)fixedSet.h">
+      <Filter>iota_util</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)iota_util.h">
       <Filter>iota_util</Filter>
     </ClInclude>
   </ItemGroup>

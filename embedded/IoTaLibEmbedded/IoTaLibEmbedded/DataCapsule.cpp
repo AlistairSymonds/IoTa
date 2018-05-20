@@ -1,5 +1,5 @@
 #include <string.h>
-
+#include "iota_util.h"
 #include "DataCapsule.h"
 
 
@@ -76,7 +76,7 @@ int DataCapsule::updateData(int dataSize, uint8_t * dataIn)
 	return 1;
 }
 
-int DataCapsule::getDataSize() {
+short DataCapsule::getDataSize() {
 	return dataSize;
 }
 
@@ -88,9 +88,14 @@ short DataCapsule::getTcpPacketLength()
 int DataCapsule::createTcpPacket(uint8_t * packet)
 {
 	short packetLength = getTcpPacketLength();
-	packet[0] = packetLength << 8;
-	packet[1] = packetLength;
-	return 0;
+	typeConv::short2bytes(packetLength, packet);
+	typeConv::long2bytes(this->getSource(), &packet[2]);
+	typeConv::long2bytes(this->getDestination(), &packet[10]);
+	typeConv::short2bytes(this->getDestFunc(), &packet[18]);
+	typeConv::short2bytes(this->getDataSize(), &packet[20]);
+	memcpy(&packet[22], this->data, this->dataSize);
+
+	return packetLength;
 }
 
 

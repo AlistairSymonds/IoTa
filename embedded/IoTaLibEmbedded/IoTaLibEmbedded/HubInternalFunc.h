@@ -2,7 +2,7 @@
 #define _HUBFUNCINTERNAL_H
 
 #include "IoTaFuncBase.h"
-#include "fixedSet.h"
+#include "circularBuffer.h"
 #include <stdlib.h>
 
 
@@ -10,7 +10,7 @@
 //as usually the hub itself is designed to be transparent to others
 class HubInternalFunc : public IoTaFuncBase {
 public:
-	HubInternalFunc(int * numFuncs, int maxFuncs);
+	HubInternalFunc(IoTaFuncBase ** funcsPtr, int * numFuncs, int maxFuncs);
 	short getFuncId();
 	void processCommand(DataCapsule *capsule);
 	void tick();
@@ -22,13 +22,10 @@ public:
 	int getStateBufLen();
 	int getStateBuffer(uint8_t *buf);
 
-	void addFuncId(uint8_t id);
-
 	~HubInternalFunc();
 private:
-	uint8_t * funcIds;
+	IoTaFuncBase * * funcsPtr;
 	int * numFuncsPtr;
-	fixedSet<long> *map;
-
+	CircularBuffer<long> *responseMap;
 };
 #endif

@@ -29,6 +29,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)HubInternalFunc.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)IoTaFuncBase.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)iota_defines.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)iota_util.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LedPropEnum.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)LedSerialMaster.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Map.h" />
@@ -47,6 +48,9 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)heartbeat.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)iota_util.cpp">
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)LedSerialMaster.cpp">

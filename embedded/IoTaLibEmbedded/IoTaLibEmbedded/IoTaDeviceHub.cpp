@@ -27,14 +27,15 @@
 
 
 
-IoTaDeviceHub::IoTaDeviceHub(long uuid) {
+IoTaDeviceHub::IoTaDeviceHub(long uuid, size_t maxFuncs) {
 	_uuid = uuid;
-	maxFuncs = 10;
+	this->maxFuncs = maxFuncs;
 	numFuncs = 0;
-	funcs = (IoTaFuncBase **)malloc(sizeof(IoTaFuncBase*) * maxFuncs);	
+	//funcs = (IoTaFuncBase **)malloc(sizeof(IoTaFuncBase*) * maxFuncs);	
+	funcs = (new IoTaFuncBase* [maxFuncs]);
 	msgStorage = new CircularBuffer<DataCapsule *>(100);
 	
-	internalHandler = new HubInternalFunc(&numFuncs, maxFuncs);
+	internalHandler = new HubInternalFunc(funcs, &numFuncs, maxFuncs);
 	addFunc(internalHandler);
 }
 
@@ -72,7 +73,6 @@ int IoTaDeviceHub::getNumFuncs()
 
 int IoTaDeviceHub::addFunc(IoTaFuncBase * newFunc)
 {
-	internalHandler->addFuncId(newFunc->getFuncId());
 	if (numFuncs < maxFuncs-1) {
 		funcs[numFuncs] = newFunc;
 		numFuncs++;

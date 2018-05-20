@@ -11,14 +11,14 @@ namespace IoTaHubTest
 	{
 		long uuid = 123456789;
 		TEST_METHOD(hub_add) {
-			IoTaDeviceHub hub(uuid);
+			IoTaDeviceHub hub(uuid, 10);
 			Heartbeat h;
 			hub.addFunc(&h);
 		}
 
 		TEST_METHOD(heartbeat_test) {
 
-			IoTaDeviceHub hub(uuid);
+			IoTaDeviceHub hub(uuid, 10);
 			Heartbeat h;
 			hub.addFunc(&h);
 			long source = 1;
@@ -43,7 +43,7 @@ namespace IoTaHubTest
 				uint8_t *pckt = new uint8_t[txCap->getTcpPacketLength()];
 				txCap->createTcpPacket(pckt);
 				
-				short tcpLen = (pckt[0] << 8 | pckt[1]);
+				short tcpLen = (pckt[1] << 8 | pckt[0]);
 				Assert::AreEqual((short)23, tcpLen);
 			}
 			

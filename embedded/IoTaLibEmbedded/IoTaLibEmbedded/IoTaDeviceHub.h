@@ -25,18 +25,13 @@ class IoTaDeviceHub {
 
 
 	public: 
-		IoTaDeviceHub(long uuid);
+		IoTaDeviceHub(long uuid, size_t maxFuncs);
 		int addFunc(IoTaFuncBase *func);
 		int processMessage(DataCapsule *capsule);
 		
 		int numCapsulesRemaining();
 		int getNextOutputCapsule(DataCapsule **capsulePtr);
 		
-		
-		/*
-		int numBroadcastsRemaining();
-		int getNextBroadcast(uint8_t*buf);
-		*/
 
 		void tick();
 		int getNumFuncs();

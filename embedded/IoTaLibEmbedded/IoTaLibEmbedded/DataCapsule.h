@@ -29,7 +29,7 @@ public:
 	int copyDataOut(uint8_t *buf);
 	short getDestFunc();
 	int updateData(int dataSize, uint8_t * dataIn);
-	int getDataSize();
+	short getDataSize();
 
 	short getTcpPacketLength();
 	int createTcpPacket(uint8_t* packet);

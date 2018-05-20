@@ -11,14 +11,14 @@ namespace IoTaHubTest
 	{
 		long uuid = 123456789;
 		TEST_METHOD(hub_add) {
-			IoTaDeviceHub hub(uuid);
+			IoTaDeviceHub hub(uuid,10);
 			Heartbeat h;
 			hub.addFunc(&h);
 		}
 
 		TEST_METHOD(dummyBroadcast) {
 
-			IoTaDeviceHub hub(uuid);
+			IoTaDeviceHub hub(uuid, 10);
 			Heartbeat h;
 			hub.addFunc(&h);
 			DummyBroadcaster db;
