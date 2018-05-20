@@ -1,7 +1,7 @@
 #include <string.h>
 #include "HubInternalFunc.h"
 #include "iota_defines.h"
-
+#include "iota_util.h"
 
 HubInternalFunc::HubInternalFunc(IoTaFuncBase ** funcs, int * numFuncs, int maxFuncs)
 {
@@ -49,10 +49,10 @@ int HubInternalFunc::getStateBufLen()
 
 int HubInternalFunc::getStateBuffer(uint8_t * buf)
 {
-	short * ids;
-	ids = new short[*numFuncsPtr];
-	for (int i = 0; i < *numFuncsPtr; i++) {
-		ids[i] = funcsPtr[i]->getFuncId();
+	uint8_t * ids;
+	ids = new uint8_t[*numFuncsPtr];
+	for (int i = 0; i < (*numFuncsPtr); i++) {
+		typeConv::short2bytes(funcsPtr[i]->getFuncId(), &ids[i*2]);
 	}
 
 	memcpy(buf, ids, (*numFuncsPtr)*2);
