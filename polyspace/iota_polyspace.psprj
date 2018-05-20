@@ -164,7 +164,7 @@
     <file path="file:/C:/Users/alist/AppData/Local/Arduino15/packages/esp8266/hardware/esp8266/2.3.0/tools/sdk/lwip/include/lwip/app/" order="140"/>
     <file path="file:/C:/Users/alist/AppData/Local/Arduino15/packages/esp8266/tools/xtensa-lx106-elf-gcc/1.20.0-26-gb404fb9-2/lib/gcc/xtensa-lx106-elf/4.8.2/install-tools/include/" order="141"/>
   </include>
-  <module name="Iota hub" path="file:/C:/Users/alist/OneDrive/Development/IoTa/polyspace/Iota%20hub/">
+  <module name="Iota hub" path="file:/C:/Users/alist/OneDrive/Development/IoTa/polyspace/Iota%20hub/" isactive="true">
     <source>
       <root_folder path="file:/C:/Users/alist/OneDrive/Development/IoTa/embedded/IoTaLibEmbedded/IoTaLibEmbedded/" isnested="true">
         <file path="DataCapsule.cpp"/>
@@ -333,7 +333,7 @@
       <file path="file:/C:/Users/alist/OneDrive/Development/IoTa/polyspace/Iota%20hub/BF_Result/" isactive="true"/>
     </result>
   </module>
-  <module name="esp8266" path="file:/C:/Users/alist/OneDrive/Development/IoTa/polyspace/esp8266/" isactive="true">
+  <module name="esp8266" path="file:/C:/Users/alist/OneDrive/Development/IoTa/polyspace/esp8266/">
     <source>
       <root_folder path="file:/C:/Users/alist/OneDrive/Development/IoTa/embedded/esp8266/esp8266/" isnested="true">
         <file path="esp8266.ino"/>

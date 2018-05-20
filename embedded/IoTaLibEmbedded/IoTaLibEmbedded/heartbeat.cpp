@@ -8,7 +8,7 @@
 Heartbeat::Heartbeat()
 {
 	responseMap = new CircularBuffer<long>(10);
-	state[0] = (uint8_t)60;
+	state[0] = (uint8_t)FID_HUB;
 }
 
 Heartbeat::Heartbeat(int size)
@@ -18,7 +18,7 @@ Heartbeat::Heartbeat(int size)
 
 short Heartbeat::getFuncId()
 {
-	return 1;
+	return FID_HEARTBEAT;
 }
 
 void Heartbeat::processCommand(DataCapsule *capsule)

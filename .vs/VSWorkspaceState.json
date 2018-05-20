@@ -2,12 +2,14 @@
   "ExpandedNodes": [
     "",
     "\\embedded",
+    "\\embedded\\Esp32Scope",
+    "\\embedded\\Esp32Scope\\Esp32Scope",
     "\\embedded\\esp8266",
     "\\embedded\\esp8266\\esp8266",
     "\\embedded\\IoTaLibEmbedded",
     "\\embedded\\IoTaLibEmbedded\\IoTaHubTest",
     "\\embedded\\IoTaLibEmbedded\\IoTaLibEmbedded"
   ],
-  "SelectedNode": "\\embedded\\esp8266\\esp8266.sln",
+  "SelectedNode": "\\embedded\\Esp32Scope\\Esp32Scope\\Esp32Scope.ino",
   "PreviewInSolutionExplorer": false
 }

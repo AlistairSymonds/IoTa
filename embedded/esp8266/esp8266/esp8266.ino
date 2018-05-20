@@ -322,9 +322,15 @@ void loop() {
 		{
 			uint8_t *txBuffer;
 			txBuffer = new uint8_t[cap->getTcpPacketLength()];
+			
 			cap->createTcpPacket(txBuffer);
 
 			WiFiClient *c = clientMap->get(cap->getDestination());
+			for (int i = 0; i < cap->getTcpPacketLength(); i++) {
+				Serial.print(txBuffer[i], HEX);
+				Serial.print(" ");
+			}
+			Serial.println();
 			c->write(&txBuffer[0], cap->getTcpPacketLength());
 			
 			delete[] txBuffer;

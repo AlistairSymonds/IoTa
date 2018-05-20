@@ -63,7 +63,7 @@ int DataCapsule::copyDataOut(uint8_t * buf)
 
 short DataCapsule::getDestFunc()
 {
-	return data[0];
+	return this->funcId;
 }
 
 int DataCapsule::updateData(int dataSize, uint8_t * dataIn)
@@ -93,7 +93,7 @@ int DataCapsule::createTcpPacket(uint8_t * packet)
 	typeConv::long2bytes(this->getDestination(), &packet[10]);
 	typeConv::short2bytes(this->getDestFunc(), &packet[18]);
 	typeConv::short2bytes(this->getDataSize(), &packet[20]);
-	memcpy(&packet[22], this->data, this->dataSize);
+	memcpy(&packet[22], this->data, this->getDataSize());
 
 	return packetLength;
 }
