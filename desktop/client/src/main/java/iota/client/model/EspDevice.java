@@ -1,16 +1,14 @@
 package iota.client.model;
 
 import iota.client.network.ConcurrentConnectionStatus;
-import iota.client.network.DataCapsule;
 import iota.client.network.ConnectionStatus;
+import iota.client.network.DataCapsule;
 import iota.common.Constants;
 import iota.common.IoTaUtil;
 import iota.common.definitions.DefinitionStore;
-import iota.common.functions.HubInternal;
-import iota.common.functions.IFunction;
 import iota.common.functions.IFuncFactory;
+import iota.common.functions.IFunction;
 
-import javax.swing.plaf.synth.SynthEditorPaneUI;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -59,7 +57,10 @@ public class EspDevice extends Observable {
         //get the first connection
         if (defs == null) {
             defs = new ArrayList<>();
-            submitMessage(new DataCapsule(new HubInternal().getFuncId(), IoTaUtil.byteArray2List(IoTaUtil.short2Bytes(Constants.FID_HUB))));
+            submitMessage(new DataCapsule(IoTaUtil.getHostId(),
+                    deviceId,
+                    Constants.FID_HUB,
+                    IoTaUtil.byteArray2List(IoTaUtil.short2Bytes(Constants.FID_HUB))));
         }
 
         return defs;
@@ -102,13 +103,24 @@ public class EspDevice extends Observable {
         byte[] sourceId = IoTaUtil.long2Bytes(capsule.getSourceId());
         System.arraycopy(sourceId, 0, msg, 2, 8);
 
-        long destId = this.deviceId;
-        for (int i = 0; i < 8; i++) {
-            msg[17 - i] = (byte) (destId << 8 * i);
+
+        byte[] destArr;
+        destArr = IoTaUtil.long2Bytes(this.deviceId);
+        for (int i = 0; i < destArr.length; i++) {
+            msg[10 + i] = destArr[i];
         }
 
-        for (int i = 0; i < 1; i++) {
-            msg[19 - i] = (byte) (capsule.getFuncId() << 8 * i);
+        byte[] fidArr;
+        fidArr = IoTaUtil.short2Bytes(capsule.getFuncId());
+        for (int i = 0; i < fidArr.length; i++) {
+
+            msg[18 + i] = fidArr[i];
+        }
+
+        byte[] dataLen;
+        dataLen = IoTaUtil.short2Bytes((short) capsule.getData().size());
+        for (int i = 0; i < dataLen.length; i++) {
+            msg[20 + i] = dataLen[i];
         }
 
         List<Byte> data = capsule.getData();
@@ -128,8 +140,10 @@ public class EspDevice extends Observable {
 
         //check if its an internal message (func id == 0x00FF)
         if (cap.getFuncId() == Constants.FID_HUB) {
-            for (int i = 0; i < cap.getData().size(); i = i + 2) {
-                IFunction f = IFuncFactory.getInstanceById((short) (cap.getData().get(i) << 8 | cap.getData().get(i + 1)));
+
+            for (int i = 0; i < cap.getData().size() / 2; i++) {
+
+                IFunction f = IFuncFactory.getInstanceById((short) (cap.getData().get(2 * i + 1) << 8 | cap.getData().get(2 * i)));
                 defs.add(f);
                 System.out.println("Added func " + f.getFuncId() + " name " + f.getTableName());
             }
@@ -148,6 +162,22 @@ public class EspDevice extends Observable {
         return 0;
     }
 
+    public long getId() {
+        return deviceId;
+    }
+
+    private DataCapsule createDataCapsuleFromArray(byte[] bytes) {
+        long source = IoTaUtil.bytes2Long(Arrays.copyOfRange(bytes, 2, 10));
+        long dest = IoTaUtil.bytes2Long(Arrays.copyOfRange(bytes, 10, 18));
+        short fid = IoTaUtil.bytes2Short(Arrays.copyOfRange(bytes, 18, 20));
+        short dataSize = IoTaUtil.bytes2Short(Arrays.copyOfRange(bytes, 20, 22));
+        ArrayList<Byte> data = new ArrayList<>();
+        for (int i = 22; i < dataSize + 22; i++) {
+            data.add(bytes[i]);
+        }
+        DataCapsule cap = new DataCapsule(source, dest, fid, data);
+        return cap;
+    }
 
     private class SenderThread implements Runnable {
         private DataOutputStream dataOut;
@@ -188,7 +218,7 @@ public class EspDevice extends Observable {
                             break;
 
                         case SENDING_EMPTY_CAPSULE:
-                            DataCapsule initCap = new DataCapsule(Constants.FID_HUB, new ArrayList<>());
+                            DataCapsule initCap = new DataCapsule(IoTaUtil.getHostId(), 0, Constants.FID_HUB, new ArrayList<>());
                             submitMessage(initCap);
                             byte[] initBytes = queue.poll();
 
@@ -198,7 +228,7 @@ public class EspDevice extends Observable {
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
-                            System.out.println("Sent emppty capsule " + IoTaUtil.byteArr2HexStr(initBytes));
+                            System.out.println("Sent empty capsule " + IoTaUtil.byteArr2HexStr(initBytes));
                             status.setStatus(ConnectionStatus.WAITING_FOR_EMPTY_CAPSULE);
                             break;
 
@@ -283,14 +313,18 @@ public class EspDevice extends Observable {
                             break;
 
                         case CONNECTED:
-                            int messageLength = 0;
-                            byte[] msg;
+
 
                             try {
-                                messageLength = (int) dataIn.readByte();
-                                msg = new byte[messageLength];
-                                msg[0] = (byte) messageLength;
-                                dataIn.read(msg, 2, messageLength - 2);
+
+                                byte[] sizeBytes = new byte[2];
+                                dataIn.read(sizeBytes, 0, 2);
+                                short msgLength = IoTaUtil.bytes2Short(sizeBytes);
+
+                                byte[] msg = new byte[msgLength];
+                                dataIn.read(msg, 2, msgLength - 2);
+                                msg[0] = sizeBytes[0];
+                                msg[1] = sizeBytes[1];
 
                                 StringBuilder byteStr = new StringBuilder("");
                                 for (int i = 0; i < msg.length; i++) {
@@ -298,7 +332,7 @@ public class EspDevice extends Observable {
                                 }
                                 System.out.println("Got message: " + byteStr);
 
-                                //handleReturnedMessage(msg);
+                                handleReturnedMessage(createDataCapsuleFromArray(msg));
 
                             } catch (IOException e) {
                                 status.setStatus(ConnectionStatus.ERROR);

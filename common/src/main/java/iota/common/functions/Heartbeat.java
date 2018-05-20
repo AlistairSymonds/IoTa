@@ -36,9 +36,7 @@ public class Heartbeat implements IFunction {
 
     @Override
     public int submitMessage(byte[] message) {
-        if (message[1] == getFuncId()) {
 
-        }
         tDel.timeOut = System.currentTimeMillis();
         return 0;
     }
@@ -46,9 +44,7 @@ public class Heartbeat implements IFunction {
     @Override
     public int handleReceivedData(List<Byte> receivedData) {
         tDel.timeIn = System.currentTimeMillis();
-        if (receivedData.get(0) != 60) {
-            return -1;
-        }
+
 
         return 1;
 

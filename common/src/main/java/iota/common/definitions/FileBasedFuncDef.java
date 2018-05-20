@@ -2,7 +2,6 @@ package iota.common.definitions;
 
 
 import iota.common.db.DbCol;
-import iota.common.functions.IFunction;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,7 +11,7 @@ import java.util.List;
 /**
  * Created by alist on 10/07/2017.
  */
-class FileBasedFuncDef implements IFunction {
+class FileBasedFuncDef implements IFuncDef {
     private ArrayList<DbCol> cols;
     private String name;
     private short id;
@@ -66,7 +65,7 @@ class FileBasedFuncDef implements IFunction {
     }
 
     @Override
-    public int handleReceivedData(List<Byte> receivedData) {
+    public int updateStateBuffer(byte[] recievedState) {
         return 0;
     }
 

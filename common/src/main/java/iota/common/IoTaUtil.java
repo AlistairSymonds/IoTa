@@ -21,26 +21,23 @@ public class IoTaUtil {
         return "\"" + fmt.format(d) + "\"";
     }
 
-    public static long bytes2Long(byte bytes[]) {
-        if (bytes.length != 8) {
-            throw new IllegalArgumentException("Array of bytes must be 8 long, recieved len = " + bytes.length);
-        }
+    public static long bytes2Long(byte[] bytes) {
         long val = 0;
         for (int i = 0; i < 8; i++) {
-            int shiftnum = (7 - i) * 8;
-            val = val | ((bytes[i] & 0xFF) << shiftnum);
+            val |= (0xFF & (long) bytes[i]) << (8 * i);
         }
         return val;
     }
 
-    public static byte[] long2Bytes(long n) {
-        byte b[] = new byte[8];
+
+    public static byte[] long2Bytes(long val) {
+        byte retVal[] = new byte[8];
         for (int i = 0; i < 8; i++) {
-            int shiftnum = (7 - i) * 8;
-            b[i] = (byte) (n >> shiftnum);
+            retVal[i] = (byte) (0xFF & (byte) (val >> i * 8));
         }
-        return b;
+        return retVal;
     }
+
 
     public static int bytes2Int(byte bytes[]) {
         int val = 0;
@@ -60,22 +57,21 @@ public class IoTaUtil {
         return b;
     }
 
-    public static short bytes2Shot(byte bytes[]) {
+    public static short bytes2Short(byte[] bytes) {
         short val = 0;
         for (int i = 0; i < 2; i++) {
-            short shiftnum = (short) ((1 - i) * 8);
-            val = (short) (val | ((bytes[i] & 0xFF) << shiftnum));
+            val |= (0xFF & (short) bytes[i]) << (8 * i);
         }
         return val;
     }
 
-    public static byte[] short2Bytes(short n) {
-        byte b[] = new byte[2];
+
+    public static byte[] short2Bytes(short val) {
+        byte retVal[] = new byte[2];
         for (int i = 0; i < 2; i++) {
-            int shiftnum = (1 - i) * 8;
-            b[i] = (byte) (n >> shiftnum);
+            retVal[i] = (byte) (0xFF & (val >> (i * 8)));
         }
-        return b;
+        return retVal;
     }
 
     //from stack overflow
@@ -162,4 +158,6 @@ public class IoTaUtil {
         }
         return ibyteStr.toString();
     }
+
+
 }

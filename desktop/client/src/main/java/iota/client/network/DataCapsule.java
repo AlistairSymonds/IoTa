@@ -2,7 +2,6 @@ package iota.client.network;
 
 
 import iota.common.IoTaUtil;
-import iota.common.functions.IFunction;
 
 import java.util.List;
 
@@ -14,16 +13,21 @@ public class DataCapsule {
     private List<Byte> data;
 
 
-    public DataCapsule(short funcId, List<Byte> data) {
+    public DataCapsule(long sourceId, long destinationId, short funcId, List<Byte> data) {
 
-
+        this.destinationId = destinationId;
+        this.sourceId = sourceId;
         this.funcId = funcId;
         this.data = data;
 
     }
 
     public long getSourceId() {
-        return IoTaUtil.getHostId();
+        return sourceId;
+    }
+
+    public long getDestinationId() {
+        return destinationId;
     }
 
 
@@ -35,4 +39,11 @@ public class DataCapsule {
         return funcId;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Total size: " + (this.getData().size() + 22));
+        sb.append("Source: " + IoTaUtil.long2Bytes(this.getSourceId()));
+        return sb.toString();
+    }
 }

@@ -3,10 +3,10 @@ package iota.desktop.jfx.views;
 
 import iota.client.UpdateAbleView;
 import iota.client.gui.presenter.IoTaPresenter;
-import iota.desktop.jfx.views.functions.DebugView;
-import iota.desktop.jfx.views.functions.FunctionViewFactory;
 import iota.client.model.EspDevice;
 import iota.common.functions.IFunction;
+import iota.desktop.jfx.views.functions.DebugView;
+import iota.desktop.jfx.views.functions.FunctionViewFactory;
 import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.layout.FlowPane;
@@ -39,7 +39,8 @@ public class DeviceView extends FlowPane implements UpdateAbleView {
             super.getChildren().clear();
             super.getChildren().add(new Text("No Device Selected"));
 
-        } else if (presenter.getSelectedEspDevice() != device) {
+        } else if (presenter.getSelectedEspDevice() != device ||
+                presenter.getSelectedEspDevice().getFuncs().size() != funcViews.size()) {
 
             //new device, detroy all views and start over
             super.getChildren().clear();
