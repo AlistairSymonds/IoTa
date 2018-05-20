@@ -75,11 +75,12 @@ C:\Users\alist\AppData\Local\Temp\VMBuilds\esp8266\esp8266_nodemcuv2\Debug\esp82
  C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded/IoTaFuncBase.h \
  C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded/DataCapsule.h \
  C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded/HubInternalFunc.h \
- C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded/fixedSet.h \
  C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded/circularBuffer.h \
  C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded/iota_defines.h \
  C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded/heartbeat.h \
  C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded/LedSerialMaster.h \
  C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded/LedPropEnum.h \
+ C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded/fixedSet.h \
  C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded/Map.h \
+ C:\Users\alist\OneDrive\Development\IoTa\embedded\IoTaLibEmbedded\IoTaLibEmbedded/iota_util.h \
  C:\Program\ Files\ (x86)\Microsoft\ Visual\ Studio\2017\Community\Common7\IDE\Extensions\pbd1usl1.2ll\Micro\ Platforms\default\debuggers\VM_DBG/VM_DBG.h

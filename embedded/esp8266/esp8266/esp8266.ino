@@ -27,6 +27,7 @@
 #define MAX_CLIENTS 10
 #define MAX_UNAUTH_CLIENTS 3
 #include "Map.h"
+#include "iota_util.h"
 
 WiFiServer server(2812);
 IoTaDeviceHub *hub;
@@ -90,7 +91,7 @@ void setup() {
 	uuid = (ESP.getChipId() << 32 | mac[0] << 24 | mac[1] << 16 | mac[2] << 9 | mac[3]);
 	Serial.printf("UUID : %l", uuid);
 	
-	hub = new IoTaDeviceHub(uuid);
+	hub = new IoTaDeviceHub(uuid, 10);
 	hub->addFunc(&hb);
 	hub->addFunc(&led);
 	
@@ -122,13 +123,17 @@ DataCapsule createDataPacket(WiFiClient *c) {
 		rxBuf[1] = c->read();
 		short msgLen = (rxBuf[0] << 8 |rxBuf[1]);
 		//Fixed read in length here, huge speed increase due to fixing timeout!
-		c->readBytes(&rxBuf[2], msgLen);
+		c->readBytes(&rxBuf[2], msgLen-2);
 
-		long source = (rxBuf[2] << 56 | rxBuf[3] << 48 | rxBuf[4] << 40 | rxBuf[5] << 32 | rxBuf[6] << 24 | rxBuf[7] << 16 | rxBuf[8] << 8 | rxBuf[9]);
-		long dest = (rxBuf[10] << 56 | rxBuf[11] << 48 | rxBuf[12] << 40 | rxBuf[13] << 32 | rxBuf[14] << 24 | rxBuf[15] << 16 | rxBuf[16] << 8 | rxBuf[17]);
-		short func = (rxBuf[18] << 8 | rxBuf[19]);
-		short size = (rxBuf[20] << 8 | rxBuf[21]);
+		long source = typeConv::bytes2long(&rxBuf[2]);
+		long dest = typeConv::bytes2long(&rxBuf[10]);
+		short func = typeConv::bytes2short(&rxBuf[18]);
+		
+		short size = typeConv::bytes2short(&rxBuf[20]);
+		
 		uint8_t * data = new uint8_t[size];
+		Serial.println("bout to copy stuff");
+		Serial.println(size);
 		memcpy(data, &rxBuf[22], size);
 		for (int i = 0; i < msgLen; i++) {
 			Serial.print(rxBuf[i], HEX);
@@ -138,7 +143,7 @@ DataCapsule createDataPacket(WiFiClient *c) {
 		Serial.println();
 		//data is now stored inside DataCapsule, data can be freed
 		DataCapsule capsule(source, dest, func, size, data);
-		printCapsuleDetails(&capsule);
+
 
 		delete data;
 		return capsule;
@@ -179,11 +184,8 @@ void loop() {
 		for (int i = 0; i < MAX_UNAUTH_CLIENTS; i++) {
 			if (std::get<authProg>(unAuthClients[i]) == NOT_CONNECTED)
 			{
-				Serial.print("New unauth client at ");
-				Serial.print(i);
+				
 				int now = micros();
-				Serial.print(" t = ");
-				Serial.println(now);
 				std::get<timeIn>(unAuthClients[i]) = now;
 				std::get<authProg>(unAuthClients[i]) = FIRST_CONNECT;
 				std::get<unAuthClient>(unAuthClients[i]) = newClient;
@@ -200,8 +202,7 @@ void loop() {
 			
 			
 			//remove due to lack of connections
-			Serial.print("timeout ");
-			Serial.println(i);
+			
 			std::get<timeIn>(unAuthClients[i]) = 0;
 			std::get<authProg>(unAuthClients[i]) = NOT_CONNECTED;
 			std::get<unAuthClient>(unAuthClients[i]).stop();
@@ -250,7 +251,8 @@ void loop() {
 					}
 					Serial.println("<- empty capsule");
 					std::get<unAuthClient>(unAuthClients[i]).write(&bytes[0],pLen);
-					Serial.println(cap.getSource());
+					Serial.print(cap.getSource());
+					Serial.println(" has auth'd");
 					clientMap->put(cap.getSource(), &std::get<unAuthClient>(unAuthClients[i]));
 					
 				}
@@ -260,8 +262,7 @@ void loop() {
 			case(CONNECTED): //client has been authenticated and moved to clientMap, time to clean up its spot
 				std::get<timeIn>(unAuthClients[i]) = 0;
 				std::get<authProg>(unAuthClients[i]) = NOT_CONNECTED;
-				Serial.print(i);
-				Serial.println(" has been cleaned");
+				
 				break;
 			default:
 				break;
@@ -309,15 +310,24 @@ void loop() {
 	
 	while (hub->numCapsulesRemaining() > 0)
 	{
+		Serial.print("Responses left: ");
+		Serial.println(hub->numCapsulesRemaining());
 		DataCapsule *cap;
 		hub->getNextOutputCapsule(&cap);
 
-		if (cap->getDestination() == 0) {//broadcast to all connect clients
+		if (cap->getDestination() == 0) {//broadcast to all connected clients
 			
 		}
 		else
 		{
+			uint8_t *txBuffer;
+			txBuffer = new uint8_t[cap->getTcpPacketLength()];
+			cap->createTcpPacket(txBuffer);
+
+			WiFiClient *c = clientMap->get(cap->getDestination());
+			c->write(&txBuffer[0], cap->getTcpPacketLength());
 			
+			delete[] txBuffer;
 		}
 	}
 
