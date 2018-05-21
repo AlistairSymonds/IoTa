@@ -5,7 +5,13 @@ VisualStudioVersion = 15.0.27428.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Esp32Scope", "Esp32Scope\Esp32Scope.vcxproj", "{C5F80730-F44F-4478-BDAE-6634EFC2CA88}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IoTaDeviceHub", "..\IoTaLibEmbedded\IoTaLibEmbedded\IoTaLibEmbedded.vcxitems", "{0FA9F25A-FB65-436E-BA56-ABED0E0FB5A1}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\IoTaLibEmbedded\IoTaLibEmbedded\IoTaLibEmbedded.vcxitems*{0fa9f25a-fb65-436e-ba56-abed0e0fb5a1}*SharedItemsImports = 9
+		..\IoTaLibEmbedded\IoTaLibEmbedded\IoTaLibEmbedded.vcxitems*{c5f80730-f44f-4478-bdae-6634efc2ca88}*SharedItemsImports = 4
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
 		fpermissive|x86 = fpermissive|x86

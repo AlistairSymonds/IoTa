@@ -30,12 +30,18 @@
     <ClInclude Include="samplerStateEnum.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Esp32ScopeFunc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Pga112SpiController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="sampler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Esp32ScopeFunc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

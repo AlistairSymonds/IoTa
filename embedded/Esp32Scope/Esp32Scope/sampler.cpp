@@ -1,3 +1,4 @@
+/*
 #include <driver\timer.h>
 #include "sampler.h"
 #include "samplerStateEnum.h"
@@ -24,7 +25,7 @@ int sampler::setState(samplerStateEnum item, short val)
 	if (item == SAMPLE_RATE_DIVISION || item == SAMPLE_RATE_BASE) {
 		state[item] = val;
 
-		sampleTimer = timerBegin(0, state[SAMPLE_RATE_BASE], true);
+		this->sampleTimer = timerBegin(0, state[SAMPLE_RATE_BASE], true);
 		timerAlarmWrite(sampleTimer, state[SAMPLE_RATE_DIVISION], true);
 		timerAlarmEnable(sampleTimer);
 		//timerAttachInterrupt(sampleTimer, &(this->timerFunc), true);
@@ -77,7 +78,7 @@ void IRAM_ATTR sampler::timerFunc()
 }
 
 //timer function
-/*
+
 if(not triggered){
 	data[currentSample] = analogRead();
 }
