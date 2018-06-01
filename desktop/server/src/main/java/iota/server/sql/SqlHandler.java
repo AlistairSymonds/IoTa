@@ -1,7 +1,6 @@
 package iota.server.sql;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
-import iota.common.definitions.IFuncDef;
 import iota.server.IoTaBaseMain;
 
 import java.sql.ResultSet;

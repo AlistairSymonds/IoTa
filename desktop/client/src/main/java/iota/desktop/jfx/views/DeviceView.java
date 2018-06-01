@@ -10,6 +10,7 @@ import iota.desktop.jfx.views.functions.FunctionViewFactory;
 import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 
 import java.util.ArrayList;
@@ -48,15 +49,20 @@ public class DeviceView extends FlowPane implements UpdateAbleView {
 
             for (IFunction funcDef : presenter.getSelectedEspDevice().getFuncs()) {
 
-                super.getChildren().add(FunctionViewFactory.getFunctionView(presenter.getSelectedEspDevice(), funcDef));
+                super.getChildren().add(FunctionViewFactory.getFunctionView(funcDef));
             }
             super.getChildren().add(new DebugView(presenter.getSelectedEspDevice()));
 
             for (Node n : super.getChildren()) {
                 n.setStyle("-fx-border-color: #566954");
+
                 if (n instanceof UpdateAbleView) {
                     funcViews.add((UpdateAbleView) n);
                     ((UpdateAbleView) n).updateView();
+                }
+
+                if (n instanceof Region) {
+                    ((Region) n).prefWidthProperty().bind(this.widthProperty());
                 }
             }
 

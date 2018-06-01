@@ -16,7 +16,7 @@ public class NetworkScanner {
     public List<ScanResult> scan(int port) {
         System.out.println("Beginning scan");
         final ExecutorService es = Executors.newFixedThreadPool(255);
-        final int timeout = 200;
+        final int timeout = 1000;
         List<Future<ScanResult>> futures = new ArrayList<>();
 
         for (int i = 0; i <= 255; i++) {

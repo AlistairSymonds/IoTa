@@ -1,11 +1,10 @@
 package iota.common.functions;
 
+import iota.client.model.EspDevice;
 import iota.common.Constants;
-import iota.common.IoTaUtil;
 import iota.common.db.DbCol;
 import iota.common.definitions.IStateItem;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class HubInternal implements IFunction {
@@ -14,7 +13,7 @@ public class HubInternal implements IFunction {
     List<IStateItem> debugParameters;
 
 
-    public HubInternal() {
+    public HubInternal(EspDevice device) {
 
     }
 

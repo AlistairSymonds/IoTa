@@ -1,14 +1,9 @@
 package iota.desktop.jfx.views.functions;
 
 import iota.client.UpdateAbleView;
-import iota.client.model.EspDevice;
-import iota.client.network.DataCapsule;
-import iota.common.IoTaUtil;
 import iota.common.definitions.IStateItem;
-import iota.common.functions.IFunction;
+import iota.common.functions.Lighting;
 import iota.desktop.jfx.views.state.DefaultStateDisp;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -18,24 +13,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LightingView extends GridPane implements UpdateAbleView {
-    private final EspDevice device;
+
     private List<DefaultStateDisp> stateDisps;
-    private IFunction funcInstance;
+    private Lighting funcInstance;
     private Button sendIt;
     private List<TextField> newVals;
 
 
-    protected LightingView(EspDevice deviceIn) {
+    protected LightingView(Lighting funcInstance) {
         super();
-        this.device = deviceIn;
+        this.funcInstance = funcInstance;
 
-        funcInstance = null;
-        for (IFunction def : device.getFuncs()) {
-            if (def.getFuncId() == 2) {
-                funcInstance = def;
-                break;
-            }
-        }
+
 
         Text t = new Text("Lights");
         super.getChildren().add(t);
@@ -56,7 +45,7 @@ public class LightingView extends GridPane implements UpdateAbleView {
             super.add(field, 1, i + 1);
         }
 
-
+        /*
         sendIt = new Button("Send it");
         sendIt.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -92,7 +81,7 @@ public class LightingView extends GridPane implements UpdateAbleView {
             }
         });
         super.add(sendIt, 0, stateDisps.size() + 2);
-
+        */
 
 
     }

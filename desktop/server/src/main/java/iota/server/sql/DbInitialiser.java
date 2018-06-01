@@ -2,7 +2,6 @@ package iota.server.sql;
 
 import com.mysql.cj.api.jdbc.Statement;
 import com.mysql.cj.jdbc.MysqlDataSource;
-import iota.common.definitions.IFuncDef;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;

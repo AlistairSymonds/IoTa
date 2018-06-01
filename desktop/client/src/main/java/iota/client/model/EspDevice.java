@@ -79,6 +79,7 @@ public class EspDevice extends Observable {
         socket.connect(new InetSocketAddress(address, 2812));
         status.setStatus(ConnectionStatus.FIRST_CONNECT);
 
+
         senderThread = new SenderThread();
         receiverThread = new ReceiverThread();
 
@@ -143,7 +144,7 @@ public class EspDevice extends Observable {
 
             for (int i = 0; i < cap.getData().size() / 2; i++) {
 
-                IFunction f = IFuncFactory.getInstanceById((short) (cap.getData().get(2 * i + 1) << 8 | cap.getData().get(2 * i)));
+                IFunction f = IFuncFactory.getInstanceById(this, (short) (cap.getData().get(2 * i + 1) << 8 | cap.getData().get(2 * i)));
                 defs.add(f);
                 System.out.println("Added func " + f.getFuncId() + " name " + f.getTableName());
             }
@@ -152,6 +153,7 @@ public class EspDevice extends Observable {
 
         for (IFunction d : defs) {
             if (d.getFuncId() == cap.getFuncId()) {
+                System.out.println(cap.toString());
                 d.handleReceivedData(cap.getData());
             }
         }
@@ -244,6 +246,11 @@ public class EspDevice extends Observable {
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
+                                try {
+                                    Thread.sleep(20);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
                             }
 
                             try {
@@ -318,7 +325,9 @@ public class EspDevice extends Observable {
                             try {
 
                                 byte[] sizeBytes = new byte[2];
-                                dataIn.read(sizeBytes, 0, 2);
+                                sizeBytes[0] = dataIn.readByte();
+                                sizeBytes[1] = dataIn.readByte();
+
                                 short msgLength = IoTaUtil.bytes2Short(sizeBytes);
 
                                 byte[] msg = new byte[msgLength];
@@ -326,15 +335,11 @@ public class EspDevice extends Observable {
                                 msg[0] = sizeBytes[0];
                                 msg[1] = sizeBytes[1];
 
-                                StringBuilder byteStr = new StringBuilder("");
-                                for (int i = 0; i < msg.length; i++) {
-                                    byteStr.append(String.format("%02x ", msg[i]));
-                                }
-                                System.out.println("Got message: " + byteStr);
 
                                 handleReturnedMessage(createDataCapsuleFromArray(msg));
 
                             } catch (IOException e) {
+                                System.out.println("Couldn't read message. Whatevs lmao");
                                 status.setStatus(ConnectionStatus.ERROR);
                                 e.printStackTrace();
                             }

@@ -2,6 +2,8 @@ package iota.common;
 
 
 public final class Constants {
+    public static final short FID_32SCOPE = 32;
+
     private Constants() {
 
     }
