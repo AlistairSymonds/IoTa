@@ -47,13 +47,15 @@ void IoTaDeviceHub::tick()
 
 		while (funcs[i]->getReponsesRemaining() > 0)
 		{
+
 			long dest = funcs[i]->getNextMsgDest();
 			int len = funcs[i]->getStateBufLen();
-			uint8_t data[255];
+
+			uint8_t data[256];
+
 			funcs[i]->getStateBuffer(data);
 			
 			DataCapsule *cap;
-
 			cap = new DataCapsule(this->_uuid, dest, funcs[i]->getFuncId(), len, data);
 			msgStorage->add(cap);
 		}

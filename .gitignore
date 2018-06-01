@@ -320,3 +320,4 @@ embedded/LedSerialSlave_octo_teensy/LedSerialSlave_octo_teensy/Release/**
 *.ino.elf
 
 
+/embedded/Esp32Scope/Esp32Scope/wifi_secrets.h

@@ -3,13 +3,16 @@ Name:		esp8266.ino
 Created:	10/4/2017 10:50:40 PM
 Author:	alist
 */
-#include <WiFi.h>          /
+#include <WiFi.h>          
+#include <esp_wpa2.h>
+#include "wifi_secrets.h"
+
 
 //needed for library
 #include <WiFiClient.h>
 #include <DNSServer.h>
 
-#define HUB_SIZE 4
+
 #include <IoTaDeviceHub.h>
 #include "iota_defines.h"
 #include "heartbeat.h"
@@ -17,10 +20,13 @@ Author:	alist
 #include "DataCapsule.h"
 #include "Esp32ScopeFunc.h"
 
-#define MAX_CLIENTS 10
-#define MAX_UNAUTH_CLIENTS 3
+
 #include "Map.h"
 #include "iota_util.h"
+
+#define HUB_SIZE 4
+#define MAX_CLIENTS 10
+#define MAX_UNAUTH_CLIENTS 3
 
 WiFiServer server(2812);
 IoTaDeviceHub *hub;
@@ -76,11 +82,29 @@ void setup() {
 	Serial.println("Starting IoTa ESP32");
 	Serial.print("Connecting to ");
 	Serial.print(ssid);
+
+
+
+	
+
+#ifdef UNIWIFI
+	WiFi.disconnect(true);
+	esp_wifi_sta_wpa2_ent_set_identity((uint8_t *)UNI_SSID, strlen(EAP_ID));
+	esp_wifi_sta_wpa2_ent_set_username((uint8_t *)EAP_USERNAME, strlen(EAP_USERNAME));
+	esp_wifi_sta_wpa2_ent_set_password((uint8_t *)EAP_PASSWORD, strlen(EAP_PASSWORD));
+	esp_wifi_sta_wpa2_ent_enable();
+#else
 	WiFi.begin(ssid, password);
+	
+#endif
+
+
 	while (WiFi.status() != WL_CONNECTED) {
 		delay(500);
 		Serial.print(".");
 	}
+	Serial.print("IP address: ");
+	Serial.println(WiFi.localIP());
 
 	Serial.println("Setting up hub");
 	byte mac[6];
@@ -92,7 +116,7 @@ void setup() {
 
 	hub = new IoTaDeviceHub(uuid, 10);
 	hub->addFunc(&hb);
-
+	hub->addFunc(&scope);
 
 	unAuthClients = new std::tuple<uint, connStatusEnum, WiFiClient>[MAX_UNAUTH_CLIENTS];
 	for (int i = 0; i < MAX_UNAUTH_CLIENTS; i++) {
@@ -130,8 +154,6 @@ DataCapsule createDataPacket(WiFiClient *c) {
 		short size = typeConv::bytes2short(&rxBuf[20]);
 
 		uint8_t * data = new uint8_t[size];
-		Serial.println("bout to copy stuff");
-		Serial.println(size);
 		memcpy(data, &rxBuf[22], size);
 		for (int i = 0; i < msgLen; i++) {
 			Serial.print(rxBuf[i], HEX);

@@ -2,6 +2,7 @@
 #include <driver\timer.h>
 #include "samplerStateEnum.h"
 #include <Arduino.h>
+short sampleMem[2048];
 class sampler
 {
 	//sample rate

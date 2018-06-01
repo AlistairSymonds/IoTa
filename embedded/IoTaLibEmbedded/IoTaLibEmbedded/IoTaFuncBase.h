@@ -11,8 +11,7 @@ public:
 	//get the funcId
 	virtual short getFuncId() = 0;
 
-	//submit a command and unique identifier of who sent it (ie, memory address of
-	//unAuthClient in memory)
+	
 	virtual void processCommand(DataCapsule *capsule) = 0;
 	virtual void tick() = 0;
 	

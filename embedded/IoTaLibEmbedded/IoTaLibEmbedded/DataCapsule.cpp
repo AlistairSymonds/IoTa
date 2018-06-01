@@ -25,7 +25,7 @@ DataCapsule::DataCapsule(DataCapsule *bcastCap, long newDest)
 	this->funcId = bcastCap->funcId;
 	this->dataSize = bcastCap->dataSize;
 
-	if (this->dataSize <= 255) {
+	if (this->dataSize <= 256) {
 		memcpy(this->data, bcastCap->data, dataSize);
 		this->dataSize = dataSize;
 	}

@@ -10,6 +10,6 @@
     "\\embedded\\IoTaLibEmbedded\\IoTaHubTest",
     "\\embedded\\IoTaLibEmbedded\\IoTaLibEmbedded"
   ],
-  "SelectedNode": "\\embedded\\Esp32Scope\\Esp32Scope\\Esp32Scope.ino",
+  "SelectedNode": "\\embedded\\Esp32Scope\\Esp32Scope\\Esp32ScopeFunc.cpp",
   "PreviewInSolutionExplorer": false
 }
