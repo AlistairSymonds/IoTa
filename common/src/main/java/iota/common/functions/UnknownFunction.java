@@ -1,17 +1,25 @@
 package iota.common.functions;
 
+import iota.client.model.EspDevice;
 import iota.common.db.DbCol;
 import iota.common.definitions.IStateItem;
 
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UnknownFunction implements IFunction {
 
     private short id;
+    private EspDevice device;
 
-    UnknownFunction(int id) {
+    UnknownFunction(EspDevice device, int id) {
         this.id = (short) id;
+        this.device = device;
+    }
+
+    public InetAddress getInetAdress() {
+        return device.getInetAddress();
     }
 
     @Override

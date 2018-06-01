@@ -42,8 +42,11 @@ public class DataCapsule {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Total size: " + (this.getData().size() + 22));
-        sb.append("Source: " + IoTaUtil.long2Bytes(this.getSourceId()));
+        sb.append("Total size: " + (this.getData().size() + 22) + " ");
+        sb.append("Source: " + IoTaUtil.byteArr2HexStr(IoTaUtil.long2Bytes(this.getSourceId())) + " ");
+        sb.append("Destination: " + IoTaUtil.byteArr2HexStr(IoTaUtil.long2Bytes(this.getDestinationId())) + " ");
+        sb.append("Associated FID: " + this.funcId + " ");
+        sb.append("Length of data: " + this.data.size() + " [bytes]");
         return sb.toString();
     }
 }

@@ -1,5 +1,6 @@
 package iota.common.functions;
 
+import iota.client.model.EspDevice;
 import iota.common.db.DbCol;
 import iota.common.definitions.IStateItem;
 
@@ -7,13 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Heartbeat implements IFunction {
-
+    private EspDevice device;
     TimeDelta tDel;
 
 
     List<IStateItem> stateItems;
 
-    protected Heartbeat() {
+    protected Heartbeat(EspDevice device) {
+        this.device = device;
         stateItems = new ArrayList<>();
         tDel = new TimeDelta();
         stateItems.add(tDel);
