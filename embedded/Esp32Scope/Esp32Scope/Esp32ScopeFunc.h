@@ -3,7 +3,7 @@
 #ifndef _esp32scope_h
 #define _esp32scope_h
 #define WORDS_PER_SECTION 120
-#define SAMPLE_MEMORY_LENGTH 4096
+#define SAMPLE_MEMORY_LENGTH 4080
 #define SAMPLE_WORD_LENGTH 2
 
 #include <stdint.h>
@@ -14,6 +14,8 @@
 class Esp32ScopeFunc : public IoTaFuncBase {
 public:
 	Esp32ScopeFunc();
+
+	void init();
 
 
 	short getFuncId();
@@ -37,7 +39,7 @@ private:
 	//CircularBuffer<std::pair<long, uint8_t>> *sampleReqs;
 	uint8_t nextSectionRequested = 0; 
 	long clienRequesting = 0; //if minus 0, no section to be returned
-	uint16_t state[5];	
+	
 	Pga112SpiController * gain;
 	hw_timer_t * sampleTimer;
 	

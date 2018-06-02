@@ -3,6 +3,8 @@ Name:		esp8266.ino
 Created:	10/4/2017 10:50:40 PM
 Author:	alist
 */
+
+#include "Esp32ScopeFunc.h"
 #include <WiFi.h>          
 #include <esp_wpa2.h>
 #include "wifi_secrets.h"
@@ -18,7 +20,7 @@ Author:	alist
 #include "heartbeat.h"
 #include "LedSerialMaster.h"
 #include "DataCapsule.h"
-#include "Esp32ScopeFunc.h"
+
 
 
 #include "Map.h"
@@ -127,6 +129,7 @@ void setup() {
 
 	Serial.println("Starting TCP server on 2812");
 	server.begin();
+	scope.init();
 	Serial.println("Setup complete!");
 	tMarkers.first = INT_MAX;
 	tMarkers.second = 0;
@@ -155,11 +158,12 @@ DataCapsule createDataPacket(WiFiClient *c) {
 
 		uint8_t * data = new uint8_t[size];
 		memcpy(data, &rxBuf[22], size);
+		/*
 		for (int i = 0; i < msgLen; i++) {
 			Serial.print(rxBuf[i], HEX);
 			Serial.print(" ");
 
-		}
+		}*/
 		Serial.println();
 		//data is now stored inside DataCapsule, data can be freed
 		DataCapsule capsule(source, dest, func, size, data);
@@ -337,7 +341,25 @@ void loop() {
 		hub->getNextOutputCapsule(&cap);
 
 		if (cap->getDestination() == 0) {//broadcast to all connected clients
+			Serial.println("Got to deliver a bcast cap");
+			std::pair<long, WiFiClient*> * refs = clientMap->getEntryReference();
+			int tcpLen = cap->getTcpPacketLength();
+			uint8_t *txBuffer;
+			txBuffer = new uint8_t[cap->getTcpPacketLength()];
 
+			cap->createTcpPacket(txBuffer);
+			
+			for (int i = 0; i < clientMap->getMaxSize(); i++) {
+				if (refs[i].first != 0) {
+					//replace blank area with client id
+
+					//or don't, we just need this to work atm					
+					refs[i].second->write(&txBuffer[0], tcpLen);
+
+
+				}
+			}
+			delete[] txBuffer;
 		}
 		else
 		{
@@ -347,11 +369,13 @@ void loop() {
 			cap->createTcpPacket(txBuffer);
 
 			WiFiClient *c = clientMap->get(cap->getDestination());
+			/*
 			for (int i = 0; i < cap->getTcpPacketLength(); i++) {
 				Serial.print(txBuffer[i], HEX);
 				Serial.print(" ");
 			}
 			Serial.println();
+			*/
 			c->write(&txBuffer[0], cap->getTcpPacketLength());
 
 			delete[] txBuffer;

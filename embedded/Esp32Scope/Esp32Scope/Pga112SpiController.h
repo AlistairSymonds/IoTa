@@ -6,6 +6,7 @@ class Pga112SpiController
 {
 public:
 	Pga112SpiController(SPIClass * spiIn, SPISettings settingsIn);
+	void init();
 	int setGain(int gain);
 	int getGain();
 	int setSpiSettings(SPISettings newSettings);

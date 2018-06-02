@@ -1,5 +1,5 @@
 #include "Pga112SpiController.h"
-
+#include <Arduino.h>
 #include <SPI.h>
 
 
@@ -7,57 +7,70 @@
 
 Pga112SpiController::Pga112SpiController(SPIClass * spiIn, SPISettings settingsIn)
 {
+	//vpsi pin
 	this->spi = spiIn;
-	spi->setHwCs(true);
-	this->spiSettings = settingsIn;
-	this->gain = -1;
+	// SCLK = 18, MISO = 19, MOSI = 23, SS = 5
+	pinMode(5, OUTPUT);
+	digitalWrite(5, HIGH);
+	this->spiSettings._bitOrder = settingsIn._bitOrder;
+	this->spiSettings._clock = settingsIn._clock;
+	this->spiSettings._dataMode = settingsIn._dataMode;
+
+	this->gain = 0;
 }
 
 
-
+void Pga112SpiController::init() {
+	this->spi->begin(18,19,23,5);
+}
 
 
 //PGA 112 gain selection, if an invalid selection is made no SPI transaction is attempted and -1 returned
 //Valid gain: 1, 2, 4, 8, 16, 32, 64, 128
-int Pga112SpiController::setGain(int gain)
+int IRAM_ATTR Pga112SpiController::setGain(int newGain)
 {
-	uint8_t msg[2];
-	msg[0] = 0b00101010;
-	switch (gain)
+	Serial.println(newGain);
+	uint16_t msg = 0;
+	msg = 0b00101010 << 8;
+	switch (newGain)
 	{
 	case(1):
-		msg[1] = 0b00000001;
+		msg |= 0b00000001;
 		break;
 	case(2):
-		msg[1] = 0b00010001;
+		msg |= 0b00010001;
 		break;
 	case(4):
-		msg[1] = 0b00100001;
+		msg |= 0b00100001;
 		break;
 	case(8):
-		msg[1] = 0b00110001;
+		msg |= 0b00110001;
 		break;
 	case(16):
-		msg[1] = 0b01000001;
+		msg |= 0b01000001;
 		break;
 	case(32):
-		msg[1] = 0b01010001;
+		msg |= 0b01010001;
 		break;
 	case(64):
-		msg[1] = 0b01100001;
+		msg |= 0b01100001;
 		break;
 	case(128):
-		msg[1] = 0b01110001;
+		msg |= 0b01110001;
 		break;
 	default:
 		return -1;
 		break;
 	}(gain);
-
-	this->gain = gain;
-	spi->beginTransaction(spiSettings);
-	spi->writeBytes(msg, 2);
+	this->gain = newGain;
+	digitalWrite(5, LOW);
+	spi->beginTransaction(SPISettings(1000, MSBFIRST, SPI_MODE0));
+	spi->transfer16(msg);
 	spi->endTransaction();
+	digitalWrite(5, HIGH);
+	Serial.println(msg, BIN);
+	
+
 	return 0;
 }
 
