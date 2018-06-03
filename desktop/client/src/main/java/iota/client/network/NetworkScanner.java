@@ -1,7 +1,9 @@
 package iota.client.network;
 
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
@@ -11,10 +13,24 @@ import java.util.concurrent.*;
  * Also spawns and kills 255 threads in the process, TODO: change that
  */
 public class NetworkScanner {
-    private String baseIp = "192.168.0.";
+
+    private String baseIp;
 
     public List<ScanResult> scan(int port) {
-        System.out.println("Beginning scan");
+        String baseIp = "192.168.0.";
+
+
+        try {
+            byte[] ipv4 = InetAddress.getLocalHost().getAddress();
+            baseIp = Integer.toUnsignedString(ipv4[0]) + "." +
+                    Integer.toUnsignedString(ipv4[1]) + "." +
+                    Integer.toUnsignedString(ipv4[2]) + ".";
+            System.out.println();
+        } catch (UnknownHostException e) {
+            System.out.println("Couldn't get a local IP, using fallback of 192.168.0.*");
+        }
+
+        System.out.println("Beginning scan of " + baseIp + "*");
         final ExecutorService es = Executors.newFixedThreadPool(255);
         final int timeout = 1000;
         List<Future<ScanResult>> futures = new ArrayList<>();
