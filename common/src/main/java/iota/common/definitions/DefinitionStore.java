@@ -1,5 +1,7 @@
 package iota.common.definitions;
 
+import iota.common.functions.IFunction;
+
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
@@ -12,13 +14,12 @@ import java.util.List;
 /**
  * Created by alist on 8/07/2017.
  */
-public class DefinitionStore implements Iterable<IFuncDef> {
-    private HashMap<Short, IFuncDef> defs;
+public class DefinitionStore implements Iterable<IFunction> {
+    private HashMap<Short, IFunction> defs;
 
     public DefinitionStore() {
-        defs = new HashMap<Short, IFuncDef>();
-        Heartbeat hb = new Heartbeat();
-        defs.put(hb.getFuncId(), hb);
+        defs = new HashMap<Short, IFunction>();
+
     }
 
 
@@ -35,8 +36,8 @@ public class DefinitionStore implements Iterable<IFuncDef> {
             for (Path file : dir) {
                 if (file.toFile().isFile()) {
                     System.out.println("Found definition file: " + file.getFileName());
-                    IFuncDef newDef = createParser(file).parseFile();
-                    defs.put(newDef.getFuncId(), newDef);
+                    //IFunction newDef = createParser(file).parseFile();
+                    //defs.put(newDef.IFunction(), newDef);
                 }
 
             }
@@ -63,17 +64,17 @@ public class DefinitionStore implements Iterable<IFuncDef> {
     }
 
     @Override
-    public Iterator<IFuncDef> iterator() {
+    public Iterator<IFunction> iterator() {
         return new DefIterator();
     }
 
-    class DefIterator implements Iterator<IFuncDef> {
-        private List<IFuncDef> data;
+    class DefIterator implements Iterator<IFunction> {
+        private List<IFunction> data;
         private int currentIndex;
 
         DefIterator() {
             currentIndex = 0;
-            data = new ArrayList<IFuncDef>();
+            data = new ArrayList<IFunction>();
             data.addAll(defs.values());
         }
 
@@ -83,8 +84,8 @@ public class DefinitionStore implements Iterable<IFuncDef> {
         }
 
         @Override
-        public IFuncDef next() {
-            IFuncDef retVal = data.get(currentIndex);
+        public IFunction next() {
+            IFunction retVal = data.get(currentIndex);
             currentIndex++;
             return retVal;
         }

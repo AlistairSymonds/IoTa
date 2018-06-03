@@ -2,6 +2,10 @@ apply plugin: 'application'
 mainClassName = "iota.client.ClientMain"
 dependencies {
     compile project (':common')
+
+    // https://mvnrepository.com/artifact/org.gillius/jfxutils
+    compile group: 'org.gillius', name: 'jfxutils', version: '1.0'
+
 }
 
 jar {

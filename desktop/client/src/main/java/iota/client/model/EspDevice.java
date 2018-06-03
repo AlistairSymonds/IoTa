@@ -30,7 +30,6 @@ public class EspDevice extends Observable {
     private volatile ConcurrentConnectionStatus status;
 
 
-    private DefinitionStore defStore;
 
 
 
@@ -42,7 +41,6 @@ public class EspDevice extends Observable {
     public EspDevice(InetAddress address, DefinitionStore defStoreIn) {
         this.deviceId = 0;
         this.address = address;
-        this.defStore = defStoreIn;
         status = new ConcurrentConnectionStatus(ConnectionStatus.NOT_CONNECTED);
 
     }
