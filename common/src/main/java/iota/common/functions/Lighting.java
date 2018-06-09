@@ -1,7 +1,7 @@
 package iota.common.functions;
 
 import iota.client.model.EspDevice;
-import iota.common.db.DbCol;
+import iota.common.Constants;
 import iota.common.definitions.IStateItem;
 
 import java.util.ArrayList;
@@ -29,25 +29,15 @@ public class Lighting implements IFunction {
     }
 
     @Override
-    public List<DbCol> getCols() {
-        return null;
-    }
-
-    @Override
-    public String getTableName() {
+    public String getDisplayName() {
         return "Lighting";
     }
 
     @Override
     public short getFuncId() {
-        return 2;
+        return Constants.FID_LEDS;
     }
 
-    @Override
-    public int submitMessage(byte[] message) {
-
-        return message.length;
-    }
 
     @Override
     public int handleReceivedData(List<Byte> receivedData) {

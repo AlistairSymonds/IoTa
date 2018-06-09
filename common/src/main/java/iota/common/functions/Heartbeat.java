@@ -1,7 +1,6 @@
 package iota.common.functions;
 
 import iota.client.model.EspDevice;
-import iota.common.db.DbCol;
 import iota.common.definitions.IStateItem;
 
 import java.util.ArrayList;
@@ -22,25 +21,13 @@ public class Heartbeat implements IFunction {
     }
 
     @Override
-    public List<DbCol> getCols() {
-        return null;
-    }
-
-    @Override
-    public String getTableName() {
+    public String getDisplayName() {
         return "heartbeat";
     }
 
     @Override
     public short getFuncId() {
         return 1;
-    }
-
-    @Override
-    public int submitMessage(byte[] message) {
-
-        tDel.timeOut = System.currentTimeMillis();
-        return 0;
     }
 
     @Override
@@ -52,6 +39,10 @@ public class Heartbeat implements IFunction {
 
     }
 
+    public void sendPing() {
+        //ArrayList<Byte> hbbyte = this.getFuncId();
+        //device.submitMessage()
+    }
 
     @Override
     public List<IStateItem> getStateItems() {

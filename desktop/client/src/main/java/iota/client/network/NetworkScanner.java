@@ -22,9 +22,9 @@ public class NetworkScanner {
 
         try {
             byte[] ipv4 = InetAddress.getLocalHost().getAddress();
-            baseIp = Integer.toUnsignedString(ipv4[0]) + "." +
-                    Integer.toUnsignedString(ipv4[1]) + "." +
-                    Integer.toUnsignedString(ipv4[2]) + ".";
+            baseIp = Byte.toUnsignedInt(ipv4[0]) + "." +
+                    Byte.toUnsignedInt(ipv4[1]) + "." +
+                    Byte.toUnsignedInt(ipv4[2]) + ".";
             System.out.println();
         } catch (UnknownHostException e) {
             System.out.println("Couldn't get a local IP, using fallback of 192.168.0.*");

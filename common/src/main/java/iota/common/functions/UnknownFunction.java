@@ -1,7 +1,6 @@
 package iota.common.functions;
 
 import iota.client.model.EspDevice;
-import iota.common.db.DbCol;
 import iota.common.definitions.IStateItem;
 
 import java.net.InetAddress;
@@ -22,24 +21,15 @@ public class UnknownFunction implements IFunction {
         return device.getInetAddress();
     }
 
-    @Override
-    public List<DbCol> getCols() {
-        return new ArrayList<>();
-    }
 
     @Override
-    public String getTableName() {
+    public String getDisplayName() {
         return "Unkown";
     }
 
     @Override
     public short getFuncId() {
         return id;
-    }
-
-    @Override
-    public int submitMessage(byte[] message) {
-        return 0;
     }
 
     @Override

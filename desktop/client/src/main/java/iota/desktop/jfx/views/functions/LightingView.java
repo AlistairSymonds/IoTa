@@ -1,7 +1,6 @@
 package iota.desktop.jfx.views.functions;
 
 import iota.client.UpdateAbleView;
-import iota.common.definitions.IStateItem;
 import iota.common.functions.Lighting;
 import iota.desktop.jfx.views.state.DefaultStateDisp;
 import javafx.scene.control.Button;
@@ -31,19 +30,8 @@ public class LightingView extends GridPane implements UpdateAbleView {
         stateDisps = new ArrayList<>();
 
 
-        for (IStateItem state : funcInstance.getStateItems()) {
-            stateDisps.add(new DefaultStateDisp(state));
-        }
-        for (int i = 0; i < stateDisps.size(); i++) {
-            super.add(stateDisps.get(i), 0, i + 1);
-        }
 
-        newVals = new ArrayList<>();
-        for (int i = 0; i < stateDisps.size(); i++) {
-            TextField field = new TextField();
-            newVals.add(field);
-            super.add(field, 1, i + 1);
-        }
+
 
         /*
         sendIt = new Button("Send it");

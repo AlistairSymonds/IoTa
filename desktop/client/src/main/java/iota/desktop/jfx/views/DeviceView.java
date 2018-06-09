@@ -48,8 +48,14 @@ public class DeviceView extends FlowPane implements UpdateAbleView {
             funcViews.clear();
 
             for (IFunction funcDef : presenter.getSelectedEspDevice().getFuncs()) {
+                try {
+                    super.getChildren().add(FunctionViewFactory.getFunctionView(funcDef));
+                } catch (NullPointerException e) {
+                    System.out.println(funcDef + " was the problem child");
+                    e.printStackTrace();
 
-                super.getChildren().add(FunctionViewFactory.getFunctionView(funcDef));
+                }
+
             }
             super.getChildren().add(new DebugView(presenter.getSelectedEspDevice()));
 

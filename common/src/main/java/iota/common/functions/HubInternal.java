@@ -2,7 +2,6 @@ package iota.common.functions;
 
 import iota.client.model.EspDevice;
 import iota.common.Constants;
-import iota.common.db.DbCol;
 import iota.common.definitions.IStateItem;
 
 import java.util.List;
@@ -17,24 +16,15 @@ public class HubInternal implements IFunction {
 
     }
 
-    @Override
-    public List<DbCol> getCols() {
-        return null;
-    }
 
     @Override
-    public String getTableName() {
+    public String getDisplayName() {
         return null;
     }
 
     @Override
     public short getFuncId() {
         return Constants.FID_HUB;
-    }
-
-    @Override
-    public int submitMessage(byte[] message) {
-        return 0;
     }
 
     @Override

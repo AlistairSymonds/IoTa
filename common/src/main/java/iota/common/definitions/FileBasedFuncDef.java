@@ -45,24 +45,15 @@ class FileBasedFuncDef implements IFunction {
         }
     }
 
-    @Override
-    public List<DbCol> getCols() {
-        return this.cols;
-    }
 
     @Override
-    public String getTableName() {
+    public String getDisplayName() {
         return this.name;
     }
 
     @Override
     public short getFuncId() {
         return id;
-    }
-
-    @Override
-    public int submitMessage(byte[] message) {
-        return 0;
     }
 
     @Override

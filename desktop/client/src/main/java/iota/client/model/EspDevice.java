@@ -73,6 +73,7 @@ public class EspDevice extends Observable {
 
 
         socket = new Socket();
+        socket.setSoTimeout(0);
         System.out.println("Connecting to socket...");
         socket.connect(new InetSocketAddress(address, 2812));
         status.setStatus(ConnectionStatus.FIRST_CONNECT);
@@ -144,7 +145,7 @@ public class EspDevice extends Observable {
 
                 IFunction f = IFuncFactory.getInstanceById(this, (short) (cap.getData().get(2 * i + 1) << 8 | cap.getData().get(2 * i)));
                 defs.add(f);
-                System.out.println("Added func " + f.getFuncId() + " name " + f.getTableName());
+                System.out.println("Added func " + f.getFuncId() + " name " + f.getDisplayName());
             }
         }
 
@@ -273,6 +274,7 @@ public class EspDevice extends Observable {
         private Thread t;
 
         public void start() throws IOException {
+
             dataIn = new DataInputStream(socket.getInputStream());
             t = new Thread(this);
             t.start();
@@ -327,6 +329,13 @@ public class EspDevice extends Observable {
                                 sizeBytes[1] = dataIn.readByte();
 
                                 short msgLength = IoTaUtil.bytes2Short(sizeBytes);
+                                long timeoutBeginNs = System.nanoTime();
+                                long timeWaitingNs = 0;
+
+                                while (timeWaitingNs < 1000000000 && dataIn.available() < msgLength - 2) {
+                                    timeWaitingNs = System.nanoTime() - timeoutBeginNs;
+                                }
+                                System.out.println("Waited for " + timeWaitingNs + " ns");
 
                                 byte[] msg = new byte[msgLength];
                                 dataIn.read(msg, 2, msgLength - 2);
@@ -337,7 +346,8 @@ public class EspDevice extends Observable {
                                 handleReturnedMessage(createDataCapsuleFromArray(msg));
 
                             } catch (IOException e) {
-                                System.out.println("Couldn't read message. Whatevs lmao");
+                                System.out.println("Couldn't read message. ");
+
                                 status.setStatus(ConnectionStatus.ERROR);
                                 e.printStackTrace();
                             }
@@ -349,6 +359,11 @@ public class EspDevice extends Observable {
 
             }
             System.out.println(this.toString() + " is finishing up");
+            try {
+                socket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

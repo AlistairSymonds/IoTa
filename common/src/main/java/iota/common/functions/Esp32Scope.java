@@ -4,7 +4,6 @@ import iota.client.model.EspDevice;
 import iota.client.network.DataCapsule;
 import iota.common.Constants;
 import iota.common.IoTaUtil;
-import iota.common.db.DbCol;
 import iota.common.definitions.IStateItem;
 
 import java.util.ArrayList;
@@ -34,13 +33,9 @@ public class Esp32Scope implements IFunction {
 
     }
 
-    @Override
-    public List<DbCol> getCols() {
-        return null;
-    }
 
     @Override
-    public String getTableName() {
+    public String getDisplayName() {
         return null;
     }
 
@@ -49,10 +44,6 @@ public class Esp32Scope implements IFunction {
         return Constants.FID_32SCOPE;
     }
 
-    @Override
-    public int submitMessage(byte[] message) {
-        return 0;
-    }
 
     @Override
     public int handleReceivedData(List<Byte> receivedData) {
