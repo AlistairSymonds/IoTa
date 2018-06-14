@@ -7,6 +7,11 @@ Currently working functions
 + internal diagnostics about esp8266
 + serial -> teensy 3.2 -> ws2812b led display
 + network ping
++ ESP32 based wireless oscilloscope
+
+
+ESP32 oscilloscope demo:
+https://www.youtube.com/watch?v=EMdqRHePBUg
 
 
 If anyone cares, I'll be keeping an album of things I've recording about the project here, it's mostly just going to be demos and other fluff but it will all be here
