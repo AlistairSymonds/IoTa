@@ -2,6 +2,7 @@ package iota.common.functions;
 
 import iota.client.model.EspDevice;
 import iota.common.Constants;
+import iota.common.functions.LightingFunction.Lighting;
 
 public class IFuncFactory {
     public static IFunction getInstanceById(EspDevice device, short funcId) {

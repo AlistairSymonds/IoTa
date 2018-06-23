@@ -1,33 +1,53 @@
 package iota.desktop.jfx.views.functions;
 
 import iota.client.UpdateAbleView;
-import iota.common.functions.Lighting;
+import iota.common.functions.LightingFunction.AnimationList;
+import iota.common.functions.LightingFunction.Lighting;
+import iota.common.functions.LightingFunction.LightingStateEnum;
 import iota.desktop.jfx.views.state.DefaultStateDisp;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.ColorPicker;
+import javafx.scene.control.ComboBox;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Text;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LightingView extends GridPane implements UpdateAbleView {
 
     private List<DefaultStateDisp> stateDisps;
     private Lighting funcInstance;
-    private Button sendIt;
-    private List<TextField> newVals;
-
+    private final ColorPicker colourSelector;
+    private ComboBox<AnimationList> programSelector;
 
     protected LightingView(Lighting funcInstance) {
         super();
         this.funcInstance = funcInstance;
+        colourSelector = new ColorPicker();
+        colourSelector.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                funcInstance.setState(LightingStateEnum.hue, (byte) (colourSelector.getValue().getHue() * 255));
+                funcInstance.setState(LightingStateEnum.sat, (byte) (colourSelector.getValue().getSaturation() * 255));
+                funcInstance.setState(LightingStateEnum.value, (byte) (colourSelector.getValue().getBrightness() * 255));
+            }
+        });
+        super.getChildren().add(colourSelector);
 
 
-
-        Text t = new Text("Lights");
-        super.getChildren().add(t);
-        stateDisps = new ArrayList<>();
+        programSelector = new ComboBox<>();
+        for (AnimationList anim : funcInstance.getAnimationList()) {
+            programSelector.getItems().add(anim);
+        }
+        programSelector.valueProperty().addListener(new ChangeListener<AnimationList>() {
+            @Override
+            public void changed(ObservableValue<? extends AnimationList> observable, AnimationList oldValue, AnimationList newValue) {
+                funcInstance.setAnimation(newValue);
+            }
+        });
+        super.getChildren().add(programSelector);
 
 
 
@@ -76,8 +96,6 @@ public class LightingView extends GridPane implements UpdateAbleView {
 
     @Override
     public void updateView() {
-        for (DefaultStateDisp d : stateDisps) {
-            d.updateView();
-        }
+
     }
 }
